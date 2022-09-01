@@ -31,7 +31,9 @@ class Register extends Component{
         if(this.state.password === this.state.confirmPassword){
             axios.post(baseUrl + "/register", data)
             .then(res => {
+               if (res.statusText === 'OK') {
                 this.setState({...this.state, created: true})
+            }
             })
             .catch(err => {
                 this.setState({...this.state, error: err.response.data.message})

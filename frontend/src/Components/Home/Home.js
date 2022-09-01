@@ -3,7 +3,14 @@ import {Link} from 'react-router-dom'
 function Home(props) {
     return(
         <div>
-            You must be authorized to see this page.
+            <div className="home--search">
+                {/*restaurant image*/}
+                {/*button or search bar - search for restaurants*/}
+            </div>
+            <div className="home--create-event">
+                {/*event image*/}
+                {/*button - create event*/}
+            </div>
         </div>
     )
 }
