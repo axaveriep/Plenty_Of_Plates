@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.EmailAlreadyExistsException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -62,27 +64,34 @@ public class JdbcUserDao implements UserDao {
         throw new UsernameNotFoundException("User " + username + " was not found.");
     }
 
+
     @Override
-    public boolean create(String username, String password, String role) {
+    public boolean create(String username, String email, String password, String role) throws EmailAlreadyExistsException {
         boolean userCreated = false;
 
         // create user
-        String insertUser = "insert into users (username,password_hash,role) values(?,?,?)";
-        String password_hash = new BCryptPasswordEncoder().encode(password);
-        String ssRole = "ROLE_" + role.toUpperCase();
+        try {
+            String insertUser = "insert into users (username,email,password_hash,role) values(?,?,?,?)";
+            String password_hash = new BCryptPasswordEncoder().encode(password);
+            String ssRole = "ROLE_" + role.toUpperCase();
 
-        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        String id_column = "user_id";
-        userCreated = jdbcTemplate.update(con -> {
-                    PreparedStatement ps = con.prepareStatement(insertUser, new String[]{id_column});
-                    ps.setString(1, username);
-                    ps.setString(2, password_hash);
-                    ps.setString(3, ssRole);
-                    return ps;
-                }
-                , keyHolder) == 1;
-        int newUserId = (int) keyHolder.getKeys().get(id_column);
+            GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+            String id_column = "user_id";
+            userCreated = jdbcTemplate.update(con -> {
+                        PreparedStatement ps = con.prepareStatement(insertUser, new String[]{id_column});
+                        ps.setString(1, username);
+                        ps.setString(2, email);
+                        ps.setString(3, password_hash);
+                        ps.setString(4, ssRole);
+                        return ps;
+                    }
+                    , keyHolder) == 1;
+            int newUserId = (int) keyHolder.getKeys().get(id_column);
 
+
+        } catch (DataAccessException e) {
+            throw new EmailAlreadyExistsException();
+        }
         return userCreated;
     }
 
@@ -90,6 +99,7 @@ public class JdbcUserDao implements UserDao {
         User user = new User();
         user.setId(rs.getLong("user_id"));
         user.setUsername(rs.getString("username"));
+        user.setEmail("email");
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(rs.getString("role"));
         user.setActivated(true);
