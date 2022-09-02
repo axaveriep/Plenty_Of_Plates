@@ -13,8 +13,7 @@ class Register extends Component{
             email: '',
             password: '',
             confirmPassword: '',
-            created: false,
-            error: null,
+            error: null
         }
         
     }
@@ -32,16 +31,15 @@ class Register extends Component{
         if(this.state.password === this.state.confirmPassword){
             axios.post(baseUrl + "/register", data)
             .then(response => {
-               if (response.status <=202) 
+               if (response.status <= 202) 
                {
-                    this.setState({...this.state, created: true})
                     this.clearFields()
                     window.location = '/login';
                     console.log("here")
                }
             })
             .catch(err => {
-                if (err.response != undefined) 
+                if (err.response !== undefined) 
                 {
                     this.setState({...this.state, error: err.response.data.message})
                 }

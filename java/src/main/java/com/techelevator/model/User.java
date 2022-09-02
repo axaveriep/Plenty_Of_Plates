@@ -16,14 +16,17 @@ public class User {
    @JsonIgnore
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
+   private String favorites;
 
    public User() { }
 
-   public User(Long id, String username, String password, String authorities) {
+   public User(Long id, String username, String email, String password, String authorities, String favorites) {
       this.id = id;
       this.username = username;
+      this.email = email;
       this.password = password;
       this.activated = true;
+      this.favorites = favorites;
    }
 
    public Long getId() {
@@ -64,6 +67,14 @@ public class User {
 
    public void setActivated(boolean activated) {
       this.activated = activated;
+   }
+
+   public String getFavorites() {
+      return favorites;
+   }
+
+   public void setFavorites(String favorites) {
+      this.favorites = favorites;
    }
 
    public Set<Authority> getAuthorities() {
