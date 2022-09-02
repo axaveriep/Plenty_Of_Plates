@@ -39,8 +39,9 @@ class Main extends Component {
                             <Redirect to='/home'/>
 
                         </div>  
-                    : 
-                        <Link to='/login'>Home | </Link>
+                    :
+                        <></> 
+                        //<Link to='/login'>Home | </Link>
                 }
                 <Switch>
                     <Route path='/login' component={() => <Login/>}/>
