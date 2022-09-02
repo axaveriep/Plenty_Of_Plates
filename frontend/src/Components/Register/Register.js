@@ -2,7 +2,7 @@ import "./Register.css"
 import axios from 'axios'
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
-import { baseUrl } from '../../Shared/baseUrl'
+import {baseUrl} from '../../Shared/baseUrl'
 
 class Register extends Component{
 
@@ -31,19 +31,33 @@ class Register extends Component{
         const data = {username: this.state.username, email: this.state.email, password: this.state.password, confirmPassword: this.state.confirmPassword, role: 'USER'}
         if(this.state.password === this.state.confirmPassword){
             axios.post(baseUrl + "/register", data)
-            .then(res => {
-               if (res.statusText === 'OK') {
-                this.setState({...this.state, created: true})
-            }
+            .then(response => {
+               if (response.status <=202) 
+               {
+                    this.setState({...this.state, created: true})
+                    this.clearFields()
+                    window.location = '/login';
+                    console.log("here")
+               }
             })
             .catch(err => {
-                this.setState({...this.state, error: err.response.data.message})
+                if (err.response != undefined) 
+                {
+                    this.setState({...this.state, error: err.response.data.message})
+                }
             })
-                
+            
         }else{
             alert("Password and Confirm Password must match!!!")
             //add red border on password confirmation by setting secondary class to invalid 
         }
+
+    }
+
+    clearFields = () => {
+        var inputs = document.getElementsByTagName("input");
+        for(var i=0;i<inputs.length;i++)
+            inputs[i].value = '';
     }
 
     render(){
