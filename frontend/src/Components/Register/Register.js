@@ -15,7 +15,7 @@ class Register extends Component{
             email: '',
             password: '',
             confirmPassword: '',
-            error: null,
+            error: null
         }
     }
 
@@ -63,7 +63,7 @@ class Register extends Component{
         {
             axios.post(baseUrl + "/register", data)
             .then(response => {
-               if (response.status <=202) 
+               if (response.status <= 202) 
                {
                     this.clearFields()
                     Swal.fire({
