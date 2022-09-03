@@ -49,6 +49,12 @@ body
   border-radius: 20px;
 }
 
+.success-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-items: center;
+}
 
 .register-title
 {
@@ -121,6 +127,7 @@ body
   border-radius: .25em;
   outline: none;
   cursor: pointer;
+  
 }
 
 .btn:focus,

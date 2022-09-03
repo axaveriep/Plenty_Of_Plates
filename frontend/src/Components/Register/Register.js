@@ -15,7 +15,10 @@ class Register extends Component{
             email: '',
             password: '',
             confirmPassword: '',
-            error: null
+            error: null, 
+            created: false, 
+            validEmail: false,
+            validPassword: false
         }
     }
 
@@ -47,12 +50,22 @@ class Register extends Component{
                 {
                     event.target.parentElement.classList.remove('valid');
                 }
+                if(event.target.name === 'email') {
+                    this.setState({...this.state, validEmail: false})
+                } else if(event.target.name === 'password') {
+                    this.setState({...this.state, validPassword: false})
+                }
             }
             else
             {
                 event.target.parentElement.classList.remove('invalid');
                 event.target.parentElement.classList.add('valid');
-            }
+                if(event.target.name === 'email') {
+                    this.setState({...this.state, validEmail: true})
+                } else if(event.target.name === 'password') {
+                    this.setState({...this.state, validPassword: true})
+                }
+            } 
     }
 
     /** @todo validate password and email formatting before submission*/
@@ -65,14 +78,15 @@ class Register extends Component{
             .then(response => {
                if (response.status <= 202) 
                {
-                    this.clearFields()
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successfully Registered!',
-                        showConfirmButton: false,
-                        timer: 1500
-                      })
-                    window.location = '/login';
+                    // this.clearFields()
+                    // Swal.fire({
+                    //     icon: 'success',
+                    //     title: 'Successfully Registered!',
+                    //     showConfirmButton: false,
+                    //     timer: 1500
+                    //   })
+                    // window.location = '/login';
+                    this.setState({...this.state, created: true})
                }
             })
             .catch(err => {
@@ -109,7 +123,12 @@ class Register extends Component{
     render(){
         return(
                 <div className="fullscreen-container">
-                    <div className="register-container">
+                    {this.state.created ? 
+                    <div className="register-container success-screen">
+                        <h1 className="register-title font-effect-emboss">Account Created!</h1>
+                        <Link to="/login" ><button className="btn">Go to Sign In</button></Link>
+                    </div>
+                    : <div className="register-container">
                         <h1 className="register-title font-effect-emboss">Create Account</h1>
                         <form className="form">
                             <div className={this.state.error === "User Already Exists." ? "input-group invalid" : "input-group"}>
@@ -173,9 +192,13 @@ class Register extends Component{
                                 {this.state.password === this.state.confirmPassword ? <div className="msg"></div> : <div className="msg">Password and Confirm Password must match!!!</div>}
                             </div>
                                 <Link to="/login" className="login-link">Have an account?</Link>
-                                <button className="btn" type="submit" onClick={this.handleSubmit}>Register</button>
+                                <button 
+                                className="btn" 
+                                type="submit" 
+                                disabled={!this.state.validEmail || !this.state.validPassword} 
+                                onClick={this.handleSubmit}>Register</button>
                         </form>
-                    </div>
+                    </div>}
                 </div>
         )
     }
