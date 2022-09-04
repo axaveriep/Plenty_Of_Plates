@@ -43,29 +43,32 @@ class Register extends Component{
     toggleValidationStyle = (event, format) => 
     {
         if (!event.target.value.match(format) && event.target.value !== null)
+        {
+            /* this doesn't work as intended :( --> event.target.parentElement.classList.toggle('invalid','valid') */
+            event.target.parentElement.classList.add('invalid');
+            if(event.target.parentElement.classList.contains('valid'))  // sanity check
             {
-                /* this doesn't work as intended :( --> event.target.parentElement.classList.toggle('invalid','valid') */
-                event.target.parentElement.classList.add('invalid');
-                if(event.target.parentElement.classList.contains('valid'))  // sanity check
-                {
-                    event.target.parentElement.classList.remove('valid');
-                }
-                if(event.target.name === 'email') {
-                    this.setState({...this.state, validEmail: false})
-                } else if(event.target.name === 'password') {
-                    this.setState({...this.state, validPassword: false})
-                }
+                event.target.parentElement.classList.remove('valid');
             }
-            else
+            if(event.target.name === 'email') {
+                this.setState({...this.state, validEmail: false})
+            } else if(event.target.name === 'password') {
+                this.setState({...this.state, validPassword: false})
+            }
+        }
+        else
+        {
+            event.target.parentElement.classList.remove('invalid');
+            event.target.parentElement.classList.add('valid');
+            if(event.target.name === 'email')
             {
-                event.target.parentElement.classList.remove('invalid');
-                event.target.parentElement.classList.add('valid');
-                if(event.target.name === 'email') {
-                    this.setState({...this.state, validEmail: true})
-                } else if(event.target.name === 'password') {
-                    this.setState({...this.state, validPassword: true})
-                }
-            } 
+                this.setState({...this.state, validEmail: true})
+            }
+            else if(event.target.name === 'password') 
+            {
+                this.setState({...this.state, validPassword: true})
+            }
+        } 
     }
 
     /** @todo validate password and email formatting before submission*/
@@ -98,7 +101,7 @@ class Register extends Component{
                         title: this.state.error,
                         showConfirmButton: false,
                         timer: 1500
-                      })
+                    })
                 }
             })
         }
@@ -128,7 +131,8 @@ class Register extends Component{
                         <h1 className="register-title font-effect-emboss">Account Created!</h1>
                         <Link to="/login" ><button className="btn">Go to Sign In</button></Link>
                     </div>
-                    : <div className="register-container">
+                    : 
+                    <div className="register-container">
                         <h1 className="register-title font-effect-emboss">Create Account</h1>
                         <form className="form">
                             <div className={this.state.error === "User Already Exists." ? "input-group invalid" : "input-group"}>
@@ -172,7 +176,6 @@ class Register extends Component{
                                     v-model="user.password"
                                     onChange={this.handleInputChange}
                                     required
-                                    pattern="[a-zA-Z0-9]{8,}"
                                     onBlur={this.handleInputBlur}
                                 />
                             </div>
@@ -193,12 +196,15 @@ class Register extends Component{
                             </div>
                                 <Link to="/login" className="login-link">Have an account?</Link>
                                 <button 
-                                className="btn" 
-                                type="submit" 
-                                disabled={!this.state.validEmail || !this.state.validPassword} 
-                                onClick={this.handleSubmit}>Register</button>
+                                    className="btn" 
+                                    type="submit" 
+                                    disabled={!this.state.validEmail || !this.state.validPassword} 
+                                    onClick={this.handleSubmit}>
+                                Register
+                                </button>
                         </form>
-                    </div>}
+                    </div>
+                    }
                 </div>
         )
     }
