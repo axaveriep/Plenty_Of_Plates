@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Switch, Route, Redirect, Link, withRouter} from 'react-router-dom'
+import {Switch, Route, Redirect, withRouter} from 'react-router-dom'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 import Home from '../Home/Home'
@@ -29,7 +29,7 @@ class Main extends Component {
         this.props.addToken("")
         this.props.deleteUser()
     }
-
+    //sessionStorage.getItem("token"); I think should be somewhere?
     render(){
         return(
             <div>
@@ -40,7 +40,6 @@ class Main extends Component {
                         </div>
                     :
                         <></>
-                        //<Link to='/login'>Home | </Link>
                 }
                 <Switch>
                     <Route path='/login' component={() => <Login/>}/>

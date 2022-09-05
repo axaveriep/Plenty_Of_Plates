@@ -32,6 +32,7 @@ class Login extends Component {
 
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
+        sessionStorage.setItem("token", userWithToken.data.token);
     }
 
     handleInputChange = (event) => {
@@ -43,10 +44,10 @@ class Login extends Component {
 
     render(){
         return(
-                <div className="fullscreen-container" src='loginbackground.jpg'>
+                <div className="fullscreen-container">
                     <div className="login-container">
                         <h1 className="login-title font-effect-emboss">Please Sign In</h1>
-                        <form className="form">
+                        <form className="form" onSubmit={this.handleLogin}>
                             <div className="input-group">
                                 <label className="sr-only">Username</label>
                                 <input
@@ -78,7 +79,7 @@ class Login extends Component {
                             </div>
 
                             <Link to="/register" className="register-link">Need an account?</Link>
-                            <button className="btn" type="submit" onClick={this.handleLogin}>Sign in</button>
+                            <button className="btn" type="submit">Sign in</button>
                         </form>
                     </div>
                 </div>

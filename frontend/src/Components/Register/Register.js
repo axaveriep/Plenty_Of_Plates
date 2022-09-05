@@ -125,7 +125,7 @@ class Register extends Component{
 
     render(){
         return(
-            <div className="fullscreen-container" src='loginbackground.jpg'>
+            <div className="fullscreen-container">
             {this.state.created ? 
                 <div className="register-container success-screen">
                     <h1 className="register-title font-effect-emboss">Account Created!</h1>
