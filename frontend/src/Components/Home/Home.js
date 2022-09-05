@@ -3,8 +3,7 @@ import React from 'react'
 export default function Home(props) {
     return(
         <div>
-            
-            <p>Welcome back User, Just pick a place!</p>
+                <p>Welcome back {props.username}, Just pick a place!</p>
             <div className="home--search">
                 {/*restaurant image*/}
                 {/*button or search bar - search for restaurants*/}
@@ -16,5 +15,6 @@ export default function Home(props) {
                 <button>Create Event</button>
             </div>
         </div>
-    )
+       )
 };
+     
