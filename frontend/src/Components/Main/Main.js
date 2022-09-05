@@ -3,6 +3,7 @@ import {Switch, Route, Redirect, Link, withRouter} from 'react-router-dom'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 import Home from '../Home/Home'
+import Navbar from '../Navbar/Navbar'
 import {addToken, deleteUser} from '../../Redux/actionCreators'
 import {connect} from 'react-redux'
 
@@ -33,8 +34,7 @@ class Main extends Component {
             <div>
                 {this.props.token.token !== undefined ?
                         <div>
-                            <Link to='/home'>Home | </Link>
-                            <Link to='/login' onClick={this.handleLogout}>logout</Link> 
+                            <Navbar handleLogout={this.handleLogout}/>
                             <Redirect to='/home'/>
 
                         </div>  
