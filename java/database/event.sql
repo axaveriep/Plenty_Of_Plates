@@ -4,7 +4,7 @@
 
 CREATE TABLE IF NOT EXISTS public.event
 (
-    event_id integer NOT NULL,
+    event_id serial NOT NULL,
     user_id integer,
     date date,
     "time" timestamp(2) without time zone,

@@ -1,54 +1,54 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name="event")
 public class Event {
 
-    private Long event_id;
-    private String event_name;
-    private Date date;
-    private Time time;
+    @Id
+    @Column(name="event_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long eventId;
 
-    public Event() {}
+    @Column(name="user_id")
+    private Long userId;
 
-    public Event(Long invite_id, Date date, Time time) {
-        this.event_id = invite_id;
+//    @Column(name="event_name")
+//    private String eventName;
+
+    @Column(name="date")
+    private LocalDate date;
+
+    @Column(name="time")
+    private Timestamp time;
+
+
+    public Event(Long eventId, Long userId, LocalDate date, Timestamp time) {
+        this.eventId = eventId;
+        this.userId = userId;
         this.date = date;
         this.time = time;
     }
 
 
-    public Long getEvent_id() {
-        return event_id;
-    }
+    /* EVENT = CHILD, USER = PARENT */
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name="user_id", insertable = false, updatable = false)
+//    private User user;
 
-    public void setEvent_id(Long event_id) {
-        this.event_id = event_id;
-    }
-
-    public String getEvent_name() {
-        return event_name;
-    }
-
-    public void setEvent_name(String event_name) {
-        this.event_name = event_name;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
 
 }

@@ -1,32 +1,60 @@
 package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
 
+   @Id
+   @Column(name="user_id")
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
+
+   @Column(name="username")
    private String username;
+
+   @Column(name="email")
    private String email;
+
+   @Column(name="password_hash")
    @JsonIgnore
    private String password;
-   @JsonIgnore
+
+   @Column(name="role")
+   private String role;
+
+   //@JsonIgnore
+   @Transient
    private boolean activated;
+
+   @Transient
    private Set<Authority> authorities = new HashSet<>();
-   private String favorites;
 
-   public User() { }
+   // private String favorites;
 
-   public User(Long id, String username, String email, String password, String authorities, String favorites) {
+   /* USER = PARENT, EVENT = CHILD */
+//   @OneToMany(mappedBy = "userId")
+//   private List<Event> eventList;
+
+   public User(Long id, String username, String email, String password) {
       this.id = id;
       this.username = username;
       this.email = email;
       this.password = password;
       this.activated = true;
-      this.favorites = favorites;
+      // this.favorites = favorites;
    }
 
    public Long getId() {
@@ -69,21 +97,29 @@ public class User {
       this.activated = activated;
    }
 
-   public String getFavorites() {
-      return favorites;
+   public String getRole() {
+      return role;
    }
 
-   public void setFavorites(String favorites) {
-      this.favorites = favorites;
+   public void setRole(String role) {
+      this.role = role;
    }
-
+//
+//   //   public String getFavorites() {
+////      return favorites;
+////   }
+////
+////   public void setFavorites(String favorites) {
+////      this.favorites = favorites;
+////   }
+//
    public Set<Authority> getAuthorities() {
       return authorities;
    }
-
-   public void setAuthorities(Set<Authority> authorities) {
-      this.authorities = authorities;
-   }
+//
+//   public void setAuthorities(Set<Authority> authorities) {
+//      this.authorities = authorities;
+//   }
 
    public void setAuthorities(String authorities) {
       String[] roles = authorities.split(",");

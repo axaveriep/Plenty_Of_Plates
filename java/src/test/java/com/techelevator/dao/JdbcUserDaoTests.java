@@ -10,21 +10,21 @@ import javax.sql.DataSource;
 
 public class JdbcUserDaoTests extends FinalCapstoneDaoTests {
 
-    private JdbcUserDao sut;
-
-    @Before
-    public void setup() {
-        DataSource dataSource = this.getDataSource();
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        sut = new JdbcUserDao(jdbcTemplate);
-    }
-
-    @Test
-    public void createNewUser() {
-        boolean userCreated = sut.create("TEST_USER", "TEST_EMAIL@TEST.TEST","test_password","user");
-        Assert.assertTrue(userCreated);
-        User user = sut.findByUsername("TEST_USER");
-        Assert.assertEquals("TEST_USER", user.getUsername());
-    }
+//    private JdbcUserDao sut;
+//
+//    @Before
+//    public void setup() {
+//        DataSource dataSource = this.getDataSource();
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//        sut = new JdbcUserDao(jdbcTemplate);
+//    }
+//
+//    @Test
+//    public void createNewUser() {
+//        boolean userCreated = sut.create("TEST_USER", "TEST_EMAIL@TEST.TEST","test_password","user");
+//        Assert.assertTrue(userCreated);
+//        User user = sut.findByUsername("TEST_USER");
+//        Assert.assertEquals("TEST_USER", user.getUsername());
+//    }
 
 }
