@@ -68,7 +68,7 @@ class Register extends Component{
             {
                 this.setState({...this.state, validPassword: true})
             }
-        } 
+        }
     }
 
     /** @todo validate password and email formatting before submission*/
@@ -109,11 +109,11 @@ class Register extends Component{
         {
             //alert("Password and Confirm Password must match!!!")
             Swal.fire({
-				icon: 'error',
-				title: 'Password and Confirm Password must match!!!',
-				showConfirmButton: false,
-				timer: 1500
-			  })
+                icon: 'error',
+                title: 'Password and Confirm Password must match!!!',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     }
 
@@ -125,87 +125,86 @@ class Register extends Component{
 
     render(){
         return(
-                <div className="fullscreen-container">
-                    {this.state.created ? 
-                    <div className="register-container success-screen">
-                        <h1 className="register-title font-effect-emboss">Account Created!</h1>
-                        <Link to="/login" ><button className="btn">Go to Sign In</button></Link>
-                    </div>
-                    : 
-                    <div className="register-container">
-                        <h1 className="register-title font-effect-emboss">Create Account</h1>
-                        <form className="form">
-                            <div className={this.state.error === "User Already Exists." ? "input-group invalid" : "input-group"}>
-                                <label className="sr-only">Username</label>
-                                <input
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    //class="form-control"
-                                    placeholder="Username"
-                                    v-model="user.username"
-                                    onChange={this.handleInputChange}
-                                    required
-                                />
-                                {this.state.error === "User Already Exists." && <div className="msg">{this.state.error}</div>}
-                            </div>
-                            
-
-                            <div className="input-group">
-                                <input 
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    //class="form-control"
-                                    placeholder='E-mail Address'
-                                    v-model="user.email"
-                                    onChange={this.handleInputChange}
-                                    required
-                                    onBlur={this.handleInputBlur}
-                                />
-                            </div>
-                            
-                            <div className="input-group">
-                                <label className="sr-only">Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    //class="form-control"
-                                    placeholder="Password"
-                                    v-model="user.password"
-                                    onChange={this.handleInputChange}
-                                    required
-                                    onBlur={this.handleInputBlur}
-                                />
-                            </div>
-                    
-                            <div className={this.state.password === '' ? "input-group" : this.state.password === this.state.confirmPassword ? "input-group valid" : "input-group  invalid"}>
-                                <input
-                                    type="password"
-                                    id="password-confirm"
-                                    name="confirmPassword"
-                                    //class="form-control"
-                                    placeholder="Confirm Password"
-                                    v-model="user.password"
-                                    onChange={this.handleInputChange}
-                                    required
-                                    onBlur={this.handleInputBlur}
-                                />
-                                {this.state.password === this.state.confirmPassword ? <div className="msg"></div> : <div className="msg">Password and Confirm Password must match!!!</div>}
-                            </div>
-                                <Link to="/login" className="login-link">Have an account?</Link>
-                                <button 
-                                    className="btn" 
-                                    type="submit" 
-                                    disabled={!this.state.validEmail || !this.state.validPassword} 
-                                    onClick={this.handleSubmit}>
-                                Register
-                                </button>
-                        </form>
-                    </div>
-                    }
+            <div className="fullscreen-container" src='loginbackground.jpg'>
+            {this.state.created ? 
+                <div className="register-container success-screen">
+                    <h1 className="register-title font-effect-emboss">Account Created!</h1>
+                    <Link to="/login" ><button className="btn">Go to Sign In</button></Link>
                 </div>
+            :
+                <div className="register-container">
+                    <h1 className="register-title font-effect-emboss">Create Account</h1>
+                    <form className="form">
+                        <div className={this.state.error === "User Already Exists." ? "input-group invalid" : "input-group"}>
+                            <label className="sr-only">Username</label>
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                //class="form-control"
+                                placeholder="Username"
+                                v-model="user.username"
+                                onChange={this.handleInputChange}
+                                required
+                            />
+                            {this.state.error === "User Already Exists." && <div className="msg">{this.state.error}</div>}
+                        </div>
+
+                        <div className="input-group">
+                            <input 
+                                type="email"
+                                id="email"
+                                name="email"
+                                //class="form-control"
+                                placeholder='E-mail Address'
+                                v-model="user.email"
+                                onChange={this.handleInputChange}
+                                required
+                                onBlur={this.handleInputBlur}
+                            />
+                        </div>
+                        
+                        <div className="input-group">
+                            <label className="sr-only">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                //class="form-control"
+                                placeholder="Password"
+                                v-model="user.password"
+                                onChange={this.handleInputChange}
+                                required
+                                onBlur={this.handleInputBlur}
+                            />
+                        </div>
+
+                        <div className={this.state.password === '' ? "input-group" : this.state.password === this.state.confirmPassword ? "input-group valid" : "input-group  invalid"}>
+                            <input
+                                type="password"
+                                id="password-confirm"
+                                name="confirmPassword"
+                                //class="form-control"
+                                placeholder="Confirm Password"
+                                v-model="user.password"
+                                onChange={this.handleInputChange}
+                                required
+                                onBlur={this.handleInputBlur}
+                            />
+                            {this.state.password === this.state.confirmPassword ? <div className="msg"></div> : <div className="msg">Password and Confirm Password must match!!!</div>}
+                        </div>
+                            <Link to="/login" className="login-link">Have an account?</Link>
+                            <button 
+                                className="btn" 
+                                type="submit" 
+                                disabled={!this.state.validEmail || !this.state.validPassword} 
+                                onClick={this.handleSubmit}>
+                            Register
+                            </button>
+                    </form>
+                </div>
+            }
+            </div>
         )
     }
 }

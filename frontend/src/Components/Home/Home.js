@@ -1,20 +1,19 @@
 import React from 'react'
 
+
 export default function Home(props) {
     return(
         <div>
-                <p>Welcome back {props.username}, Just pick a place!</p>
+            <h2>Welcome back {props.username}, Just pick a place!</h2>
             <div className="home--search">
                 {/*restaurant image*/}
-                {/*button or search bar - search for restaurants*/}
                 <input placeholder='Search...'/>
             </div>
+
             <div className="home--create-event">
                 {/*event image*/}
-                {/*button - create event*/}
                 <button>Create Event</button>
             </div>
         </div>
-       )
+    )
 };
-     

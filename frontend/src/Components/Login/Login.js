@@ -27,7 +27,7 @@ class Login extends Component {
     handleLogin = async (e) => {
         e.preventDefault()
         const data = { username: this.state.username, password: this.state.password };
-        
+
         const userWithToken = await axios.post(baseUrl + '/login', data)
 
         await this.props.dispatch(addToken(userWithToken.data.token))
@@ -43,7 +43,7 @@ class Login extends Component {
 
     render(){
         return(
-                <div className="fullscreen-container">
+                <div className="fullscreen-container" src='loginbackground.jpg'>
                     <div className="login-container">
                         <h1 className="login-title font-effect-emboss">Please Sign In</h1>
                         <form className="form">

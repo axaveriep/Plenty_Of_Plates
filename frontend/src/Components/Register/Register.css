@@ -19,7 +19,7 @@
   color: white;
 }
 
-body 
+body
 {
   overflow: hidden;
   margin: 0;
@@ -49,7 +49,8 @@ body
   border-radius: 20px;
 }
 
-.success-screen {
+.success-screen
+{
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -127,7 +128,6 @@ body
   border-radius: .25em;
   outline: none;
   cursor: pointer;
-  
 }
 
 .btn:focus,

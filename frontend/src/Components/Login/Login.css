@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster&effect=emboss');
 
-*, *::before, *::after 
+*, *::before, *::after
 {
   box-sizing: border-box;
 }
@@ -18,7 +18,7 @@
   color: white;
 }
 
-body 
+body
 {
   overflow: hidden;
   margin: 0;

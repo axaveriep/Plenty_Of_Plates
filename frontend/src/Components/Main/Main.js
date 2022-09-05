@@ -7,6 +7,7 @@ import Navbar from '../Navbar/Navbar'
 import {addToken, deleteUser} from '../../Redux/actionCreators'
 import {connect} from 'react-redux'
 
+
 const mapStateToProps = state => {
     return {
         token: state.token,
@@ -36,10 +37,9 @@ class Main extends Component {
                         <div>
                             <Navbar handleLogout={this.handleLogout}/>
                             <Redirect to='/home'/>
-
-                        </div>  
+                        </div>
                     :
-                        <></> 
+                        <></>
                         //<Link to='/login'>Home | </Link>
                 }
                 <Switch>
@@ -51,6 +51,5 @@ class Main extends Component {
             </div>
         )
     }
-} 
-
+}
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
