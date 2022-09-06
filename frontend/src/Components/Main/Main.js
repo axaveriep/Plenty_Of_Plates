@@ -29,7 +29,7 @@ class Main extends Component {
         this.props.addToken("")
         this.props.deleteUser()
     }
-    //sessionStorage.getItem("token"); I think should be somewhere?
+
     render(){
         return(
             <div>
@@ -44,7 +44,7 @@ class Main extends Component {
                 <Switch>
                     <Route path='/login' component={() => <Login/>}/>
                     <Route path='/register'component={() => <Register/>}/>
-                    <Route path='/home' component={this.props.token.token !== undefined ? () => <Home username={this.props.user.username}/> : null}/>
+                    <Route path='/home' component={this.props.token.token !== undefined ? () => <Home username={this.props.user.username}/> : () => <Redirect to='/login'/>}/>
                     <Redirect to='/login'/>
                 </Switch>
             </div>
