@@ -1,6 +1,7 @@
 package com.techelevator.security;
 
 
+import com.techelevator.business.UserService;
 import com.techelevator.dao.UserRepository;
 import com.techelevator.model.User;
 import org.slf4j.Logger;
@@ -22,17 +23,17 @@ public class UserModelDetailsService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(UserModelDetailsService.class);
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserModelDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserModelDetailsService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating user '{}'", login);
         String lowercaseLogin = login.toLowerCase();
-        return createSpringSecurityUser(lowercaseLogin, userRepository.findByUsername(lowercaseLogin));
+        return createSpringSecurityUser(lowercaseLogin, userService.findByUsername(lowercaseLogin));
     }
 
     private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {

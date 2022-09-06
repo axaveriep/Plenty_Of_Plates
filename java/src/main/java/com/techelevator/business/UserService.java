@@ -17,6 +17,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+
     public List<User> findAllUsers() {
         List<User> allUsers = userRepository.findAll();
         for (User user : allUsers) {
@@ -35,8 +36,6 @@ public class UserService {
     public User findByUsername(String username) throws UsernameNotFoundException {
         for (User user : this.findAllUsers()) {
             if( user.getUsername().toLowerCase().equals(username.toLowerCase())) {
-                user.setAuthorities(user.getRole());
-                user.setActivated(true);
                 return user;
             }
         }
