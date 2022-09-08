@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import SearchBar from '../SearchBar/SearchBar'
+import RestaurantGrid from '../RestaurantGrid/RestaurantGrid'
 
 
 export default function Home(props) {
@@ -15,6 +16,10 @@ export default function Home(props) {
             <div className="home--create-event">
                 {/*event image*/}
                 <Link to="/EventPage" ><button className="btn">Create Event</button></Link>
+            </div>
+
+            <div>
+                <RestaurantGrid />
             </div>
         </div>
     )
