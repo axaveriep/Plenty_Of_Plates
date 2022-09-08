@@ -17,9 +17,9 @@ export default function EventPage()
         {
             if (restaurant.id === id)
             {
-                console.log("selected for removal: ", restaurant)
-                console.log("at index of: ", restaurants.indexOf(restaurant))
-                console.log("restaurants in list: ", restaurants)
+                // console.log("selected for removal: ", restaurant)
+                // console.log("at index of: ", restaurants.indexOf(restaurant))
+                // console.log("restaurants in list: ", restaurants)
                 removeItem(restaurants.indexOf(restaurant))
             }
         }

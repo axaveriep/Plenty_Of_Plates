@@ -47,7 +47,7 @@ class Main extends Component {
                     <Route path='/register'component={() => <Register/>}/>
                     <Route path='/eventpage'component={() => <EventPage/>}/>
                     <Route path='/home' component={this.props.token.token !== undefined ? () => <Home username={this.props.user.username}/> : () => <Redirect to='/login'/>}/>
-                    <Redirect to='/login'/>
+                    <Redirect to='/home'/>
                 </Switch>
             </div>
         )
