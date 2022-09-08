@@ -2,17 +2,18 @@
 //showing only the picture and restaurant name.
 
 export default function RestaurantCard(props) {
+
     return(
         <div>
             <div className="restaurant--container">
-                <h1 className='restaurant--name'>Restaurant Name Here</h1>
+                <h1 className='restaurant--name'>{props.restaurant.name}<span class="badge">Closed</span></h1>
                 <h2 className='restaurant--type'>Type</h2>
                 <address className='restaurant--address'>123 Fake st Maydup, State 10101</address>
                 <p><a href="tel:(123)456-7890">(123)456-7890</a></p>
                 <img className='restaurant--image' src=""/>
                 <p className='restaurant--description'>Description</p>
                 <button className="restaurant--favorite">Add to Favorites</button>
-                <button className="closeBtn">X</button>
+                <button className="closeBtn" onClick={(event) => props.removeRestaurant(event, props.restaurant.id)}>X</button>
                 <h3>Hours</h3>
                 <ul className='restaurant--hours'>
                     <li className='hours--monday'>

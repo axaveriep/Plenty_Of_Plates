@@ -7,6 +7,8 @@ import {addToken, addUser} from '../../Redux/actionCreators'
 import {baseUrl} from '../../Shared/baseUrl'
 import axios from 'axios'
 
+const Swal = window.Swal
+
 
 const mapDispatchToProps = (dispatch) => ({
     addToken: () =>  dispatch(addToken()),
@@ -26,12 +28,30 @@ class Login extends Component {
     
     handleLogin = async (e) => {
         e.preventDefault()
-        const data = { username: this.state.username, password: this.state.password };
+        const data = { username: this.state.username, password: this.state.password }
 
-        const userWithToken = await axios.post(baseUrl + '/login', data)
-
-        await this.props.dispatch(addToken(userWithToken.data.token))
-        await this.props.dispatch(addUser(userWithToken.data.user));
+            // const userWithToken = await axios.post(baseUrl + '/login', data)
+            //await this.props.dispatch(addToken(userWithToken.data.token))
+            //await this.props.dispatch(addUser(userWithToken.data.user))
+            await axios.post(baseUrl + '/login', data)
+            .then(response => {
+                const userWithToken = response
+                this.props.dispatch(addToken(userWithToken.data.token))
+                this.props.dispatch(addUser(userWithToken.data.user))
+            })
+            .catch(err => {
+                if (err.response !== undefined) 
+                {
+                    this.setState({...this.state, error: err.response.data.message})
+                    Swal.fire({
+                        icon: 'error',
+                        title: this.state.error,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+            
     }
 
     handleInputChange = (event) => {

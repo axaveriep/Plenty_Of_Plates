@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 
 export default function Home(props) {
@@ -12,7 +13,7 @@ export default function Home(props) {
 
             <div className="home--create-event">
                 {/*event image*/}
-                <button>Create Event</button>
+                <Link to="/EventPage" ><button className="btn">Create Event</button></Link>
             </div>
         </div>
     )

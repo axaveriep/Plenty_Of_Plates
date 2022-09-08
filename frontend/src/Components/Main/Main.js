@@ -2,6 +2,7 @@ import {Component} from 'react'
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
+import EventPage from '../EventPage/EventPage'
 import Home from '../Home/Home'
 import Navbar from '../Navbar/Navbar'
 import {addToken, deleteUser} from '../../Redux/actionCreators'
@@ -44,6 +45,7 @@ class Main extends Component {
                 <Switch>
                     <Route path='/login' component={() => <Login/>}/>
                     <Route path='/register'component={() => <Register/>}/>
+                    <Route path='/eventpage'component={() => <EventPage/>}/>
                     <Route path='/home' component={this.props.token.token !== undefined ? () => <Home username={this.props.user.username}/> : () => <Redirect to='/login'/>}/>
                     <Redirect to='/login'/>
                 </Switch>

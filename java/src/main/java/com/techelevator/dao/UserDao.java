@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 

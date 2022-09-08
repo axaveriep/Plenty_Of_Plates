@@ -6,6 +6,4 @@ public class EventRestaurant {
     private String restaurant_id;
     private int up_votes;
     private int down_votes;
-
-
 }
