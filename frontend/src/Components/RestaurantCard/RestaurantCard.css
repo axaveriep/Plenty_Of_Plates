@@ -11,3 +11,60 @@
     text-align: center;
     border-radius: 5px;
 }
+
+h3
+{
+  text-align: center;
+}
+
+.restaurant--container
+{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+  text-align: center;
+  border: solid #222 2px;
+  border-radius: 2rem;
+}
+
+.restaurant--hours
+{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: space-around;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
+
+.hours
+{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: space-between;
+  text-align: center;
+  justify-content: center;
+  padding: 1em;
+}
+
+.closeBtn
+{
+  border: none;
+  max-width: 100px;
+  background-color: #222;
+  color:white;
+  align-self: flex-end;
+}
+
+.restaurant--favorite, .restaurant--add-to-event
+{
+  border: none;
+  max-width: 400px;
+  align-self: center;
+  padding: 1em;
+}

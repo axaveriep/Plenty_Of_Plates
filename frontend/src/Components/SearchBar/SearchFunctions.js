@@ -12,9 +12,9 @@ import axios from "axios"
 
 export async function searchRestaurantsByLocation(input) {
 
-    // console.log(input)
+    const uri = 'http://localhost:8081/search/location/'+input.replaceAll(' ', '+');
 
-    const restaurantsResults = await axios.get(`http://localhost:8081/search/location/${input}`).catch(err => console.log(err))
+    const restaurantsResults = await axios.get(decodeURIComponent(uri)).catch(err => console.log(err))
     
     let restaurantsArray = restaurantsResults.data.businesses
     console.log(restaurantsArray)

@@ -1,5 +1,6 @@
 //maybe reuse this to also render the smaller card versions that are displayed in the grid
 //showing only the picture and restaurant name.
+import "./RestaurantCard.css"
 
 export default function RestaurantCard(props) {
 
@@ -16,31 +17,31 @@ export default function RestaurantCard(props) {
                 <button className="closeBtn" onClick={(event) => props.removeRestaurant(event, props.restaurant.id)}>X</button>
                 <h3>Hours</h3>
                 <ul className='restaurant--hours'>
-                    <li className='hours--monday'>
+                    <li className='hours monday'>
                         <p>Mon: </p>
                         <p>12:00-12:00</p>
                     </li>
-                    <li className='hours--tuesday'>
+                    <li className='hours tuesday'>
                         <p>Tue: </p>
                         <p>12:00-12:00</p>
                     </li>
-                    <li className='hours--wednesday'>
+                    <li className='hours wednesday'>
                         <p>Wed: </p>
                         <p>12:00-12:00</p>
                     </li>
-                    <li className='hours--thursday'>
+                    <li className='hours thursday'>
                         <p>Thu: </p>
                         <p>12:00-12:00</p>
                         </li>
-                    <li className='hours--friday'>
+                    <li className='hours friday'>
                         <p>Fri: </p>
                         <p>12:00-12:00</p>
                     </li>
-                    <li className='hours--saturday'>
+                    <li className='hours saturday'>
                         <p>Sat: </p>
                         <p>12:00-12:00</p>
                     </li>
-                    <li className='hours--sunday'>
+                    <li className='hours sunday'>
                         <p>Sun: </p>
                         <p>12:00-12:00</p>
                     </li>

@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import SearchBar from "../SearchBar/SearchBar"
 import RestaurantCard from "../RestaurantCard/RestaurantCard"
-
+import { Button, Modal, ModalFooter,ModalHeader, ModalBody, Container, Row, Col } from "reactstrap"
+import "./RestaurantGrid.css"
 
 export default function RestaurantGrid(props) {
 
     const [restaurants, setRestaurants] = useState([])
 
     async function addRestaurants(restaurantsArray) {
-        // console.log(Promise.resolve(restaurantsArray).then())
         Promise.resolve(restaurantsArray).then(value => {
             setRestaurants(value)
         })
@@ -30,9 +30,6 @@ export default function RestaurantGrid(props) {
         {
             if (restaurant.id === id)
             {
-                // console.log("selected for removal: ", restaurant)
-                // console.log("at index of: ", restaurants.indexOf(restaurant))
-                // console.log("restaurants in list: ", restaurants)
                 removeItem(restaurants.indexOf(restaurant))
             }
         }
@@ -46,14 +43,40 @@ export default function RestaurantGrid(props) {
         return (<RestaurantCard key={i} restaurant={restaurant} removeRestaurant={removeRestaurant}/>)
     })
 
+
+    const [modal, setModal] = React.useState(false);
+
+    const toggle = () => setModal(!modal);
+
     return(
-        <div className="restaurant--grid">Grid to Display Collection of Restaurant Cards
-            <SearchBar 
-            searchType={'RESTAURANTS_LOCATION'} 
-            addRestaurants={addRestaurants}
-            />
-            {displayedRestaurants}
-            
-        </div>
+  
+        <div>
+            <Button
+                onClick={toggle}>View Restaurants
+            </Button>
+
+            <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true} >
+                <ModalHeader toggle={toggle} className="header">
+                    Restaurants
+                </ModalHeader>
+                <ModalBody className="modal-body">
+                    <SearchBar 
+                    searchType={'RESTAURANTS_LOCATION'} 
+                    addRestaurants={addRestaurants}
+                    />
+                    <Container>
+                        <Col>
+                            <Row>
+
+                            </Row>
+                        </Col>
+                    </Container>
+                    {displayedRestaurants}
+                </ModalBody>
+                <ModalFooter>
+                    <Button onClick={toggle}>Okay</Button>
+                </ModalFooter>
+            </Modal>
+        </div >
     )
 }
