@@ -55,7 +55,9 @@ export default function RestaurantCard(props) {
                     </li> 
                 </ul>*/}
             <div className="rating">Rating: {props.restaurant.rating}</div>
-            <div className="restaurant--buttons"><button className="restaurant--favorite">Add to Favorites</button> <button className='restaurant--add-to-event'>Add To Event</button><button className="closeBtn" onClick={(event) => props.removeRestaurant(event, props.restaurant.id)}>X</button></div>
+            <div className="restaurant--buttons"><button className="restaurant--favorite">Add to Favorites</button> 
+            <button className='restaurant--add-to-event' onClick={() => props.selectRestaurant(props.restaurant)}>Add To Event</button>
+            <button className="closeBtn" onClick={(event) => props.removeRestaurant(event, props.restaurant.id)}>X</button></div>
             </div>
         </div>
     )

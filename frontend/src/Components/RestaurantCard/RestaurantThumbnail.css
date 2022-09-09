@@ -1,0 +1,36 @@
+.restaurant--thumbnail {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    background-size:cover;
+
+}
+
+/* .restaurant--thumbnail-image {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+} */
+
+.restaurant--thumbnail-name {
+    width: 100px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 12px;
+    padding: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 80px;
+    margin-bottom: 0;
+    border-radius: 0 0 5px 5px;
+}
+
+.restaurant--thumbnail-button {
+    border: none;
+    background-color: darkred;
+    color: white;
+}

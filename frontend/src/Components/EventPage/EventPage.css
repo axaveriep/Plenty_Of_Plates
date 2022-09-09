@@ -1,0 +1,9 @@
+.event--selectedRestuarants {
+    width: 800px;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

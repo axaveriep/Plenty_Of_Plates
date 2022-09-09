@@ -1,59 +1,61 @@
 import './EventPage.css'
-import {react, useState} from 'react'
+import { react, useState } from 'react'
 import RestaurantCard from '../RestaurantCard/RestaurantCard'
+import RestaurantGrid from '../RestaurantGrid/RestaurantGrid';
+import RestaurantThumbnail from '../RestaurantCard/RestaurantThumbnail';
 
-export default function EventPage()
-{
-    var [eventTitle, setEventTitle] = useState('Event Title');
+export default function EventPage() {
+    const [eventTitle, setEventTitle] = useState('Event Title');
 
-    var [eventDate, setEventDate] = useState(new Date().toISOString().slice(0,10))
+    const [eventDate, setEventDate] = useState(new Date().toISOString().slice(0, 10))
 
-    // var [restaurants, setRestaurants] = useState([{name: "Test 1", id: "0001"}])
+    const [selectedRestuarants, setSelectedRestaurants] = useState([])
 
-    // function removeRestaurant(event, id){
-    //     //setRestaurants({restaurants: restaurants.filter(function(restaurant) 
-    //     //    { return restaurant.id !== id })});
-    //     for (const restaurant of restaurants)
-    //     {
-    //         if (restaurant.id === id)
-    //         {
-    //             // console.log("selected for removal: ", restaurant)
-    //             // console.log("at index of: ", restaurants.indexOf(restaurant))
-    //             // console.log("restaurants in list: ", restaurants)
-    //             removeItem(restaurants.indexOf(restaurant))
-    //         }
-    //     }
-    // }
-    // function removeItem(index){
-    //     setRestaurants(restaurants.filter((o, i) => index !== i));
-    // };
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            setEventTitle(event.target.textContent)
+
+        }
+    }
+
+    function selectRestaurant(restaurant) {
+        setSelectedRestaurants(prevSelectedRestaurants => {
+            return [...prevSelectedRestaurants, restaurant]
+        })
+    }
+
+    function removeRestaurant(id) {
+        setSelectedRestaurants(prevSelectedRestaurants => {
+            return prevSelectedRestaurants.filter(restaurant => restaurant.id !== id)
+        })
+    }
 
 
-    // function addRestaurant(restaurant) {
-    //     setRestaurants(prevRestaurants =>( [...prevRestaurants, restaurant]))
-    // }
 
-    // let displayedRestaurants = restaurants.map((restaurant, i) => {
-    //     return (<RestaurantCard key={i} restaurant={restaurant} removeRestaurant={removeRestaurant}/>)
-    // })
+    let restaurantThumbnails = selectedRestuarants.map((restaurant, i) => {
+        return <RestaurantThumbnail key={i} restaurant={restaurant} removeRestaurant={removeRestaurant} />
+    })
 
-    return(
+    return (
         <div className="container">
-            <h1 
-                contenteditable="true" 
-                className="event--title" 
+            <h1
+                contenteditable="true"
+                className="event--title"
+                onKeyDown={handleKeyDown}
                 onBlur={e => (setEventTitle(e.currentTarget.textContent))}>
                 {eventTitle}
             </h1>
-            <input 
-                type="date" 
-                name="event--date" 
-                defaultValue={eventDate} 
-                value={eventDate} 
-                onChange={e => (setEventDate(e.currentTarget.value))}/>
-                <br/>
+            <input
+                type="date"
+                name="event--date"
+                defaultValue={eventDate}
+                value={eventDate}
+                onChange={e => (setEventDate(e.currentTarget.value))} />
+            <br />
+            <RestaurantGrid selectRestaurant={selectRestaurant}/>
             <div className="event--selectedRestuarants">
-            {/* {displayedRestaurants} */}
+                
+                {restaurantThumbnails}
             </div>
             {/* <button className='btn' onClick={ go to Restaurants Grid page? }>Add Restuarants</button> */}
         </div>

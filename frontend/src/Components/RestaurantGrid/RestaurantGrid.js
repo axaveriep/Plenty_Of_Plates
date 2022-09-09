@@ -39,8 +39,12 @@ export default function RestaurantGrid(props) {
         setRestaurants(restaurants.filter((o, i) => index !== i));
     };
 
+    function selectRestaurant(restaurant){
+        props.selectRestaurant(restaurant)
+    }
+
     let displayedRestaurants = restaurants.map((restaurant, i) => {
-        return (<RestaurantCard key={i} restaurant={restaurant} removeRestaurant={removeRestaurant}/>)
+        return (<RestaurantCard key={i} restaurant={restaurant} removeRestaurant={removeRestaurant} selectRestaurant={selectRestaurant}/>)
     })
 
 
