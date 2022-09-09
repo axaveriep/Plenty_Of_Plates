@@ -24,7 +24,7 @@ public class YelpAPIService {
 
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
-            Gson gson = new Gson();
+//            Gson gson = new Gson();
 
             HttpRequest searchRequest = HttpRequest.newBuilder()
                     .uri(new URI(yelpBaseUrl + "search?location=" + location))
@@ -42,7 +42,7 @@ public class YelpAPIService {
     public String getRestaurantById(String restaurantId) throws SearchFailedException {
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
-            Gson gson = new Gson();
+//            Gson gson = new Gson();
 
             HttpRequest getRequest = HttpRequest.newBuilder()
                     .uri(new URI(yelpBaseUrl + restaurantId))

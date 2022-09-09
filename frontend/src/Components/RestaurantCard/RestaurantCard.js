@@ -4,19 +4,27 @@ import "./RestaurantCard.css"
 
 export default function RestaurantCard(props) {
 
+    const categories = props.restaurant.categories
+    const categoryTitles = categories.map((category, i) => {
+       if(i<categories.length-1) {return category.title + " | "}
+       else { return category.title}
+    })
+
+    // <span className="badge">{props.restaurant.is_closed ? "Closed" : "Open"}</span>
+
     return(
         <div>
             <div className="restaurant--container">
-                <h1 className='restaurant--name'>{props.restaurant.name}<span class="badge">Closed</span></h1>
-                <h2 className='restaurant--type'>Type</h2>
-                <address className='restaurant--address'>123 Fake st Maydup, State 10101</address>
-                <p><a href="tel:(123)456-7890">(123)456-7890</a></p>
-                <img className='restaurant--image' src=""/>
-                <p className='restaurant--description'>Description</p>
-                <button className="restaurant--favorite">Add to Favorites</button>
-                <button className="closeBtn" onClick={(event) => props.removeRestaurant(event, props.restaurant.id)}>X</button>
-                <h3>Hours</h3>
-                <ul className='restaurant--hours'>
+                <div className='restaurant--name'>{props.restaurant.name}</div>
+                <div className='restaurant--type'>{categoryTitles}</div>
+                <address className='restaurant--address'>{props.restaurant.location.display_address}</address>
+                <p><a href="tel:(123)456-7890">{props.restaurant.display_phone}</a></p>
+                <img className='restaurant--image' src={props.restaurant.image_url}/>
+                {/* <p className='restaurant--description'>Description</p> */}
+                
+                
+                <h3 className="">Hours</h3>
+                {/* <ul className='restaurant--hours'>
                     <li className='hours monday'>
                         <p>Mon: </p>
                         <p>12:00-12:00</p>
@@ -44,10 +52,10 @@ export default function RestaurantCard(props) {
                     <li className='hours sunday'>
                         <p>Sun: </p>
                         <p>12:00-12:00</p>
-                    </li>
-                </ul>
-            <div className="rating">*****</div>
-            <button className='restaurant--add-to-event'>Add To Event</button>
+                    </li> 
+                </ul>*/}
+            <div className="rating">Rating: {props.restaurant.rating}</div>
+            <div className="restaurant--buttons"><button className="restaurant--favorite">Add to Favorites</button> <button className='restaurant--add-to-event'>Add To Event</button><button className="closeBtn" onClick={(event) => props.removeRestaurant(event, props.restaurant.id)}>X</button></div>
             </div>
         </div>
     )

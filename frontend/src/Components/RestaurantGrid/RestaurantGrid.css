@@ -33,3 +33,9 @@ body
   height: 80vh;
   overflow-y: auto;
 }
+
+.restaurant--grid-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

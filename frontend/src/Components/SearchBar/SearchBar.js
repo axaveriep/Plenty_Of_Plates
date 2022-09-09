@@ -21,7 +21,6 @@ function SearchBar(props) {
     const handleSearch = (searchTerm) => {
         
         
-
         switch(props.searchType) {
             case 'RESTAURANTS_LOCATION':
             props.addRestaurants(searchRestaurantsByLocation(searchTerm))    

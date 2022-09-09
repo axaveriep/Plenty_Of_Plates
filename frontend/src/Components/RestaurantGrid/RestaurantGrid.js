@@ -52,7 +52,7 @@ export default function RestaurantGrid(props) {
   
         <div>
             <Button
-                onClick={toggle}>View Restaurants
+                onClick={toggle}>Search Restaurants
             </Button>
 
             <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true} >
@@ -60,18 +60,19 @@ export default function RestaurantGrid(props) {
                     Restaurants
                 </ModalHeader>
                 <ModalBody className="modal-body">
+                    Enter a Location or Zip Code
                     <SearchBar 
                     searchType={'RESTAURANTS_LOCATION'} 
                     addRestaurants={addRestaurants}
                     />
-                    <Container>
+                    {/* <Container>
                         <Col>
                             <Row>
 
                             </Row>
                         </Col>
-                    </Container>
-                    {displayedRestaurants}
+                    </Container> */}
+                    <div className="restaurant--grid-display">{displayedRestaurants}</div>
                 </ModalBody>
                 <ModalFooter>
                     <Button onClick={toggle}>Okay</Button>
