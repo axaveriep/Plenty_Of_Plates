@@ -2,5 +2,6 @@
     "emmet.showSuggestionsAsSnippets": true,
     "emmet.includeLanguages": {
         "javascript":"javascriptreact"
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

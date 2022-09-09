@@ -14,7 +14,7 @@ export default function Navbar(props) {
                 </li>
 
                 <li>
-                    <a href="profile">Profile</a>
+                <Link to='/userprofile'>Profile</Link>
                 </li>
 
                 <li>

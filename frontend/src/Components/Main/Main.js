@@ -8,6 +8,7 @@ import Navbar from '../Navbar/Navbar'
 import { addToken, deleteUser } from '../../Redux/actionCreators'
 import { connect } from 'react-redux'
 import RestaurantGrid from '../RestaurantGrid/RestaurantGrid'
+import Userprofile from "../Userprofile/Userprofile"
 
 
 const mapStateToProps = state => {
@@ -61,6 +62,9 @@ class Main extends Component {
                     />
                     <Route path='/home'
                         component={this.props.token.token !== undefined ? () => <Home username={this.props.user.username} /> : () => <Redirect to='/login' />}
+                    />
+                    <Route path='/userprofile'
+                        component={this.props.token.token !== undefined ? () => <Userprofile username={this.props.user.username} /> : () => <Redirect to='/login' />}
                     />
                     {/* <Route path='/grid' component={<RestaurantGrid />} /> */}
                     <Redirect to='/home' />
