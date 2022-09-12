@@ -1,9 +1,7 @@
 package com.techelevator.business;
 
-import com.google.gson.Gson;
 import com.techelevator.exceptions.SearchFailedException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URI;
@@ -15,7 +13,6 @@ import java.net.http.HttpResponse;
 @Service
 public class YelpAPIService {
 
-    private final RestTemplate restTemplate = new RestTemplate();
     private final String yelpBaseUrl = "https://api.yelp.com/v3/businesses/";
     String bearerToken = "Bearer 7w0VfA6HD2GXdQe2o4LNVcW5Iq1KuAJn6_gLLIzBunEceC7_4aqXaCmk-kJqbKBfRCyENM1PMQBj2HIfX38CjudMNT1mJrYE5NAb6ck7m-L_x2H0Mu4srV7LkWYSY3Yx";
 
@@ -24,7 +21,7 @@ public class YelpAPIService {
 
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
-//            Gson gson = new Gson();
+
 
             HttpRequest searchRequest = HttpRequest.newBuilder()
                     .uri(new URI(yelpBaseUrl + "search?location=" + location))
@@ -42,7 +39,6 @@ public class YelpAPIService {
     public String getRestaurantById(String restaurantId) throws SearchFailedException {
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
-//            Gson gson = new Gson();
 
             HttpRequest getRequest = HttpRequest.newBuilder()
                     .uri(new URI(yelpBaseUrl + restaurantId))
