@@ -21,20 +21,28 @@ export default function EventPage(props) {
 
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
 
+  /** brings userId of logged in user from redux state */
   const userId = useSelector((state) => state.user.id);
 
+  /** saves event title to state when user presses enter key on input */
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       setEventTitle(event.target.textContent);
     }
   };
 
+  /** adds restaurants to state when selected by user -
+   * function passed to Restaurant Grid/Card
+  */
   function selectRestaurant(restaurant) {
     setSelectedRestaurants((prevSelectedRestaurants) => {
       return [...prevSelectedRestaurants, restaurant];
     });
   }
 
+  /** removes restaurants from state when user presses X button -
+   * function passed to Restaurant Thumbnail
+   */
   function removeRestaurant(id) {
     setSelectedRestaurants((prevSelectedRestaurants) => {
       return prevSelectedRestaurants.filter(
@@ -43,6 +51,7 @@ export default function EventPage(props) {
     });
   }
 
+  /** maps chosen restaurants to thumnails to be displayed on page */
   let restaurantThumbnails = selectedRestaurants.map((restaurant, i) => {
     return (
       <RestaurantThumbnail
@@ -53,13 +62,12 @@ export default function EventPage(props) {
     );
   });
 
+  /** saves all event information to database */
   function handleSubmit(event) {
     const selectedRestaurantsID = selectedRestaurants.map((restaurant) => {
       return restaurant.id;
     });
 
-    console.log(selectedRestaurants);
-    console.log(selectedRestaurantsID);
     
     event.preventDefault();
     const data = {
@@ -70,7 +78,6 @@ export default function EventPage(props) {
       time: eventTime
     };
     
-    console.log(data);
 
     axios
       .post(baseUrl + "/event", data)
@@ -107,8 +114,12 @@ export default function EventPage(props) {
       onChange={(e) => setEventTime(e.currentTarget.value)}
       />
       <br />
+      {/** Restaurant Grid component displays "Search Restaurants" button
+       * and that brings up a search modal when clicked
+       */}
       <RestaurantGrid selectRestaurant={selectRestaurant} />
       <div className="event--selectedRestuarants">{restaurantThumbnails}</div>
+
       {/* <button className='btn' onClick={ go to Restaurants Grid page? }>Add Restuarants</button> */}
 
       <button className="btn" type="submit" onClick={handleSubmit}>

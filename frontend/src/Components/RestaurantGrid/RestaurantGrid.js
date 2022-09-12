@@ -13,19 +13,10 @@ export default function RestaurantGrid(props) {
             setRestaurants(value)
         })
 
-        console.log(restaurants)
-        // let restaurantsReturned = await Promise.all(restaurantsArray)
-
-        // console.log(restaurantsReturned)
-
-        // setRestaurants(prevRestaurants => {
-        //     return [...prevRestaurants, restaurantsReturned]
-        // })
     }
 
     function removeRestaurant(event, id) {
-        //setRestaurants({restaurants: restaurants.filter(function(restaurant) 
-        //    { return restaurant.id !== id })});
+
         for (const restaurant of restaurants) {
             if (restaurant.id === id) {
                 removeItem(restaurants.indexOf(restaurant))

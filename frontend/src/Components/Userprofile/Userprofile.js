@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "./Userprofile.css"
+import "./UserProfile.css"
 
-export const Userprofile = (props) => {
+export const UserProfile = (props) => {
   return (
     <div title  = "Profile">
         <div className='profileContainer'>
@@ -17,4 +17,4 @@ export const Userprofile = (props) => {
   )
 }
 
-export default Userprofile;
+export default UserProfile;

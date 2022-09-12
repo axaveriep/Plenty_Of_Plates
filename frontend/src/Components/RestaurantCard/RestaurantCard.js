@@ -17,43 +17,19 @@ export default function RestaurantCard(props) {
             <div className="restaurant--container">
                 <div className='restaurant--name'>{props.restaurant.name}</div>
                 <div className='restaurant--type'>{categoryTitles}</div>
-                <address className='restaurant--address'>{props.restaurant.location.display_address}</address>
+                <address className='restaurant--address'>{props.restaurant.location.display_address}
+                {/** adjust display address to not show on one line */}</address>
                 <p><a href="tel:(123)456-7890">{props.restaurant.display_phone}</a></p>
                 <img className='restaurant--image' src={props.restaurant.image_url}/>
                 {/* <p className='restaurant--description'>Description</p> */}
                 
                 
                 <h3 className="">Hours</h3>
-                {/* <ul className='restaurant--hours'>
-                    <li className='hours monday'>
-                        <p>Mon: </p>
-                        <p>12:00-12:00</p>
-                    </li>
-                    <li className='hours tuesday'>
-                        <p>Tue: </p>
-                        <p>12:00-12:00</p>
-                    </li>
-                    <li className='hours wednesday'>
-                        <p>Wed: </p>
-                        <p>12:00-12:00</p>
-                    </li>
-                    <li className='hours thursday'>
-                        <p>Thu: </p>
-                        <p>12:00-12:00</p>
-                        </li>
-                    <li className='hours friday'>
-                        <p>Fri: </p>
-                        <p>12:00-12:00</p>
-                    </li>
-                    <li className='hours saturday'>
-                        <p>Sat: </p>
-                        <p>12:00-12:00</p>
-                    </li>
-                    <li className='hours sunday'>
-                        <p>Sun: </p>
-                        <p>12:00-12:00</p>
-                    </li> 
-                </ul>*/}
+                {/* to get Hours and if business is currently open, we will have to make another call to the API for restaurant details
+                using the Restaurant Id
+                
+                -- convert Hours to a button that makes that call and 
+                shows info */}
             <div className="rating">Rating: {props.restaurant.rating}</div>
             <div className="restaurant--buttons"><button className="restaurant--favorite">Add to Favorites</button> 
             <button className='restaurant--add-to-event' onClick={() => props.selectRestaurant(props.restaurant)}>Add To Event</button>
