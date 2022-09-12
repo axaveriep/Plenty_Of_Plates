@@ -1,15 +1,21 @@
 package com.techelevator.model;
 
+import java.sql.Timestamp;
+
 public class EventDTO {
 
     private long userId;
+    private String[] restaurantIds;
+    private String title;
     private String date;
     private String time;
 
     public EventDTO() {}
 
-    public EventDTO(int userId, String date, String time) {
+    public EventDTO(long userId, String[] restaurantIds, String title, String date, String time) {
         this.userId = userId;
+        this.restaurantIds = restaurantIds;
+        this.title = title;
         this.date = date;
         this.time = time;
     }
@@ -18,8 +24,24 @@ public class EventDTO {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public String[] getRestaurantIds() {
+        return restaurantIds;
+    }
+
+    public void setRestaurantIds(String[] restaurantIds) {
+        this.restaurantIds = restaurantIds;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDate() {

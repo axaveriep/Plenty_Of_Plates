@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import SearchBar from "../SearchBar/SearchBar"
 import RestaurantCard from "../RestaurantCard/RestaurantCard"
-import { Button, Modal, ModalFooter,ModalHeader, ModalBody, Container, Row, Col } from "reactstrap"
+import { Button, Modal, ModalFooter, ModalHeader, ModalBody, Container, Row, Col } from "reactstrap"
 import "./RestaurantGrid.css"
 
 export default function RestaurantGrid(props) {
@@ -23,28 +23,31 @@ export default function RestaurantGrid(props) {
         // })
     }
 
-    function removeRestaurant(event, id){
+    function removeRestaurant(event, id) {
         //setRestaurants({restaurants: restaurants.filter(function(restaurant) 
         //    { return restaurant.id !== id })});
-        for (const restaurant of restaurants)
-        {
-            if (restaurant.id === id)
-            {
+        for (const restaurant of restaurants) {
+            if (restaurant.id === id) {
                 removeItem(restaurants.indexOf(restaurant))
             }
         }
     }
 
-    function removeItem(index){
+    function removeItem(index) {
         setRestaurants(restaurants.filter((o, i) => index !== i));
     };
 
-    function selectRestaurant(restaurant){
+    function selectRestaurant(restaurant) {
         props.selectRestaurant(restaurant)
     }
 
     let displayedRestaurants = restaurants.map((restaurant, i) => {
-        return (<RestaurantCard key={i} restaurant={restaurant} removeRestaurant={removeRestaurant} selectRestaurant={selectRestaurant}/>)
+        return (<RestaurantCard
+            key={i}
+            restaurant={restaurant}
+            removeRestaurant={removeRestaurant}
+            selectRestaurant={selectRestaurant}
+        />)
     })
 
 
@@ -52,8 +55,8 @@ export default function RestaurantGrid(props) {
 
     const toggle = () => setModal(!modal);
 
-    return(
-  
+    return (
+
         <div>
             <Button
                 onClick={toggle}>Search Restaurants
@@ -65,9 +68,9 @@ export default function RestaurantGrid(props) {
                 </ModalHeader>
                 <ModalBody className="modal-body">
                     Enter a Location or Zip Code
-                    <SearchBar 
-                    searchType={'RESTAURANTS_LOCATION'} 
-                    addRestaurants={addRestaurants}
+                    <SearchBar
+                        searchType={'RESTAURANTS_LOCATION'}
+                        addRestaurants={addRestaurants}
                     />
                     {/* <Container>
                         <Col>
@@ -76,7 +79,8 @@ export default function RestaurantGrid(props) {
                             </Row>
                         </Col>
                     </Container> */}
-                    <div className="restaurant--grid-display">{displayedRestaurants}</div>
+                    <div className="restaurant--grid-display">      {displayedRestaurants}
+                    </div>
                 </ModalBody>
                 <ModalFooter>
                     <Button onClick={toggle}>Okay</Button>

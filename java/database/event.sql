@@ -2,10 +2,16 @@
 
 -- DROP TABLE IF EXISTS public.event;
 
-CREATE TABLE IF NOT EXISTS public.event
-(
-    event_id serial NOT NULL,
+CREATE SEQUENCE seq_event_id
+  INCREMENT BY 1
+  START WITH 20001
+  NO MAXVALUE
+  CACHE 1;
+
+CREATE TABLE IF NOT EXISTS public.event (
+    event_id int DEFAULT nextval('seq_event_id'::regclass) NOT NULL,
     user_id integer,
+    title varchar(50),
     date date,
     "time" timestamp(2) without time zone,
     CONSTRAINT "invite _pkey" PRIMARY KEY (event_id),

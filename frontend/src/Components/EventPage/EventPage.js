@@ -6,16 +6,22 @@ import RestaurantThumbnail from "../RestaurantCard/RestaurantThumbnail";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
+import { useSelector } from "react-redux";
 const Swal = window.Swal;
 
 export default function EventPage(props) {
+
   const [eventTitle, setEventTitle] = useState("Event Title");
 
   const [eventDate, setEventDate] = useState(
     new Date().toISOString().slice(0, 10)
   );
 
-  const [selectedRestuarants, setSelectedRestaurants] = useState([]);
+  const [eventTime, setEventTime] = useState();
+
+  const [selectedRestaurants, setSelectedRestaurants] = useState([]);
+
+  const userId = useSelector((state) => state.user.id);
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -37,7 +43,7 @@ export default function EventPage(props) {
     });
   }
 
-  let restaurantThumbnails = selectedRestuarants.map((restaurant, i) => {
+  let restaurantThumbnails = selectedRestaurants.map((restaurant, i) => {
     return (
       <RestaurantThumbnail
         key={i}
@@ -48,17 +54,23 @@ export default function EventPage(props) {
   });
 
   function handleSubmit(event) {
-    const selectedResturantsID = selectedRestuarants.map((resturant) => {
-      return resturant.id;
+    const selectedRestaurantsID = selectedRestaurants.map((restaurant) => {
+      return restaurant.id;
     });
+
+    console.log(selectedRestaurants);
+    console.log(selectedRestaurantsID);
     
     event.preventDefault();
     const data = {
-      resturantIds: selectedResturantsID,
+      userId: userId,
+      restaurantIds: selectedRestaurantsID,
       date: eventDate,
       title: eventTitle,
+      time: eventTime
     };
     
+    console.log(data);
 
     axios
       .post(baseUrl + "/event", data)
@@ -86,6 +98,13 @@ export default function EventPage(props) {
         defaultValue={eventDate}
         value={eventDate}
         onChange={(e) => setEventDate(e.currentTarget.value)}
+      />
+      <br />
+      <input 
+      type="time"
+      name="event--time"
+      value={eventTime}
+      onChange={(e) => setEventTime(e.currentTarget.value)}
       />
       <br />
       <RestaurantGrid selectRestaurant={selectRestaurant} />

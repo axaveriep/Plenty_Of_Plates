@@ -12,11 +12,6 @@ CREATE TABLE IF NOT EXISTS public.event_restaurants
         REFERENCES public.event (event_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-        NOT VALID,
-    CONSTRAINT "resturant_id " FOREIGN KEY (restaurant_id)
-        REFERENCES public.restaurants (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
         NOT VALID
 )
 

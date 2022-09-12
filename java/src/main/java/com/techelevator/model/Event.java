@@ -26,8 +26,8 @@ public class Event {
     @Column(name="user_id")
     private Long userId;
 
-//    @Column(name="event_name")
-//    private String eventName;
+    @Column(name="title")
+    private String title;
 
     @Column(name="date")
     private LocalDate date;
@@ -36,9 +36,10 @@ public class Event {
     private Timestamp time;
 
 
-    public Event(Long eventId, Long userId, LocalDate date, Timestamp time) {
+    public Event(Long eventId, Long userId, String title, LocalDate date, Timestamp time) {
         this.eventId = eventId;
         this.userId = userId;
+        this.title = title;
         this.date = date;
         this.time = time;
     }
