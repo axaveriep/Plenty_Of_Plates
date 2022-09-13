@@ -17,14 +17,13 @@ export async function searchRestaurantsByLocation(input) {
     const restaurantsResults = await axios.get(decodeURIComponent(uri)).catch(err => console.log(err))
     
     let restaurantsArray = restaurantsResults.data.businesses
-    console.log(restaurantsArray)
 
     return(restaurantsArray)
 }
 
-// export async function getRestaurantById(restaurantId) {
+export async function getRestaurantById(restaurantId) {
 
-//     const restaurant = await axios.get('https://api.yelp.com/v3/businesses/' + restaurantId, config).catch(err => console.log(err))
+    const restaurant = await axios.get('http://localhost:8081/search/restaurant/' + restaurantId).catch(err => console.log(err))
 
-//     return restaurant.data
-// }
+    return restaurant.data
+}

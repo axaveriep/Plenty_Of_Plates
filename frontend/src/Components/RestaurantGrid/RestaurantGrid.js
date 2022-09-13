@@ -12,8 +12,6 @@ export default function RestaurantGrid(props) {
         Promise.resolve(restaurantsArray).then(value => {
             setRestaurants(value)
         })
-
-        console.log(restaurants)
         // let restaurantsReturned = await Promise.all(restaurantsArray)
 
         // console.log(restaurantsReturned)
@@ -44,7 +42,7 @@ export default function RestaurantGrid(props) {
     }
 
     let displayedRestaurants = restaurants.map((restaurant, i) => {
-        return (<RestaurantCard key={i} restaurant={restaurant} removeRestaurant={removeRestaurant} selectRestaurant={selectRestaurant}/>)
+        return (<RestaurantCard key={i} restaurant={restaurant} removeRestaurant={removeRestaurant} selectRestaurant={selectRestaurant} hideAddBtn={props.hideAddBtn} hideRemoveBtn={props.hideRemoveBtn}/>)
     })
 
 

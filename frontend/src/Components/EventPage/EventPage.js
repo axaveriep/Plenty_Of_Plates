@@ -73,7 +73,7 @@ export default function EventPage(props) {
   return (
     <div className="container">
       <h1
-        contenteditable="true"
+        contentEditable="true"
         className="event--title"
         onKeyDown={handleKeyDown}
         onBlur={(e) => setEventTitle(e.currentTarget.textContent)}
@@ -88,7 +88,7 @@ export default function EventPage(props) {
         onChange={(e) => setEventDate(e.currentTarget.value)}
       />
       <br />
-      <RestaurantGrid selectRestaurant={selectRestaurant} />
+      <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false} hideRemoveBtn={true}/>
       <div className="event--selectedRestuarants">{restaurantThumbnails}</div>
       {/* <button className='btn' onClick={ go to Restaurants Grid page? }>Add Restuarants</button> */}
 

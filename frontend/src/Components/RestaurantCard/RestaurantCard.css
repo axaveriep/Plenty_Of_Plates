@@ -22,7 +22,6 @@ h3
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  align-items: space-between;
   justify-content: space-evenly;
   text-align: center;
   border: solid #222 2px;
@@ -83,7 +82,7 @@ h3
   margin: 5px;
 }
 
-.restaurant--favorite, .restaurant--add-to-event
+.restaurant--favoriteBtn, .restaurant--addBtn, .restaurant--removeBtn
 {
   border: none;
   max-width: 400px;

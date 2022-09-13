@@ -13,7 +13,7 @@ export default function Home(props) {
                 <SearchBar searchType={'RESTAURANTS_LOCATION'}/>
             </div> */}
             <div>
-                <RestaurantGrid />
+                <RestaurantGrid hideAddBtn={true} hideRemoveBtn={true}/>
             </div>
 
             <div className="home--create-event">
