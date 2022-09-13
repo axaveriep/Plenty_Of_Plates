@@ -5,8 +5,8 @@ DROP SEQUENCE IF EXISTS seq_user_id;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
+  START WITH 10001
   NO MAXVALUE
-  NO MINVALUE
   CACHE 1;
 
 
@@ -21,6 +21,5 @@ CREATE TABLE users (
 
 INSERT INTO users (username, email, password_hash, role) VALUES ('user','user@testemail.com','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username, email, password_hash, role) VALUES ('admin','admin@testemail.com','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
-INSERT INTO users (username, email, password_hash, role) VALUES ('Monday1','1@monday.com','$2a$10$7OkEycjFrsbVTHSvDNehwOvNOPElLIeD0wDeMaAjXTMRuXdKNGVWa','ROLE_USER');
 
 COMMIT TRANSACTION;

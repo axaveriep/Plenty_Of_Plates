@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import './SearchBar.css'
 import { searchRestaurantsByLocation } from './SearchFunctions'
 
+/** takes searchType as a prop in case we need SearBar to be reusable */
 function SearchBar(props) {
 
     const [input, setInput] = useState('')
-   // const [searchTerm, setSearchTerm] = useState('')
 
     const handleChange = (event) => {
         setInput(event.target.value)
@@ -23,7 +23,7 @@ function SearchBar(props) {
         
         switch(props.searchType) {
             case 'RESTAURANTS_LOCATION':
-            props.addRestaurants(searchRestaurantsByLocation(searchTerm))    
+            props.addRestaurants(searchRestaurantsByLocation(searchTerm)) 
 
             default: console.log(searchTerm)    
         }

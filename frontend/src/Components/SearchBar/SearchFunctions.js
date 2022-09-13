@@ -1,14 +1,6 @@
 import React from "react"
 import axios from "axios"
-// import { bearerToken } from "../../Shared/bearerToken"
 
-// const config = {
-//     headers: {
-//         'Authorization': `Bearer ${bearerToken}`
-//     }
-// };
-
-//'https://api.yelp.com/v3/businesses/search?location=' + input, config
 
 export async function searchRestaurantsByLocation(input) {
 
@@ -22,8 +14,14 @@ export async function searchRestaurantsByLocation(input) {
 }
 
 export async function getRestaurantById(restaurantId) {
+<<<<<<< HEAD
 
     const restaurant = await axios.get('http://localhost:8081/search/restaurant/' + restaurantId).catch(err => console.log(err))
 
+=======
+    
+    const restaurant = await axios.get('http://localhost:8081/search/restaurant/' + restaurantId).catch(err => console.log(err))
+
+>>>>>>> 72ca4799aaec6f6805406b5d71d6349581fca7cc
     return restaurant.data
 }
