@@ -14,14 +14,8 @@ export async function searchRestaurantsByLocation(input) {
 }
 
 export async function getRestaurantById(restaurantId) {
-<<<<<<< HEAD
 
     const restaurant = await axios.get('http://localhost:8081/search/restaurant/' + restaurantId).catch(err => console.log(err))
 
-=======
-    
-    const restaurant = await axios.get('http://localhost:8081/search/restaurant/' + restaurantId).catch(err => console.log(err))
-
->>>>>>> 72ca4799aaec6f6805406b5d71d6349581fca7cc
     return restaurant.data
 }

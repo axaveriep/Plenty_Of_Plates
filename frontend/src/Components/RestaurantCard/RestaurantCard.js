@@ -33,8 +33,7 @@ export default function RestaurantCard(props) {
         setModal(!modal)
     }
     // <span className="badge">{props.restaurant.is_closed ? "Closed" : "Open"}</span>
-
-    let hours;
+ 
     function mapHours() {
             console.log("maphours: ")
             restaurantDetails.hours.map((object, i)=>{console.log(object.open)})

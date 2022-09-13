@@ -7,7 +7,7 @@ import Home from '../Home/Home'
 import Navbar from '../Navbar/Navbar'
 import { addToken, deleteUser } from '../../Redux/actionCreators'
 import { connect } from 'react-redux'
-import UserProfile from "../UserProfile/UserProfile"
+import UserProfile from "../Userprofile/UserProfile"
 
 
 const mapStateToProps = state => {
