@@ -19,3 +19,11 @@ export async function getRestaurantById(restaurantId) {
 
     return restaurant.data
 }
+
+export async function getEventsByUserId(userId) {
+
+    const events = await axios.get(baseUrl+"/event/user/"+userId).catch(err => console.log(err))
+
+    return events.data
+
+}
