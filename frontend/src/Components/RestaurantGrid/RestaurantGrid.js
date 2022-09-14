@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import SearchBar from "../SearchBar/SearchBar"
 import RestaurantCard from "../RestaurantCard/RestaurantCard"
-import { Button, Modal, ModalFooter, ModalHeader, ModalBody, Container, Row, Col } from "reactstrap"
+import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap"
 import "./RestaurantGrid.css"
 
 export default function RestaurantGrid(props) {
@@ -12,13 +12,6 @@ export default function RestaurantGrid(props) {
         Promise.resolve(restaurantsArray).then(value => {
             setRestaurants(value)
         })
-        // let restaurantsReturned = await Promise.all(restaurantsArray)
-
-        // console.log(restaurantsReturned)
-
-        // setRestaurants(prevRestaurants => {
-        //     return [...prevRestaurants, restaurantsReturned]
-        // })
     }
 
     function removeRestaurant(event, id) {
@@ -64,14 +57,8 @@ export default function RestaurantGrid(props) {
                         searchType={'RESTAURANTS_LOCATION'}
                         addRestaurants={addRestaurants}
                     />
-                    {/* <Container>
-                        <Col>
-                            <Row>
-
-                            </Row>
-                        </Col>
-                    </Container> */}
-                    <div className="restaurant--grid-display">      {displayedRestaurants}
+                    <div className="restaurant--grid-display">
+                        {displayedRestaurants}
                     </div>
                 </ModalBody>
                 <ModalFooter>

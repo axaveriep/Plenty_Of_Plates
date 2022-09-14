@@ -1,12 +1,12 @@
 import "./EventPage.css";
 import { react, useState } from "react";
-import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import RestaurantGrid from "../RestaurantGrid/RestaurantGrid";
 import RestaurantThumbnail from "../RestaurantCard/RestaurantThumbnail";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
 import { useSelector } from "react-redux";
+
 const Swal = window.Swal;
 
 export default function EventPage(props) {
@@ -109,9 +109,6 @@ export default function EventPage(props) {
       <br />
       <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false} hideRemoveBtn={true}/>
       <div className="event--selectedRestuarants">{restaurantThumbnails}</div>
-
-      {/* <button className='btn' onClick={ go to Restaurants Grid page? }>Add Restuarants</button> */}
-
       <button className="btn" type="submit" onClick={handleSubmit}>
         Submit event!
       </button>

@@ -1,10 +1,11 @@
 import React from "react"
 import axios from "axios"
+import { baseUrl } from "../../Shared/baseUrl";
 
 
 export async function searchRestaurantsByLocation(input) {
 
-    const uri = 'http://localhost:8081/search/location/'+input.replaceAll(' ', '+');
+    const uri = baseUrl+"/search/location/"+input.replaceAll(" ", "+");
 
     const restaurantsResults = await axios.get(decodeURIComponent(uri)).catch(err => console.log(err))
     
@@ -15,7 +16,7 @@ export async function searchRestaurantsByLocation(input) {
 
 export async function getRestaurantById(restaurantId) {
 
-    const restaurant = await axios.get('http://localhost:8081/search/restaurant/' + restaurantId).catch(err => console.log(err))
+    const restaurant = await axios.get(baseUrl+"/search/restaurant/" + restaurantId).catch(err => console.log(err))
 
     return restaurant.data
 }

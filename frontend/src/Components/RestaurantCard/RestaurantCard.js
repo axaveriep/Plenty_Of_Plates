@@ -65,7 +65,7 @@ export default function RestaurantCard(props) {
                 <div className='restaurant--type'>{categoryTitles}</div>
                 <address className='restaurant--address'>{props.restaurant.location.display_address}
                     {/** adjust display address to not show on one line */}</address>
-                <p><a href="tel:(123)456-7890">{props.restaurant.display_phone}</a></p>
+                <p><a href={"tel:"+props.restaurant.display_phone}>{props.restaurant.display_phone}</a></p>
                 <img className='restaurant--image' src={props.restaurant.image_url} />
                 {/* <p className='restaurant--description'>Description</p> */}
                 <Button className="" onClick={toggle}>Hours</Button>
