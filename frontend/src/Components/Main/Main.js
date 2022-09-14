@@ -37,7 +37,7 @@ class Main extends Component {
             <div>
                 {this.props.token.token !== undefined ?
                     <div>
-                        <Navbar handleLogout={this.handleLogout} />
+                        <Navbar handleLogout={this.handleLogout} username={this.props.user.username}/>
                         <Redirect to='/home' />
                     </div>
                     :
@@ -56,8 +56,8 @@ class Main extends Component {
                     <Route path='/home'
                         component={()=> <Home username={this.props.user.username} />}
                     />
-                    <Route path='/userprofile'
-                        component={()=> <UserProfile username={this.props.user.username} />}
+                    <Route path='/:username'
+                        component={()=> <UserProfile user={this.props.user} />}
                     />
 
                     {/* <Redirect to='/home' /> */}
