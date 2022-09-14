@@ -1,6 +1,6 @@
 import React from 'react'
 
-function RestaurantHours({object}) {
+export default function RestaurantHours({object}) {
     let today;
     if (object.day === 6) {
         today = "Sunday"
@@ -22,12 +22,27 @@ function RestaurantHours({object}) {
         <div>
             <h4>{today}</h4>
             <p>
-                Open: {object.start}<br />
-                Close: {object.end}<br />
+                Open: {convertTime(object.start)}<br />
+                Close: {convertTime(object.end)}<br />
             </p>
             <hr />
         </div>
     )
 }
 
-export default RestaurantHours
+function convertTime(time) 
+{
+    console.log(typeof(time)," ",time)
+    let hourHand = time.substring(-1, 2);
+    let minuteHand = time.substring(2, 4);
+    let ampm = 'AM';
+    if (parseInt(hourHand) >= 12) 
+    { 
+        ampm = 'PM' 
+    }
+    if (parseInt(hourHand) > 12) 
+    {
+        hourHand = parseInt(hourHand) - 12;
+    }
+    return String(hourHand).padStart(2,'0') + ':' + minuteHand + ' ' + ampm;
+}

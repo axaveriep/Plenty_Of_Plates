@@ -3,9 +3,18 @@
   box-sizing: border-box;
 }
 
-.badge
+.badge.closed
 {
     background-color: red;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.badge.open
+{
+    background-color: green;
     color: white;
     padding: 4px 8px;
     text-align: center;

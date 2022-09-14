@@ -27,30 +27,16 @@ export default function RestaurantCard(props) {
 
     const toggle = () => 
     {
-        // console.log(restaurantDetails)
-        // console.log(restaurantDetails.hours)
-        // console.log(restaurantDetails.hours[0].open)
-        // console.log(restaurantDetails.hours[0].open[0])
-        setModal(!modal)
-        let resthours = restaurantDetails.hours[0].open.map((object, i) => 
+        if(restaurantDetails.hours !== undefined)
         {
-            return (<RestaurantHours key={i} object={object} />)
-        })
-        setHours(resthours)
-    }
-
-    // <span className="badge">{props.restaurant.is_closed ? "Closed" : "Open"}</span>
-    function convertTime(time) {
-        let hourHand = time.substring(0, 1);
-        let minuteHand = time.substring(2, 3);
-        let ampm = 'AM';
-        if (hourHand >= 12) { ampm = 'PM' }
-        if (hourHand > 12) {
-            hourHand = hourHand - 12;
+            setModal(!modal)
+            let resthours = restaurantDetails.hours[0].open.map((object, i) => 
+            {
+                return (<RestaurantHours key={i} object={object} />)
+            })
+            setHours(resthours)
         }
-        return hourHand + ':' + minuteHand + ' ' + ampm;
     }
-
 
     return (
         <div>
@@ -61,17 +47,13 @@ export default function RestaurantCard(props) {
                     {/** adjust display address to not show on one line */}</address>
                 <p><a href={"tel:"+props.restaurant.display_phone}>{props.restaurant.display_phone}</a></p>
                 <img className='restaurant--image' src={props.restaurant.image_url} alt="restaurant visual"/>
-                {/* <p className='restaurant--description'>Description</p> */}
-                <Button className="" onClick={toggle}>Hours</Button>
-                {/* to get Hours and if business is currently open, we will have to make another call to the API for restaurant details
-                using the Restaurant Id
-                
-                -- convert Hours to a button that makes that call and 
-                shows info */}
+
+                <Button className="" onClick={toggle}>Hours</Button> {/*disabled={restaurantDetails.hours === undefined}*/}
+
                 <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true}>
                     <ModalHeader className="header">
                         {props.restaurant.name} Hours <br />
-                        {restaurantDetails.hours === undefined ? '' : restaurantDetails.hours[0].is_open_now ? "Open Now" : "Closed"}
+                        {restaurantDetails.hours === undefined ? '' : restaurantDetails.hours[0].is_open_now ? <span className="badge open">Open Now</span> : <span className="badge closed">Closed</span>}
                     </ModalHeader>
                     <ModalBody className="modal-body">
                         {console.log(props.restaurant.name)}
@@ -81,9 +63,9 @@ export default function RestaurantCard(props) {
                         <Button onClick={toggle}>Okay</Button>
                     </ModalFooter>
                 </Modal>
-                <div className="rating">Rating: {props.restaurant.rating}</div>
+                <div className="rating">Rating: {props.restaurant.rating}{/*TODO: Add visuals*/}</div>
                 <div className="restaurant--buttons">
-                    <button className="restaurant--favoriteBtn">Add to Favorites</button>
+                    <button className="restaurant--favoriteBtn">{/*TODO: Add functionality*/}Add to Favorites</button>
                     {props.hideAddBtn ? <></> : <button className="restaurant--addBtn" onClick={() => props.selectRestaurant(props.restaurant)}>Add To Event</button>}
                     {props.hideRemoveBtn ? <></> : <button className="restaurant--removeBtn" onClick={(event) => props.removeRestaurant(event, props.restaurant.id)}>X</button>}
                 </div>
