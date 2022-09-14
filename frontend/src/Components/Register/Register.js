@@ -32,7 +32,7 @@ class Register extends Component{
     handleInputBlur = (event) => {
         if(event.target.name === "email")
         {
-            this.toggleValidationStyle(event, "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+            this.toggleValidationStyle(event, "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$")
         }
         else if(event.target.name === "password")
         {
@@ -44,7 +44,6 @@ class Register extends Component{
     {
         if (!event.target.value.match(format) && event.target.value !== null)
         {
-            /* this doesn't work as intended :( --> event.target.parentElement.classList.toggle('invalid','valid') */
             event.target.parentElement.classList.add('invalid');
             if(event.target.parentElement.classList.contains('valid'))  // sanity check
             {
@@ -141,7 +140,6 @@ class Register extends Component{
                                 type="text"
                                 id="username"
                                 name="username"
-                                //class="form-control"
                                 placeholder="Username"
                                 v-model="user.username"
                                 onChange={this.handleInputChange}
@@ -155,7 +153,6 @@ class Register extends Component{
                                 type="email"
                                 id="email"
                                 name="email"
-                                //class="form-control"
                                 placeholder='E-mail Address'
                                 v-model="user.email"
                                 onChange={this.handleInputChange}
@@ -170,7 +167,6 @@ class Register extends Component{
                                 type="password"
                                 id="password"
                                 name="password"
-                                //class="form-control"
                                 placeholder="Password"
                                 v-model="user.password"
                                 onChange={this.handleInputChange}
@@ -184,7 +180,6 @@ class Register extends Component{
                                 type="password"
                                 id="password-confirm"
                                 name="confirmPassword"
-                                //class="form-control"
                                 placeholder="Confirm Password"
                                 v-model="user.password"
                                 onChange={this.handleInputChange}
@@ -193,14 +188,14 @@ class Register extends Component{
                             />
                             {this.state.password === this.state.confirmPassword ? <div className="msg"></div> : <div className="msg">Password and Confirm Password must match!!!</div>}
                         </div>
-                            <Link to="/login" className="login-link">Have an account?</Link>
-                            <button 
-                                className="btn" 
-                                type="submit" 
-                                disabled={!this.state.validEmail || !this.state.validPassword} 
-                                onClick={this.handleSubmit}>
-                            Register
-                            </button>
+                        <Link to="/login" className="login-link">Have an account?</Link>
+                        <button 
+                            className="btn" 
+                            type="submit" 
+                            disabled={!this.state.validEmail || !this.state.validPassword} 
+                            onClick={this.handleSubmit}>
+                        Register
+                        </button>
                     </form>
                 </div>
             }

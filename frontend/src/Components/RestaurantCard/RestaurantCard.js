@@ -22,30 +22,24 @@ export default function RestaurantCard(props) {
             .then(value => {
                 setRestaurantDetails(value)
             })
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [modal])
 
-    const toggle = () => {
+    const toggle = () => 
+    {
+        // console.log(restaurantDetails)
+        // console.log(restaurantDetails.hours)
+        // console.log(restaurantDetails.hours[0].open)
+        // console.log(restaurantDetails.hours[0].open[0])
         setModal(!modal)
-        console.log(restaurantDetails)
-        console.log(restaurantDetails.hours)
-        console.log(restaurantDetails.hours[0].open)
-        console.log(restaurantDetails.hours[0].open[0])
-
-        let resthours = restaurantDetails.hours[0].open.map((object, i) => {
-            console.log(object)
-
+        let resthours = restaurantDetails.hours[0].open.map((object, i) => 
+        {
             return (<RestaurantHours key={i} object={object} />)
-
         })
-
         setHours(resthours)
     }
 
-    
     // <span className="badge">{props.restaurant.is_closed ? "Closed" : "Open"}</span>
-
-
-
     function convertTime(time) {
         let hourHand = time.substring(0, 1);
         let minuteHand = time.substring(2, 3);
@@ -66,7 +60,7 @@ export default function RestaurantCard(props) {
                 <address className='restaurant--address'>{props.restaurant.location.display_address}
                     {/** adjust display address to not show on one line */}</address>
                 <p><a href={"tel:"+props.restaurant.display_phone}>{props.restaurant.display_phone}</a></p>
-                <img className='restaurant--image' src={props.restaurant.image_url} />
+                <img className='restaurant--image' src={props.restaurant.image_url} alt="restaurant visual"/>
                 {/* <p className='restaurant--description'>Description</p> */}
                 <Button className="" onClick={toggle}>Hours</Button>
                 {/* to get Hours and if business is currently open, we will have to make another call to the API for restaurant details

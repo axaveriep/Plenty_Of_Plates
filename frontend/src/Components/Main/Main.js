@@ -23,9 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     handleLogout = () => {
         this.props.addToken("")
@@ -41,32 +41,26 @@ class Main extends Component {
                         <Redirect to='/home' />
                     </div>
                     :
-                    <></>
+                    <><Redirect to='/login' /></>
                 }
                 <Switch>
                     <Route path='/login'
-                        component={this.props.token.token === undefined ?
-                            () => <Login />
-                            : () => <Redirect to='/home' />}
+                        component={Login}
                     />
                     <Route path='/register'
-                        component={this.props.token.token === undefined ?
-                            () => <Register />
-                            : () => <Redirect to='/home' />}
+                        component={Register}
                     />
                     <Route path='/eventpage'
-                        component={this.props.token.token !== undefined ?
-                            () => <EventPage />
-                            : <Redirect to='/login' />}
+                        component={EventPage}
                     />
                     <Route path='/home'
-                        component={this.props.token.token !== undefined ? () => <Home username={this.props.user.username} /> : () => <Redirect to='/login' />}
+                        component={Home}
                     />
                     <Route path='/userprofile'
-                        component={this.props.token.token !== undefined ? () => <UserProfile username={this.props.user.username} /> : () => <Redirect to='/login' />}
+                        component={UserProfile}
                     />
 
-                    <Redirect to='/home' />
+                    {/* <Redirect to='/home' /> */}
 
                 </Switch>
             </div>

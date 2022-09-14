@@ -71,7 +71,6 @@ class Login extends Component {
                                     type="text"
                                     id="username"
                                     name="username"
-                                    //class="form-control"
                                     placeholder="Username"
                                     v-model="user.username"
                                     onChange={this.handleInputChange}
@@ -85,7 +84,6 @@ class Login extends Component {
                                     type="password"
                                     id="password"
                                     name="password"
-                                    //class="form-control"
                                     placeholder="Password"
                                     v-model="user.password"
                                     onChange={this.handleInputChange}

@@ -23,7 +23,8 @@ function SearchBar(props) {
         
         switch(props.searchType) {
             case 'RESTAURANTS_LOCATION':
-            props.addRestaurants(searchRestaurantsByLocation(searchTerm)) 
+                props.addRestaurants(searchRestaurantsByLocation(searchTerm))
+                break
 
             default: console.log(searchTerm)    
         }
