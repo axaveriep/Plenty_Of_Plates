@@ -1,0 +1,6 @@
+.event-thumbnail--container {
+    width: 200px;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid red;
+}

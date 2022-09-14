@@ -33,6 +33,10 @@ public class UserService {
         return user;
     }
 
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public User findByUsername(String username) throws UsernameNotFoundException {
         for (User user : this.findAllUsers()) {
             if( user.getUsername().toLowerCase().equals(username.toLowerCase())) {
