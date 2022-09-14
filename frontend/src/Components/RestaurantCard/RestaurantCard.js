@@ -1,3 +1,4 @@
+import { element } from "prop-types"
 import { React, useState, useEffect } from "react"
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap"
 import { getRestaurantById } from "../SearchBar/SearchFunctions"
@@ -43,9 +44,14 @@ export default function RestaurantCard(props) {
             <div className="restaurant--container">
                 <div className='restaurant--name'>{props.restaurant.name}</div>
                 <div className='restaurant--type'>{categoryTitles}</div>
-                <address className='restaurant--address'>{props.restaurant.location.display_address}
-                    {/** adjust display address to not show on one line */}</address>
-                <p><a href={"tel:"+props.restaurant.display_phone}>{props.restaurant.display_phone}</a></p>
+                <div className='restaurant--address'>
+                    <a href={"https://www.google.com/maps/search/?api=1&query=" + String(props.restaurant.location.display_address)}target="_blank">
+                    {props.restaurant.location.display_address[0]+" "}
+                    {props.restaurant.location.display_address[1]+" "}<br/>
+                    {props.restaurant.location.display_address[2]}
+                    </a>
+                </div>
+                <a href={"tel:"+props.restaurant.display_phone}>{props.restaurant.display_phone}</a>
                 <img className='restaurant--image' src={props.restaurant.image_url} alt="restaurant visual"/>
 
                 <Button className="" onClick={toggle}>Hours</Button> {/*disabled={restaurantDetails.hours === undefined}*/}

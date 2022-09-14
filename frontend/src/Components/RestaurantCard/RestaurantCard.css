@@ -40,21 +40,41 @@ h3
   height: 620px;
 }
 
-.restaurant--name {
- 
- font-size: 24px;
- /* font-size: clamp(10px, 2vw, 24px) */
+.restaurant--name
+{
+ font-size: 1.5em;
 }
-.restaurant--image {
+
+.restaurant--type
+{
+  display: flex;
+  flex-direction: column;
+  font-size: 1em;
+  color: gray;
+}
+
+a[href^="tel:"]
+{
+  text-decoration: none;
+}
+
+a[href^="tel:"]::before 
+{
+  content: "\260E";
+  margin-right: 0.5em;
+}
+
+.restaurant--address a
+{
+  font-style: italic;
+  text-decoration: none;
+}
+
+.restaurant--image
+{
   max-height: 250px;
   max-width: 100%;
   object-fit: cover;
-}
-
-.restaurant--type {
-  display: flex;
-  flex-direction: column;
-  font-size:small;
 }
 
 .restaurant--hours
