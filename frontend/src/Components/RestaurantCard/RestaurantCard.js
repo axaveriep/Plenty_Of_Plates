@@ -56,7 +56,6 @@ export default function RestaurantCard(props) {
                         {restaurantDetails.hours === undefined ? '' : restaurantDetails.hours[0].is_open_now ? <span className="badge open">Open Now</span> : <span className="badge closed">Closed</span>}
                     </ModalHeader>
                     <ModalBody className="modal-body">
-                        {console.log(props.restaurant.name)}
                         {hours === undefined ? <></> : <>{hours}</>}
                     </ModalBody>
                     <ModalFooter>

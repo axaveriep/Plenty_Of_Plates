@@ -32,7 +32,14 @@ export default function RestaurantGrid(props) {
     }
 
     let displayedRestaurants = restaurants.map((restaurant, i) => {
-        return (<RestaurantCard key={i} restaurant={restaurant} removeRestaurant={removeRestaurant} selectRestaurant={selectRestaurant} hideAddBtn={props.hideAddBtn} hideRemoveBtn={props.hideRemoveBtn}/>)
+        return (<RestaurantCard 
+            key={i} 
+            restaurant={restaurant} 
+            removeRestaurant={removeRestaurant} 
+            selectRestaurant={selectRestaurant} 
+            hideAddBtn={props.hideAddBtn} 
+            hideRemoveBtn={props.hideRemoveBtn}
+            />)
     })
 
 
@@ -49,14 +56,14 @@ export default function RestaurantGrid(props) {
 
             <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true} >
                 <ModalHeader toggle={toggle} className="header">
-                    Restaurants
-                </ModalHeader>
-                <ModalBody className="modal-body">
-                    Enter a Location or Zip Code
+                    <h1>Restaurants</h1>
                     <SearchBar
                         searchType={'RESTAURANTS_LOCATION'}
                         addRestaurants={addRestaurants}
+                        placeholder="Enter a Location or Zip Code"
                     />
+                </ModalHeader>
+                <ModalBody className="modal-body">
                     <div className="restaurant--grid-display">
                         {displayedRestaurants}
                     </div>

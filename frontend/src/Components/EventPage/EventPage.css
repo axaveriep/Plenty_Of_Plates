@@ -1,10 +1,10 @@
-.event--selectedRestuarants {
-    width: 800px;
-    margin: auto;
-    padding: 10px;
+.event--selectedRestuarants
+{
     border: 2px solid black;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: row;
+    gap: 20px;
+    overflow: auto;
 }

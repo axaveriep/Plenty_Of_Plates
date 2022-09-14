@@ -1,0 +1,11 @@
+/* .search--input > input
+{
+    border: solid red 2px;
+} */
+
+::placeholder 
+{
+    color: grey;
+    opacity: 1; /* Firefox */
+    font-size: 1rem;
+}

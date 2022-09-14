@@ -35,7 +35,7 @@ function SearchBar(props) {
         <div className="search">
             <div className="search--input">
                 <input type="text" 
-                placeholder="Search..." 
+                placeholder={props.placeholder} 
                 value={input}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}

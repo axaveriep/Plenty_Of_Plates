@@ -34,7 +34,8 @@ body
   overflow-y: auto;
 }
 
-.restaurant--grid-display {
+.restaurant--grid-display 
+{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;

@@ -1,36 +1,102 @@
-.restaurant--thumbnail {
-    width: 100px;
-    height: 100px;
-    border-radius: 5px;
-    background-size:cover;
-
+*, *::before, *::after
+{
+  box-sizing: border-box;
 }
 
-/* .restaurant--thumbnail-image {
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
-} */
+.restaurant--thumbnail 
+{
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    padding: 5px;
+}
 
-.restaurant--thumbnail-name {
-    width: 100px;
-    height: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    font-size: 12px;
-    padding: 2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.restaurant--thumbnail-image 
+{
+    width: 128px;
+    height: 128px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.restaurant--thumbnail-button
+{
+    width: 128px;
+    height: fill;
+    cursor: pointer;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin-top: 80px;
-    margin-bottom: 0;
-    border-radius: 0 0 5px 5px;
+    align-items: center;
+    border: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+   
+.restaurant--thumbnail-button, .restaurant--thumbnail-button span 
+{
+    transition: 200ms;
+}
+   
+.restaurant--thumbnail-button .text 
+{
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+}
+   
+.restaurant--thumbnail-button .icon 
+{
+    position: absolute;
+    /* border-left: 1px solid #c41b1b; */
+    transform: translateX(128px);
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+   
+.restaurant--thumbnail-button svg 
+{
+    width: 15px;
+    fill: transparent;
 }
 
-.restaurant--thumbnail-button {
-    border: none;
-    background-color: darkred;
-    color: white;
+.restaurant--thumbnail-button:hover 
+{
+    background: #ff3636;
+}
+
+.restaurant--thumbnail-button:hover .text 
+{
+    color: transparent;
+}
+   
+.restaurant--thumbnail-button:hover .icon 
+{
+    width: 128px;
+    transform: translateX(0);
+}
+
+.restaurant--thumbnail-button:hover svg 
+{
+    width: 15px;
+    fill: white;
+}
+
+.restaurant--thumbnail-button:focus 
+{
+    outline: none;
+}
+   
+.restaurant--thumbnail-button:active .icon svg 
+{
+    transform: scale(0.8);
 }
