@@ -7,7 +7,7 @@ import java.util.Objects;
 @Embeddable
 public class GuestId implements Serializable {
 
-    @Column(name="invite_id")
+    @Column(name="event_id")
     private Long eventId;
 
     @Column(name="guest_id")
