@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react"
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap"
 import { getRestaurantById } from "../SearchBar/SearchFunctions"
 import "./RestaurantCard.css"
+import RestaurantHours from "./RestaurantHours"
 
 export default function RestaurantCard(props) {
     const categories = props.restaurant.categories
@@ -10,67 +11,40 @@ export default function RestaurantCard(props) {
         else { return category.title }
     })
     const [modal, setModal] = useState(false);
-    // let operationHours = []
-    // let fullDetails = getRestaurantById(props.restaurant.id)
-    // Promise.resolve(fullDetails).then(value => {
-    //     operationHours.push(value.hours)
-    // })
 
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
-    function doThisStuff() {
-        toggle()
+    const[hours, setHours] = useState()
+
+    useEffect(() => {
         Promise
             .resolve(getRestaurantById(props.restaurant.id))
-            .then(value => 
-                {
-                    setRestaurantDetails(value)
-                    mapHours()
-                })
-    }
+            .then(value => {
+                setRestaurantDetails(value)
+            })
+    }, [modal])
 
     const toggle = () => {
         setModal(!modal)
+        console.log(restaurantDetails)
+        console.log(restaurantDetails.hours)
+        console.log(restaurantDetails.hours[0].open)
+        console.log(restaurantDetails.hours[0].open[0])
+
+        let resthours = restaurantDetails.hours[0].open.map((object, i) => {
+            console.log(object)
+
+            return (<RestaurantHours key={i} object={object} />)
+
+        })
+
+        setHours(resthours)
     }
+
+    
     // <span className="badge">{props.restaurant.is_closed ? "Closed" : "Open"}</span>
- 
-    function mapHours() {
-            console.log("maphours: ")
-            restaurantDetails.hours.map((object, i)=>{console.log(object.open)})
-            //console.log(restaurantDetails.hours[0])
-            restaurantDetails.hours.map((object, i) => 
-            {
-                console.log(object.open[0].day)
-                // let today;
-                // if (object.open.day === 6) {
-                //     today = "Sunday"
-                // } else if (object.open.day === 0) {
-                //     today = "Monday"
-                // } else if (object.open.day === 1) {
-                //     today = "Tuesday"
-                // } else if (object.open.day === 2) {
-                //     today = "Wednesday"
-                // } else if (object.open.day === 3) {
-                //     today = "Thursday"
-                // } else if (object.open.day === 4) {
-                //     today = "Friday"
-                // } else if (object.open.day === 5) {
-                //     today = "Saturday"
-                // }
 
-                // return (
-                //     <div key={i}>
-                //         <h4>{today}</h4>
-                //         <p>
-                //             Open: {convertTime(object.start)}<br />
-                //             Close: {convertTime(object.end)}<br />
-                //         </p>
-                //         <hr />
-                //     </div>
-                // )
 
-            })
-        }
 
     function convertTime(time) {
         let hourHand = time.substring(0, 1);
@@ -82,6 +56,8 @@ export default function RestaurantCard(props) {
         }
         return hourHand + ':' + minuteHand + ' ' + ampm;
     }
+
+
     return (
         <div>
             <div className="restaurant--container">
@@ -92,7 +68,7 @@ export default function RestaurantCard(props) {
                 <p><a href="tel:(123)456-7890">{props.restaurant.display_phone}</a></p>
                 <img className='restaurant--image' src={props.restaurant.image_url} />
                 {/* <p className='restaurant--description'>Description</p> */}
-                <Button className="" onClick={doThisStuff}>Hours</Button>
+                <Button className="" onClick={toggle}>Hours</Button>
                 {/* to get Hours and if business is currently open, we will have to make another call to the API for restaurant details
                 using the Restaurant Id
                 
@@ -105,6 +81,7 @@ export default function RestaurantCard(props) {
                     </ModalHeader>
                     <ModalBody className="modal-body">
                         {console.log(props.restaurant.name)}
+                        {hours === undefined ? <></> : <>{hours}</>}
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={toggle}>Okay</Button>

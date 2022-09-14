@@ -1,12 +1,11 @@
 package com.techelevator.business;
 
 import com.techelevator.dao.GuestRepository;
-import com.techelevator.model.Guest;
-import com.techelevator.model.GuestDTO;
-import com.techelevator.model.GuestId;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,10 +19,15 @@ public class GuestService {
         return guestRepository.findByGuestIdEventId(eventId);
     }
 
-    public void saveGuestToEvent(GuestDTO guestDTO) {
-        Guest newGuest = new Guest();
-        newGuest.setGuestId(new GuestId(guestDTO.getEvent_id(), guestDTO.getGuest_id()));
-        guestRepository.save(newGuest);
+    public void saveGuestsToEvent(Event savedEvent, EventDTO eventDTO) {
+        List<Guest> invitedGuests = new ArrayList<>();
+
+        for(Long guestId : eventDTO.getGuestIds()) {
+            Guest newGuest = new Guest(new GuestId(savedEvent.getEventId(), guestId), false);
+            invitedGuests.add(newGuest);
+        }
+
+        guestRepository.saveAll(invitedGuests);
     }
 
 

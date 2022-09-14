@@ -1,12 +1,11 @@
 package com.techelevator.controller;
 
 import com.techelevator.business.EventService;
+import com.techelevator.business.GuestService;
+import com.techelevator.business.RestaurantService;
 import com.techelevator.dao.EventRepository;
 import com.techelevator.dao.RestaurantRepository;
-import com.techelevator.model.Event;
-import com.techelevator.model.EventDTO;
-import com.techelevator.model.Restaurant;
-import com.techelevator.model.RestaurantId;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,48 +19,42 @@ import java.util.List;
 public class EventController {
 
     @Autowired
-    EventRepository eventRepository;
-
-    @Autowired
     EventService eventService;
 
     @Autowired
-    RestaurantRepository restaurantRepository;
+    RestaurantService restaurantService;
+
+    @Autowired
+    GuestService guestService;
 
     //TODO: endpoint - GET all events by userId
+    @GetMapping("/event/user/{userId}")
+    public List<Event> getAllEventsByUserId(@PathVariable long userId) {
+        return eventService.findAllEventsByUserId(userId);
+    }
 
     //TODO: endpoint - GET event by eventId
 
-    @GetMapping("/event/{id}")
-    public Event getEvent(@PathVariable long id) {
-        return eventService.findByEventId(id);
+    @GetMapping("/event/{eventId}")
+    public Event getEventByEventId(@PathVariable long eventId) {
+        return eventService.findByEventId(eventId);
     }
 
     //TODO: endpoint - POST new event
 
     @PostMapping("/event")
     public void createEvent(@RequestBody EventDTO eventDTO) {
-        Event newEvent = new Event();
-        newEvent.setUserId(eventDTO.getUserId());
-        newEvent.setTitle(eventDTO.getTitle());
-        newEvent.setDate(LocalDate.parse(eventDTO.getDate()));
-        newEvent.setTime(Timestamp.valueOf(eventDTO.getDate() + " " + eventDTO.getTime() + ":00"));
 
-        Event savedEvent = eventRepository.save(newEvent);
-        List<Restaurant> savedRestaurants = new ArrayList<>();
+        Event savedEvent = eventService.createNewEvent(eventDTO);
 
-        for(String restaurantId : eventDTO.getRestaurantIds()) {
-            Restaurant restaurant = new Restaurant(new RestaurantId(savedEvent.getEventId(), restaurantId), 0, 0);
-            // note: the 0s right now represent initial upVotes and downVotes - remove magic numbers later
-            savedRestaurants.add(restaurant);
-        }
+        restaurantService.saveRestaurantsToEvent(savedEvent, eventDTO);
 
-        restaurantRepository.saveAll(savedRestaurants);
-
+        guestService.saveGuestsToEvent(savedEvent, eventDTO);
     }
 
     //TODO: endpoint - POST save each guest with eventID
     // default: voted = false
+
 
     //TODO: endpoint - POST save each restaurant with eventID
     // default: upVotes = 0, downVotes = 0
@@ -69,12 +62,21 @@ public class EventController {
     //TODO: endpoint - PUT? update event name/date/time?
 
     //TODO: endpoint - GET all guests by eventId
+    @GetMapping("/event/{eventId}/guests")
+    public List<Guest> getGuestsByEventId(@PathVariable long eventId) {
+        return guestService.findAllGuestsByEventId(eventId);
+    }
 
     //TODO: endpoint - GET all restaurants by eventId
+    @GetMapping("/event/{eventId}/restaurants")
+    public List<Restaurant> getRestaurantsByEventId(@PathVariable long eventId) {
+        return restaurantService.findAllRestaurantsByEventId(eventId);
+    }
 
     /* Might make Guest and Restaurant Controllers */
 
     //TODO: endpoint - PUT update guest when voted = true
+
 
     //TODO: endpoint - PUT update restaurant when votes change
 

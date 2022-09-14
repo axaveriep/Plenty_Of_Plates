@@ -6,15 +6,17 @@ public class EventDTO {
 
     private long userId;
     private String[] restaurantIds;
+    private Long[] guestIds;
     private String title;
     private String date;
     private String time;
 
     public EventDTO() {}
 
-    public EventDTO(long userId, String[] restaurantIds, String title, String date, String time) {
+    public EventDTO(long userId, String[] restaurantIds, Long[] guestIds, String title, String date, String time) {
         this.userId = userId;
         this.restaurantIds = restaurantIds;
+        this.guestIds = guestIds;
         this.title = title;
         this.date = date;
         this.time = time;
@@ -34,6 +36,14 @@ public class EventDTO {
 
     public void setRestaurantIds(String[] restaurantIds) {
         this.restaurantIds = restaurantIds;
+    }
+
+    public Long[] getGuestIds() {
+        return guestIds;
+    }
+
+    public void setGuestIds(Long[] guestIds) {
+        this.guestIds = guestIds;
     }
 
     public String getTitle() {
