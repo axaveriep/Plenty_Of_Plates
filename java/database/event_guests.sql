@@ -4,10 +4,10 @@
 
 CREATE TABLE IF NOT EXISTS public.event_guests
 (
-    invite_id integer,
+    event_id integer,
     guest_id integer,
     voted boolean,
-    CONSTRAINT invite_id FOREIGN KEY (invite_id)
+    CONSTRAINT event_id FOREIGN KEY (event_id)
         REFERENCES public.event (event_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
