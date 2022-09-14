@@ -54,10 +54,10 @@ class Main extends Component {
                         component={EventPage}
                     />
                     <Route path='/home'
-                        component={Home}
+                        component={()=> <Home username={this.props.user.username} />}
                     />
                     <Route path='/userprofile'
-                        component={UserProfile}
+                        component={()=> <UserProfile username={this.props.user.username} />}
                     />
 
                     {/* <Redirect to='/home' /> */}
