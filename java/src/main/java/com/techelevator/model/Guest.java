@@ -1,5 +1,6 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,6 +33,12 @@ public class Guest {
 
     @Column(name="voted")
     private boolean voted;
+
+    @JsonIgnore
+    @MapsId("eventId")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="event_id")
+    private Event event;
 
     public Guest(GuestId guestId, String guestName, boolean voted) {
         this.guestId = guestId;

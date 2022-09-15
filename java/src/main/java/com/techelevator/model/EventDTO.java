@@ -1,11 +1,10 @@
 package com.techelevator.model;
 
-import java.sql.Timestamp;
-
 public class EventDTO {
 
     private long userId;
-    private String[] restaurantIds;
+    // private String[] restaurantIds;
+    private RestaurantDTO[] restaurantDTOs;
     private GuestDTO[] guestDTOs;
     private String title;
     private String date;
@@ -15,9 +14,20 @@ public class EventDTO {
     //<editor-fold desc="Constructors Getters Setters">
     public EventDTO() {}
 
-    public EventDTO(long userId, String[] restaurantIds, GuestDTO[] guestDTOs, String title, String date, String deadline, String time) {
+//    public EventDTO(long userId, String[] restaurantIds, GuestDTO[] guestDTOs, String title, String date, String deadline, String time) {
+//        this.userId = userId;
+//        this.restaurantIds = restaurantIds;
+//        this.guestDTOs = guestDTOs;
+//        this.title = title;
+//        this.date = date;
+//        this.deadline = deadline;
+//        this.time = time;
+//    }
+
+
+    public EventDTO(long userId, RestaurantDTO[] restaurantDTOs, GuestDTO[] guestDTOs, String title, String date, String deadline, String time) {
         this.userId = userId;
-        this.restaurantIds = restaurantIds;
+        this.restaurantDTOs = restaurantDTOs;
         this.guestDTOs = guestDTOs;
         this.title = title;
         this.date = date;
@@ -33,12 +43,21 @@ public class EventDTO {
         this.userId = userId;
     }
 
-    public String[] getRestaurantIds() {
-        return restaurantIds;
+//    public String[] getRestaurantIds() {
+//        return restaurantIds;
+//    }
+//
+//    public void setRestaurantIds(String[] restaurantIds) {
+//        this.restaurantIds = restaurantIds;
+//    }
+
+
+    public RestaurantDTO[] getRestaurantDTOs() {
+        return restaurantDTOs;
     }
 
-    public void setRestaurantIds(String[] restaurantIds) {
-        this.restaurantIds = restaurantIds;
+    public void setRestaurantDTOs(RestaurantDTO[] restaurantDTOs) {
+        this.restaurantDTOs = restaurantDTOs;
     }
 
     public GuestDTO[] getGuestDTOs() {

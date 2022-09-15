@@ -45,8 +45,8 @@ public class User {
    // private String favorites;
 
    /* USER = PARENT, EVENT = CHILD */
-//   @OneToMany(mappedBy = "userId")
-//   private List<Event> eventList;
+   @OneToMany(mappedBy = "userId")
+   private List<Event> eventList;
 
    public User(Long id, String username, String email, String password) {
       this.id = id;
@@ -104,7 +104,16 @@ public class User {
    public void setRole(String role) {
       this.role = role;
    }
-//
+
+   public List<Event> getEventList() {
+      return eventList;
+   }
+
+   public void setEventList(List<Event> eventList) {
+      this.eventList = eventList;
+   }
+
+   //
 //   //   public String getFavorites() {
 ////      return favorites;
 ////   }

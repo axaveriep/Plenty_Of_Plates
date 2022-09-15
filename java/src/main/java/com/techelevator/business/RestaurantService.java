@@ -17,8 +17,20 @@ public class RestaurantService {
     public void saveRestaurantsToEvent(Event savedEvent, EventDTO eventDTO) {
         List<Restaurant> savedRestaurants = new ArrayList<>();
 
-        for(String restaurantId : eventDTO.getRestaurantIds()) {
-            Restaurant restaurant = new Restaurant(new RestaurantId(savedEvent.getEventId(), restaurantId), 0, 0);
+//        for(String restaurantId : eventDTO.getRestaurantIds()) {
+//            Restaurant restaurant = new Restaurant(new RestaurantId(savedEvent.getEventId(), restaurantId), 0, 0);
+//            // note: the 0s right now represent initial upVotes and downVotes - remove magic numbers later
+//            savedRestaurants.add(restaurant);
+//        }
+
+        for(RestaurantDTO restaurantDTO : eventDTO.getRestaurantDTOs()) {
+            Restaurant restaurant = new Restaurant();
+            restaurant.setEvent(savedEvent);
+            restaurant.setRestaurantId(new RestaurantId(savedEvent.getEventId(), restaurantDTO.getRestaurantId()));
+            restaurant.setRestaurantName(restaurantDTO.getRestaurantName());
+            restaurant.setImage_url(restaurantDTO.getRestaurantImage());
+            restaurant.setUpVotes(0);
+            restaurant.setDownVotes(0);
             // note: the 0s right now represent initial upVotes and downVotes - remove magic numbers later
             savedRestaurants.add(restaurant);
         }

@@ -3,31 +3,20 @@ package com.techelevator.model;
 
 public class RestaurantDTO {
 
-    private long eventId;
-
     private String restaurantId;
 
-    private int upVotes;
+    private String restaurantName;
 
-    private int downVotes;
+    private String restaurantImage;
 
 
     //<editor-fold desc="Constructors, Getters, Setters">
     public RestaurantDTO() {}
 
-    public RestaurantDTO(long eventId, String restaurantId, int upVotes, int downVotes) {
-        this.eventId = eventId;
+    public RestaurantDTO(String restaurantId, String restaurantName, String restaurantImage) {
         this.restaurantId = restaurantId;
-        this.upVotes = upVotes;
-        this.downVotes = downVotes;
-    }
-
-    public long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(long eventId) {
-        this.eventId = eventId;
+        this.restaurantName = restaurantName;
+        this.restaurantImage = restaurantImage;
     }
 
     public String getRestaurantId() {
@@ -38,21 +27,22 @@ public class RestaurantDTO {
         this.restaurantId = restaurantId;
     }
 
-    public int getUpVotes() {
-        return upVotes;
+    public String getRestaurantName() {
+        return restaurantName;
     }
 
-    public void setUpVotes(int upVotes) {
-        this.upVotes = upVotes;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
-    public int getDownVotes() {
-        return downVotes;
+    public String getRestaurantImage() {
+        return restaurantImage;
     }
 
-    public void setDownVotes(int downVotes) {
-        this.downVotes = downVotes;
+    public void setRestaurantImage(String restaurantImage) {
+        this.restaurantImage = restaurantImage;
     }
+
     //</editor-fold>
 
 

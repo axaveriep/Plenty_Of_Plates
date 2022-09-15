@@ -10,6 +10,8 @@ import java.sql.Time;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -49,10 +51,14 @@ public class Event {
 
 
     /* EVENT = CHILD, USER = PARENT */
-//    @JsonIgnore
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name="user_id", insertable = false, updatable = false)
-//    private User user;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", insertable = false, updatable = false)
+    private User user;
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<Guest> guestList;
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<Restaurant> restaurantList;
 }

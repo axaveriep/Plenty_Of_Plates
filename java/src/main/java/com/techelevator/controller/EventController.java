@@ -54,12 +54,6 @@ public class EventController {
         return savedEvent.getEventId();
     }
 
-    //TODO: endpoint - POST save each guest with eventID
-    // default: voted = false
-
-
-    //TODO: endpoint - POST save each restaurant with eventID
-    // default: upVotes = 0, downVotes = 0
 
     //TODO: endpoint - PUT? update event name/date/time?
 

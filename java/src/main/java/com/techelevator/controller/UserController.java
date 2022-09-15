@@ -15,9 +15,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/user/{email}")
+    @GetMapping("/user/email/{email}")
     public User getUserByEmail(@PathVariable String email) {
         return userService.findUserByEmail(email);
+    }
+
+    @GetMapping("/user/id/{userId}")
+    public User getUserByUserId(@PathVariable long userId) {
+        return userService.findUserByUserId(userId);
     }
 
     /*  mostly for Add to Favorites */

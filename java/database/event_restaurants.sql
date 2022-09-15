@@ -5,7 +5,9 @@
 CREATE TABLE IF NOT EXISTS public.event_restaurants
 (
     event_id integer,
-    restaurant_id character varying(22) COLLATE pg_catalog."default",
+    restaurant_id varchar(22) COLLATE pg_catalog.default,
+    restaurant_name varchar(100),
+    image_url varchar(75),
     up_votes integer,
     down_votes integer,
     CONSTRAINT event_id FOREIGN KEY (event_id)

@@ -23,7 +23,11 @@ public class GuestService {
         List<Guest> invitedGuests = new ArrayList<>();
 
         for(GuestDTO guestDTO : eventDTO.getGuestDTOs()) {
-            Guest newGuest = new Guest(new GuestId(savedEvent.getEventId(), guestDTO.getGuest_id()), guestDTO.getGuest_name(), false);
+            Guest newGuest = new Guest();
+            newGuest.setEvent(savedEvent);
+            newGuest.setGuestId(new GuestId(savedEvent.getEventId(), guestDTO.getGuest_id()));
+            newGuest.setGuestName(guestDTO.getGuest_name());
+            newGuest.setVoted(false);
             invitedGuests.add(newGuest);
         }
 

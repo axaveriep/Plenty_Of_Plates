@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,11 +24,23 @@ public class Restaurant {
     @EmbeddedId
     private RestaurantId restaurantId;
 
+    @Column(name="restaurant_name")
+    private String restaurantName;
+
+    @Column(name="image_url")
+    private String image_url;
+
     @Column(name = "up_votes")
     private int upVotes;
 
     @Column(name="down_votes")
     private int downVotes;
+
+    @JsonIgnore
+    @MapsId("eventId")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="event_id")
+    private Event event;
 
     public Restaurant(RestaurantId restaurantId, int upVotes, int downVotes) {
         this.restaurantId = restaurantId;

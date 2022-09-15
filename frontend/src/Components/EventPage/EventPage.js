@@ -18,14 +18,14 @@ export default function EventPage(props) {
   let minEventDate = new Date(currentDate)
   minEventDate.setDate(minEventDate.getDate() + 5)
 
-  const [eventDate, setEventDate] = useState(minEventDate.toISOString().slice(0, 10) 
+  const [eventDate, setEventDate] = useState(minEventDate.toISOString().slice(0, 10)
   );
 
   let maxEventDeadline = new Date(eventDate)
-  maxEventDeadline.setDate(maxEventDeadline.getDate()-2)
+  maxEventDeadline.setDate(maxEventDeadline.getDate() - 2)
 
   let minEventDeadline = new Date(currentDate)
-  minEventDeadline.setDate(minEventDeadline.getDate()+2)
+  minEventDeadline.setDate(minEventDeadline.getDate() + 2)
 
   const [eventDeadline, setEventDeadline] = useState(maxEventDeadline.toISOString().slice(0, 10))
 
@@ -36,7 +36,7 @@ export default function EventPage(props) {
 
   const [selectedGuests, setSelectedGuests] = useState([]);
 
-  const [eventCreated , setEventCreated] = useState(false);
+  const [eventCreated, setEventCreated] = useState(false);
 
   const [eventId, setEventId] = useState();
 
@@ -83,7 +83,7 @@ export default function EventPage(props) {
   });
 
 
- 
+
   function addGuests(guests) {
     setSelectedGuests(guests)
   }
@@ -91,13 +91,25 @@ export default function EventPage(props) {
 
   /** saves all event information to database */
   function handleSubmit(event) {
-    const selectedRestaurantsID = selectedRestaurants.map((restaurant) => {
-      return restaurant.id;
-    });
+    // const selectedRestaurantsID = selectedRestaurants.map((restaurant) => {
+    //   return restaurant.id;
+    // });
 
-    const selectedGuestDTOs = selectedGuests.map((guest) =>{ 
-      return ({guest_name: guest.name, 
-        guest_id: guest.id});
+    const selectedRestaurantDTOs = selectedRestaurants.map((restaurant) => {
+      return (
+        {
+          restaurantId: restaurant.id,
+          restaurantName: restaurant.name,
+          restaurantImage: restaurant.image_url
+        }
+      )
+    })
+
+    const selectedGuestDTOs = selectedGuests.map((guest) => {
+      return ({
+        guest_name: guest.name,
+        guest_id: guest.id
+      });
     })
 
     console.log(selectedGuestDTOs);
@@ -105,7 +117,8 @@ export default function EventPage(props) {
     event.preventDefault();
     const data = {
       userId: userId,
-      restaurantIds: selectedRestaurantsID,
+      //restaurantIds: selectedRestaurantsID,
+      restaurantDTOs: selectedRestaurantDTOs,
       guestDTOs: selectedGuestDTOs,
       date: eventDate,
       deadline: eventDeadline,
@@ -114,12 +127,12 @@ export default function EventPage(props) {
     };
 
     console.log(data);
-    
+
     axios
       .post(baseUrl + "/event", data)
       .then(function (response) {
         console.log(response);
-        if(response.status === 200){
+        if (response.status === 200) {
           setEventId(response.data)
           setEventCreated(true)
         }
@@ -130,76 +143,76 @@ export default function EventPage(props) {
   }
 
   return (
-  
-      <div className="container">
-      { eventCreated ?
-       <div>
-       <h1>Event Created!</h1>
-       <div className='event--title'>{eventTitle}</div>
-       <div className='event--date-time'>{eventDate} at {eventTime}</div>
-       <div className="event--confirmed-selectedGuests">
-        {selectedGuests.map((guest, i) => {
-          return (<div key={i} className="event--confirmed-guest">
-            <label>{guest.name}</label>
-            <input type='text' readOnly={true} value={`localhost:3000/${eventId}/${guest.id}`} />
-            <button>copy</button><button>e-mail link</button>
-          </div>)
-        })}<br />
-      </div>
-      <div className="event--selectedRestuarantsSubmited">{restaurantThumbnails}</div>
-      <button className="btn" type="submit">GO TO EVENT</button>
-      </div>
 
-:
-  <div>
-      <h1
-        contentEditable="true"
-        className="event--title"
-        onKeyDown={handleKeyDown}
-        onBlur={(e) => setEventTitle(e.currentTarget.textContent)}
-      >
-        {eventTitle}
-      </h1>
-      <input
-        type="date"
-        min={minEventDate.toISOString().slice(0, 10)}
-        name="event--date"
-        defaultValue={eventDate}
-        value={eventDate}
-        onChange={(e) => setEventDate(e.currentTarget.value)}
-      />
-      <br />
-      <input
-        type="time"
-        name="event--time"
-        value={eventTime}
-        onChange={(e) => setEventTime(e.currentTarget.value)}
-      />
-      <br />
-      <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false} hideRemoveBtn={true} />
-      <div className="event--selectedRestuarants">{restaurantThumbnails}</div>
-      <GuestForm addGuests={addGuests} />
-      <div className="event--selectedRestuarants">
-        {selectedGuests.map((guest, i) => {
-          return (<h5 key={i}>
-            {guest.name}
-          </h5>)
-        })}<br />
-      </div>
-      <input
-        type="date"
-        min={minEventDeadline.toISOString().slice(0, 10)}
-        max={maxEventDeadline.toISOString().slice(0, 10)}
-        name="event--deadline"
-        defaultValue={eventDeadline}
-        value={eventDeadline}
-        onChange={(e) => setEventDeadline(e.currentTarget.value)}
-      />
-      <button className="btn" type="submit" onClick={handleSubmit}>
-        Submit event!
-      </button>
+    <div className="container">
+      {eventCreated ?
+        <div>
+          <h1>Event Created!</h1>
+          <div className='event--title'>{eventTitle}</div>
+          <div className='event--date-time'>{eventDate} at {eventTime}</div>
+          <div className="event--confirmed-selectedGuests">
+            {selectedGuests.map((guest, i) => {
+              return (<div key={i} className="event--confirmed-guest">
+                <label>{guest.name}</label>
+                <input type='text' readOnly={true} value={`localhost:3000/${eventId}/${guest.id}`} />
+                <button>copy</button><button>e-mail link</button>
+              </div>)
+            })}<br />
+          </div>
+          <div className="event--selectedRestuarantsSubmited">{restaurantThumbnails}</div>
+          <button className="btn" type="submit">GO TO EVENT</button>
+        </div>
+
+        :
+        <div>
+          <h1
+            contentEditable="true"
+            className="event--title"
+            onKeyDown={handleKeyDown}
+            onBlur={(e) => setEventTitle(e.currentTarget.textContent)}
+          >
+            {eventTitle}
+          </h1>
+          <input
+            type="date"
+            min={minEventDate.toISOString().slice(0, 10)}
+            name="event--date"
+            defaultValue={eventDate}
+            value={eventDate}
+            onChange={(e) => setEventDate(e.currentTarget.value)}
+          />
+          <br />
+          <input
+            type="time"
+            name="event--time"
+            value={eventTime}
+            onChange={(e) => setEventTime(e.currentTarget.value)}
+          />
+          <br />
+          <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false} hideRemoveBtn={true} />
+          <div className="event--selectedRestuarants">{restaurantThumbnails}</div>
+          <GuestForm addGuests={addGuests} />
+          <div className="event--selectedRestuarants">
+            {selectedGuests.map((guest, i) => {
+              return (<h5 key={i}>
+                {guest.name}
+              </h5>)
+            })}<br />
+          </div>
+          <input
+            type="date"
+            min={minEventDeadline.toISOString().slice(0, 10)}
+            max={maxEventDeadline.toISOString().slice(0, 10)}
+            name="event--deadline"
+            defaultValue={eventDeadline}
+            value={eventDeadline}
+            onChange={(e) => setEventDeadline(e.currentTarget.value)}
+          />
+          <button className="btn" type="submit" onClick={handleSubmit}>
+            Submit event!
+          </button>
+        </div>
+      }
     </div>
-    }
-    </div> 
   );
 }
