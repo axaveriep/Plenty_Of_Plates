@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS public.event (
     title varchar(50),
     date date,
     "time" timestamp(2) without time zone,
+    deadline date,
     CONSTRAINT "invite _pkey" PRIMARY KEY (event_id),
     CONSTRAINT user_id FOREIGN KEY (user_id)
         REFERENCES public.users (user_id) MATCH SIMPLE

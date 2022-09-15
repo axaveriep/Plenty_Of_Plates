@@ -7,6 +7,8 @@
     flex-direction: row;
     gap: 20px;
     overflow: auto;
+    margin: 10px;
+    padding: 5px;
 }
 .event--selectedRestuarantsSubmited
 {
@@ -17,4 +19,16 @@
     flex-direction: row;
     gap: 20px;
     overflow: auto;
+    margin: 10px;
+    padding: 5px;
+}
+
+.event--confirmed-selectedGuests {
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 10px;
+    padding: 5px;
 }

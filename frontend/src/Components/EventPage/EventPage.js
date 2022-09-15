@@ -1,5 +1,5 @@
 import "./EventPage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RestaurantGrid from "../RestaurantGrid/RestaurantGrid";
 import RestaurantThumbnail from "../RestaurantCard/RestaurantThumbnail";
 import GuestForm from "../GuestForm/GuestForm"
@@ -14,9 +14,21 @@ export default function EventPage(props) {
 
   const [eventTitle, setEventTitle] = useState("Event Title");
 
-  const [eventDate, setEventDate] = useState(
-    new Date().toISOString().slice(0, 10)
+  const currentDate = new Date().toISOString().slice(0, 10)
+  let minEventDate = new Date(currentDate)
+  minEventDate.setDate(minEventDate.getDate() + 5)
+
+  const [eventDate, setEventDate] = useState(minEventDate.toISOString().slice(0, 10) 
   );
+
+  let maxEventDeadline = new Date(eventDate)
+  maxEventDeadline.setDate(maxEventDeadline.getDate()-2)
+
+  let minEventDeadline = new Date(currentDate)
+  minEventDeadline.setDate(minEventDeadline.getDate()+2)
+
+  const [eventDeadline, setEventDeadline] = useState(maxEventDeadline.toISOString().slice(0, 10))
+
 
   const [eventTime, setEventTime] = useState();
 
@@ -25,6 +37,8 @@ export default function EventPage(props) {
   const [selectedGuests, setSelectedGuests] = useState([]);
 
   const [eventCreated , setEventCreated] = useState(false);
+
+  const [eventId, setEventId] = useState();
 
   /** brings userId of logged in user from redux state */
   const userId = useSelector((state) => state.user.id);
@@ -93,6 +107,7 @@ export default function EventPage(props) {
       restaurantIds: selectedRestaurantsID,
       guestIds: selectedGuestIDs,
       date: eventDate,
+      deadline: eventDeadline,
       title: eventTitle,
       time: eventTime
     };
@@ -103,6 +118,10 @@ export default function EventPage(props) {
       .post(baseUrl + "/event", data)
       .then(function (response) {
         console.log(response);
+        if(response.status === 200){
+          setEventId(response.data)
+          setEventCreated(true)
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -115,13 +134,16 @@ export default function EventPage(props) {
       { eventCreated ?
        <div>
        <h1>Event Created!</h1>
-       <div className="event--selectedRestuarants">
+       <div className='event--title'>{eventTitle}</div>
+       <div className='event--date-time'>{eventDate} at {eventTime}</div>
+       <div className="event--confirmed-selectedGuests">
         {selectedGuests.map((guest, i) => {
-          return (<h5 key={i}>
-            {guest.name}
-          </h5>)
+          return (<div key={i} className="event--confirmed-guest">
+            <label>{guest.name}</label>
+            <input type='text' readOnly={true} value={`localhost:3000/${eventId}/${guest.id}`} />
+            <button>copy</button><button>e-mail link</button>
+          </div>)
         })}<br />
-        {console.log(selectedGuests)}
       </div>
       <div className="event--selectedRestuarantsSubmited">{restaurantThumbnails}</div>
       <button className="btn" type="submit">GO TO EVENT</button>
@@ -139,6 +161,7 @@ export default function EventPage(props) {
       </h1>
       <input
         type="date"
+        min={minEventDate.toISOString().slice(0, 10)}
         name="event--date"
         defaultValue={eventDate}
         value={eventDate}
@@ -161,9 +184,17 @@ export default function EventPage(props) {
             {guest.name}
           </h5>)
         })}<br />
-        {console.log(selectedGuests)}
       </div>
-      <button className="btn" type="submit" onClick={ () => {setEventCreated(true); }}>
+      <input
+        type="date"
+        min={minEventDeadline.toISOString().slice(0, 10)}
+        max={maxEventDeadline.toISOString().slice(0, 10)}
+        name="event--deadline"
+        defaultValue={eventDeadline}
+        value={eventDeadline}
+        onChange={(e) => setEventDeadline(e.currentTarget.value)}
+      />
+      <button className="btn" type="submit" onClick={handleSubmit}>
         Submit event!
       </button>
     </div>

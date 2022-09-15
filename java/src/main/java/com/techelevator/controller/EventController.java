@@ -43,13 +43,15 @@ public class EventController {
     //TODO: endpoint - POST new event
 
     @PostMapping("/event")
-    public void createEvent(@RequestBody EventDTO eventDTO) {
+    public long createEvent(@RequestBody EventDTO eventDTO) {
 
         Event savedEvent = eventService.createNewEvent(eventDTO);
 
         restaurantService.saveRestaurantsToEvent(savedEvent, eventDTO);
 
         guestService.saveGuestsToEvent(savedEvent, eventDTO);
+
+        return savedEvent.getEventId();
     }
 
     //TODO: endpoint - POST save each guest with eventID

@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS public.event_guests
 (
     event_id integer,
     guest_id integer,
+    guest_name varchar(50),
     voted boolean,
     CONSTRAINT event_id FOREIGN KEY (event_id)
         REFERENCES public.event (event_id) MATCH SIMPLE
