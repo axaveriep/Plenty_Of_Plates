@@ -4,6 +4,17 @@ import './RestaurantThumbnail.css'
 export default function RestaurantThumbnail(props) {
 
   return (
+    <div>
+      { props.eventCreated ?
+      <div className="restaurant--thumbnail">
+      <img className="restaurant--thumbnail-image" src={props.restaurant.image_url}/>
+        <span class="text">{props.restaurant.name}</span>
+        <span class="icon">
+        </span>
+      
+    </div>
+
+:
     <div className="restaurant--thumbnail">
       <img className="restaurant--thumbnail-image" src={props.restaurant.image_url}/>
 
@@ -15,6 +26,8 @@ export default function RestaurantThumbnail(props) {
           </svg>
         </span>
       </button>
+    </div>
+}
     </div>
   )
 }

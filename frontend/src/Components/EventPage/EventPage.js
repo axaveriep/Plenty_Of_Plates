@@ -24,6 +24,8 @@ export default function EventPage(props) {
 
   const [selectedGuests, setSelectedGuests] = useState([]);
 
+  const [eventCreated , setEventCreated] = useState(false);
+
   /** brings userId of logged in user from redux state */
   const userId = useSelector((state) => state.user.id);
 
@@ -61,10 +63,13 @@ export default function EventPage(props) {
         key={i}
         restaurant={restaurant}
         removeRestaurant={removeRestaurant}
+        eventCreated={eventCreated}
       />
     );
   });
 
+
+ 
   function addGuests(guests) {
     setSelectedGuests(guests)
   }
@@ -105,7 +110,25 @@ export default function EventPage(props) {
   }
 
   return (
-    <div className="container">
+  
+      <div className="container">
+      { eventCreated ?
+       <div>
+       <h1>Event Created!</h1>
+       <div className="event--selectedRestuarants">
+        {selectedGuests.map((guest, i) => {
+          return (<h5 key={i}>
+            {guest.name}
+          </h5>)
+        })}<br />
+        {console.log(selectedGuests)}
+      </div>
+      <div className="event--selectedRestuarantsSubmited">{restaurantThumbnails}</div>
+      <button className="btn" type="submit">GO TO EVENT</button>
+      </div>
+
+:
+  <div>
       <h1
         contentEditable="true"
         className="event--title"
@@ -140,9 +163,11 @@ export default function EventPage(props) {
         })}<br />
         {console.log(selectedGuests)}
       </div>
-      <button className="btn" type="submit" onClick={handleSubmit}>
+      <button className="btn" type="submit" onClick={ () => {setEventCreated(true); }}>
         Submit event!
       </button>
     </div>
+    }
+    </div> 
   );
 }
