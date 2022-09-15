@@ -13,6 +13,7 @@ export const UserProfile = (props) => {
   const [eventThumbnails, setEventThumbnails] = useState()
 
   useEffect(() => {
+    console.log(props.user)
     Promise
       .resolve(getEventsByUserId(userId))
       .then(value => setEventData(value))

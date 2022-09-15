@@ -37,7 +37,7 @@ class Main extends Component {
             <div>
                 {this.props.token.token !== undefined ?
                     <div>
-                        <Navbar handleLogout={this.handleLogout} username={this.props.user.username}/>
+                        <Navbar handleLogout={this.handleLogout} username={this.props.user.username} />
                         <Redirect to='/home' />
                     </div>
                     :
@@ -54,12 +54,14 @@ class Main extends Component {
                         component={EventPage}
                     />
                     <Route path='/home'
-                        component={()=> <Home username={this.props.user.username} />}
+                        component={() => <Home username={this.props.user.username} />}
                     />
                     <Route path='/:username'
-                        component={()=> <UserProfile user={this.props.user} />}
+                        component={() => <UserProfile user={this.props.user} />}
                     />
-
+                    <Route path='/:eventId/:guestId'
+                        component={<VotingPage />}
+                    />
                     {/* <Redirect to='/home' /> */}
 
                 </Switch>
