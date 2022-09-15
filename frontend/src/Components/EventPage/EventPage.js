@@ -95,17 +95,18 @@ export default function EventPage(props) {
       return restaurant.id;
     });
 
-    const selectedGuestIDs = selectedGuests.map((guest) =>{ 
-      return guest.id;
+    const selectedGuestDTOs = selectedGuests.map((guest) =>{ 
+      return ({guest_name: guest.name, 
+        guest_id: guest.id});
     })
 
-    console.log(selectedGuestIDs);
+    console.log(selectedGuestDTOs);
 
     event.preventDefault();
     const data = {
       userId: userId,
       restaurantIds: selectedRestaurantsID,
-      guestIds: selectedGuestIDs,
+      guestDTOs: selectedGuestDTOs,
       date: eventDate,
       deadline: eventDeadline,
       title: eventTitle,

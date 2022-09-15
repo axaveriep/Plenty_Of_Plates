@@ -22,8 +22,8 @@ public class GuestService {
     public void saveGuestsToEvent(Event savedEvent, EventDTO eventDTO) {
         List<Guest> invitedGuests = new ArrayList<>();
 
-        for(Long guestId : eventDTO.getGuestIds()) {
-            Guest newGuest = new Guest(new GuestId(savedEvent.getEventId(), guestId), false);
+        for(GuestDTO guestDTO : eventDTO.getGuestDTOs()) {
+            Guest newGuest = new Guest(new GuestId(savedEvent.getEventId(), guestDTO.getGuest_id()), guestDTO.getGuest_name(), false);
             invitedGuests.add(newGuest);
         }
 

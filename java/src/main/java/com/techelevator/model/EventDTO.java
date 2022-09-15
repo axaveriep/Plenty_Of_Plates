@@ -6,19 +6,22 @@ public class EventDTO {
 
     private long userId;
     private String[] restaurantIds;
-    private Long[] guestIds;
+    private GuestDTO[] guestDTOs;
     private String title;
     private String date;
+    private String deadline;
     private String time;
 
+    //<editor-fold desc="Constructors Getters Setters">
     public EventDTO() {}
 
-    public EventDTO(long userId, String[] restaurantIds, Long[] guestIds, String title, String date, String time) {
+    public EventDTO(long userId, String[] restaurantIds, GuestDTO[] guestDTOs, String title, String date, String deadline, String time) {
         this.userId = userId;
         this.restaurantIds = restaurantIds;
-        this.guestIds = guestIds;
+        this.guestDTOs = guestDTOs;
         this.title = title;
         this.date = date;
+        this.deadline = deadline;
         this.time = time;
     }
 
@@ -38,12 +41,12 @@ public class EventDTO {
         this.restaurantIds = restaurantIds;
     }
 
-    public Long[] getGuestIds() {
-        return guestIds;
+    public GuestDTO[] getGuestDTOs() {
+        return guestDTOs;
     }
 
-    public void setGuestIds(Long[] guestIds) {
-        this.guestIds = guestIds;
+    public void setGuestDTOs(GuestDTO[] guestDTOs) {
+        this.guestDTOs = guestDTOs;
     }
 
     public String getTitle() {
@@ -62,6 +65,14 @@ public class EventDTO {
         this.date = date;
     }
 
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
     public String getTime() {
         return time;
     }
@@ -69,4 +80,7 @@ public class EventDTO {
     public void setTime(String time) {
         this.time = time;
     }
+    //</editor-fold>
+
+
 }

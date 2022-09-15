@@ -30,6 +30,7 @@ public class EventService {
         newEvent.setTitle(eventDTO.getTitle());
         newEvent.setDate(LocalDate.parse(eventDTO.getDate()));
         newEvent.setTime(Timestamp.valueOf(eventDTO.getDate() + " " + eventDTO.getTime() + ":00"));
+        newEvent.setDeadline(LocalDate.parse(eventDTO.getDeadline()));
 
         return eventRepository.save(newEvent);
     }

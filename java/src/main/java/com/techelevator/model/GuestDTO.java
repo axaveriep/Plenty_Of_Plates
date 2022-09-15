@@ -3,28 +3,26 @@ package com.techelevator.model;
 
 public class GuestDTO {
 
-    private long event_id;
 
     private long guest_id;
 
-    private boolean voted;
+    private String guest_name;
 
 
     //<editor-fold desc="Constructors, Getters, Setters">
     public GuestDTO() {}
 
-    public GuestDTO(long event_id, long guest_id, boolean voted) {
-        this.event_id = event_id;
+    public GuestDTO(String guest_name, long guest_id) {
+        this.guest_name = guest_name;
         this.guest_id = guest_id;
-        this.voted = voted;
     }
 
-    public long getEvent_id() {
-        return event_id;
+    public String getGuest_name() {
+        return guest_name;
     }
 
-    public void setEvent_id(long event_id) {
-        this.event_id = event_id;
+    public void setGuest_name(String guest_name) {
+        this.guest_name = guest_name;
     }
 
     public long getGuest_id() {
@@ -35,13 +33,6 @@ public class GuestDTO {
         this.guest_id = guest_id;
     }
 
-    public boolean isVoted() {
-        return voted;
-    }
-
-    public void setVoted(boolean voted) {
-        this.voted = voted;
-    }
     //</editor-fold>
 
 }

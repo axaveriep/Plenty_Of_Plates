@@ -35,13 +35,16 @@ public class Event {
     @Column(name="time")
     private Timestamp time;
 
+    @Column(name="deadline")
+    private LocalDate deadline;
 
-    public Event(Long eventId, Long userId, String title, LocalDate date, Timestamp time) {
+    public Event(Long eventId, Long userId, String title, LocalDate date, Timestamp time, LocalDate deadline) {
         this.eventId = eventId;
         this.userId = userId;
         this.title = title;
         this.date = date;
         this.time = time;
+        this.deadline = deadline;
     }
 
 

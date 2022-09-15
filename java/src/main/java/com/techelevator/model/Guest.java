@@ -27,11 +27,15 @@ public class Guest {
 //    @Column(name="guest_id")
 //    private long guestId;
 
+    @Column(name="guest_name")
+    private String guestName;
+
     @Column(name="voted")
     private boolean voted;
 
-    public Guest(GuestId guestId, boolean voted) {
+    public Guest(GuestId guestId, String guestName, boolean voted) {
         this.guestId = guestId;
+        this.guestName = guestName;
         this.voted = voted;
     }
 
