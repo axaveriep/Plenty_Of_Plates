@@ -101,6 +101,7 @@ function VotingPage() {
                   onExiting={() => setAnimating(true)}
                   onExited={() => setAnimating(false)}
                   key={restaurant.restaurantId.restaurantId}
+                  tag="div"
                   className='voting--carousel-item'
                 >
                   <img src={restaurant.image_url} alt={restaurant.name} 
@@ -108,9 +109,14 @@ function VotingPage() {
                   
                   <CarouselCaption
                     captionHeader={restaurant.name}
+                    captionText={
+                    <div className='voting--carousel-btns'>
+                      <p>Something here</p>
+                      <button>yes</button><button>details</button><button>no</button>
+                      </div>}
                     className='voting--carousel-item-caption'
                   />
-                  <div className='voting--carousel-btns'><button>yes</button><button>no</button></div>
+                  
                 </CarouselItem>
                 
                 
