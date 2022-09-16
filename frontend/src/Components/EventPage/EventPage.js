@@ -42,6 +42,7 @@ export default function EventPage(props) {
 
   /** brings userId of logged in user from redux state */
   const userId = useSelector((state) => state.user.id);
+  const user = useSelector((state) => state.user);
 
   /** saves event title to state when user presses enter key on input */
   const handleKeyDown = (event) => {
@@ -87,7 +88,6 @@ export default function EventPage(props) {
   function addGuests(guests) {
     setSelectedGuests(guests)
   }
-
 
   /** saves all event information to database */
   function handleSubmit(event) {
@@ -154,8 +154,9 @@ export default function EventPage(props) {
             {selectedGuests.map((guest, i) => {
               return (<div key={i} className="event--confirmed-guest">
                 <label>{guest.name}</label>
-                <input type='text' readOnly={true} value={`localhost:3000/vote/${eventId}/${guest.id}`} />
-                <button>copy</button><button>e-mail link</button>
+                <input id="input--eventLink" type='text' readOnly={true} value={`localhost:3000/vote/${eventId}/${guest.id}`} />
+                <button onClick={()=> navigator.clipboard.writeText(`localhost:3000/vote/${eventId}/${guest.id}`)}>Copy</button>
+                {guest.email===""?<></>:<button><a href={`mailto:${guest.email}?&subject=${user.username} has invited you out!&body=Click this link localhost:3000/vote/${eventId}/${guest.id}`}>E-mail Link</a></button>}
               </div>)
             })}<br />
           </div>

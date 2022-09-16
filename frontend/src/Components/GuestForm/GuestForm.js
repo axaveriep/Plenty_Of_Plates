@@ -34,6 +34,7 @@ function GuestForm(props) {
 
     let handleSubmit = (event) => {
         event.preventDefault();
+        toggle()
         // alert(JSON.stringify(formValues));
 
         let guests = formValues.map((formValue) => {
@@ -74,12 +75,12 @@ function GuestForm(props) {
                         ))}
                         <div className="button-section">
                             <button className="button add" type="button" onClick={() => addFormFields()}>Add</button>
-                            <button className="button submit" type="submit">Submit</button>
                         </div>
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                <Button onClick={toggle}>Okay</Button>
+                    <button className="button submit" type="submit" onClick={handleSubmit}>Submit</button>
+                {/* <Button onClick={toggle}>Okay</Button> */}
                 </ModalFooter>
             </Modal>
         </div>
