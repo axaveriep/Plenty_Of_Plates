@@ -27,3 +27,15 @@ export async function getEventsByUserId(userId) {
     return events.data
 
 }
+
+export async function getEventByEventId(eventId) {
+    const event = await axios.get(baseUrl+"/event/"+eventId).catch(err => console.log(err))
+
+    return event.data
+}
+
+export async function getGuestByGuestId(guestId) {
+    const guest = await axios.get(baseUrl+"/guest/"+guestId).catch(err => console.log(err))
+
+    return guest.data
+}

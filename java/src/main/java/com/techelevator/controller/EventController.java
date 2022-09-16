@@ -73,6 +73,11 @@ public class EventController {
 
     //TODO: endpoint - PUT update guest when voted = true
 
+    @GetMapping("/guest/{guestId}")
+    public Guest getGuestByGuestId(@PathVariable long guestId) {
+        return guestService.findByGuestId(guestId);
+    }
+
 
     //TODO: endpoint - PUT update restaurant when votes change
 

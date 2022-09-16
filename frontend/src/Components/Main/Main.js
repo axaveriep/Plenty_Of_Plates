@@ -3,6 +3,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 import EventPage from '../EventPage/EventPage'
+import VotingPage from '../VotingPage/VotingPage'
 import Home from '../Home/Home'
 import Navbar from '../Navbar/Navbar'
 import { addToken, deleteUser } from '../../Redux/actionCreators'
@@ -35,16 +36,17 @@ class Main extends Component {
     render() {
         return (
             <div>
-                {this.props.token.token !== undefined ?
+               {this.props.token.token !== undefined ?
                     <div>
                         <Navbar handleLogout={this.handleLogout} username={this.props.user.username} />
                         <Redirect to='/home' />
                     </div>
                     :
-                    <><Redirect to='/login' /></>
+                    <></>
+                    // <><Redirect to='/login' /></>
                 }
                 <Switch>
-                    <Route path='/login'
+                    {/* <Route path='/login'
                         component={Login}
                     />
                     <Route path='/register'
@@ -58,11 +60,35 @@ class Main extends Component {
                     />
                     <Route path='/:username'
                         component={() => <UserProfile user={this.props.user} />}
+                    /> */}
+                    <Route path='/login'
+                        component={this.props.token.token === undefined ?
+                            () => <Login />
+                            : () => <Redirect to='/home' />}
                     />
-                    <Route path='/:eventId/:guestId'
-                        component={<VotingPage />}
+                    <Route path='/register'
+                        component={this.props.token.token === undefined ?
+                            () => <Register />
+                            : () => <Redirect to='/home' />}
                     />
-                    {/* <Redirect to='/home' /> */}
+                    <Route path='/eventpage'
+                        component={this.props.token.token !== undefined ?
+                            () => <EventPage />
+                            : <Redirect to='/login' />}
+                    />
+                    <Route path='/home'
+                        component={this.props.token.token !== undefined ? () => <Home username={this.props.user.username} /> : () => <Redirect to='/login' />}
+                    />
+                    <Route path='/user/:username'
+                        component={this.props.token.token !== undefined ? () => <UserProfile user={this.props.user} /> : () => <Redirect to='/login' />}
+                    />
+
+                    <Route path='/vote/:eventId/:guestId'
+                        component={this.props.token.token === undefined ? () => <VotingPage /> : () => <Redirect to='/home' />}
+                    />
+
+                    
+                    <Redirect to='/home' />
 
                 </Switch>
             </div>

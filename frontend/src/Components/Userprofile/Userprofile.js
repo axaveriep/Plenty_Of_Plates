@@ -17,7 +17,7 @@ export const UserProfile = (props) => {
     Promise
       .resolve(getEventsByUserId(userId))
       .then(value => setEventData(value))
-  }, [userId])
+  }, [props.user, userId])
 
   useEffect(() => {
     if (eventData !== undefined) {

@@ -25,7 +25,7 @@ public class Restaurant {
     private RestaurantId restaurantId;
 
     @Column(name="restaurant_name")
-    private String restaurantName;
+    private String name;
 
     @Column(name="image_url")
     private String image_url;

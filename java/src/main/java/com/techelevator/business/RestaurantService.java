@@ -27,7 +27,7 @@ public class RestaurantService {
             Restaurant restaurant = new Restaurant();
             restaurant.setEvent(savedEvent);
             restaurant.setRestaurantId(new RestaurantId(savedEvent.getEventId(), restaurantDTO.getRestaurantId()));
-            restaurant.setRestaurantName(restaurantDTO.getRestaurantName());
+            restaurant.setName(restaurantDTO.getRestaurantName());
             restaurant.setImage_url(restaurantDTO.getRestaurantImage());
             restaurant.setUpVotes(0);
             restaurant.setDownVotes(0);

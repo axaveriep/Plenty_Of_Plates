@@ -154,7 +154,7 @@ export default function EventPage(props) {
             {selectedGuests.map((guest, i) => {
               return (<div key={i} className="event--confirmed-guest">
                 <label>{guest.name}</label>
-                <input type='text' readOnly={true} value={`localhost:3000/${eventId}/${guest.id}`} />
+                <input type='text' readOnly={true} value={`localhost:3000/vote/${eventId}/${guest.id}`} />
                 <button>copy</button><button>e-mail link</button>
               </div>)
             })}<br />
@@ -189,7 +189,7 @@ export default function EventPage(props) {
             onChange={(e) => setEventTime(e.currentTarget.value)}
           />
           <br />
-          <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false}/>
+          <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false} />
           <div className="event--selectedRestuarants">{restaurantThumbnails}</div>
           <GuestForm addGuests={addGuests} />
           <div className="event--selectedRestuarants">
