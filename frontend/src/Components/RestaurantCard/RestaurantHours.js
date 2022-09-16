@@ -32,7 +32,6 @@ export default function RestaurantHours({object}) {
 
 function convertTime(time) 
 {
-    console.log(typeof(time)," ",time)
     let hourHand = time.substring(-1, 2);
     let minuteHand = time.substring(2, 4);
     let ampm = 'AM';

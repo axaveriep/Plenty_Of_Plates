@@ -38,7 +38,6 @@ export default function RestaurantGrid(props) {
             removeRestaurant={removeRestaurant} 
             selectRestaurant={selectRestaurant} 
             hideAddBtn={props.hideAddBtn} 
-            hideRemoveBtn={props.hideRemoveBtn}
             />)
     })
 
@@ -56,7 +55,12 @@ export default function RestaurantGrid(props) {
 
             <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true} >
                 <ModalHeader toggle={toggle} className="header">
-                    <h1>Restaurants</h1>
+                    <div className="restaurant--grid-title">
+                        Restaurants
+                    </div>
+                    <div className="restaurant--grid-subtitle">
+                        in
+                    </div>
                     <SearchBar
                         searchType={'RESTAURANTS_LOCATION'}
                         addRestaurants={addRestaurants}
@@ -69,7 +73,7 @@ export default function RestaurantGrid(props) {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={toggle}>Okay</Button>
+                    <button className="modal-okayBtn" onClick={toggle}>Okay</button>
                 </ModalFooter>
             </Modal>
         </div >

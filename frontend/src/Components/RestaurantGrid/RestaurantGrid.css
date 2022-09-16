@@ -1,13 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster&effect=emboss');
+
+.modal-dialog ::-webkit-scrollbar 
+{
+  width: 20px;
+}
+
+/* Track */
+.modal-dialog ::-webkit-scrollbar-track 
+{
+  /* box-shadow: inset 0 0 5px grey;  */
+  border-radius: 10px;
+  backdrop-filter: blur(.25rem) saturate(180%);
+  -webkit-backdrop-filter: blur(.25rem) saturate(180%);
+  background-color: rgba(200, 200, 200, 0.25);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+ 
+/* Handle */
+.modal-dialog ::-webkit-scrollbar-thumb 
+{
+  /* background: rgba(250, 231, 124, 0.75); */
+  background-color: orange;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.modal-dialog ::-webkit-scrollbar-thumb:hover
+{
+  /* background: rgb(200, 175, 60);   */
+  background-color: darkorange;
+}
 
 body
 {
-  margin: 4rem 0;
+
+  background-image: url("../../Shared/loginbackground.jpg");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: bottom;
 }
- 
-.header
+
+.modal-header
 {
-  margin-bottom:2rem;
-  margin-top: 1rem;
+  border-bottom: solid 2px rgba(200, 200, 200, 0.25);
+  backdrop-filter: blur(.25rem) saturate(180%);
+  -webkit-backdrop-filter: blur(.25rem) saturate(180%);
+  background-color: rgba(200, 200, 200, 0.5);
+  box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.25);
+}
+
+h5.modal-title
+{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.restaurant--grid-title
+{
+  font-family: 'Lobster', sans-serif;
+  font-size: 3rem;
+}
+
+.restaurant--grid-subtitle
+{
+  font-family: 'Lobster', sans-serif;
+  font-size: 2rem;
+}
+
+.modal-title .search .search--input input
+{
+  font-size: 1.25rem;
+  border-radius: 1rem !important;
+  background-color: rgba(200, 200, 200, 0.75);
+  text-align: center;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(100, 100, 100, 0.5);
+  margin: 10px;
+  padding-bottom: 5px;
+}
+
+.modal-title .search .search--input input:focus
+{
+  box-shadow: 0 0 0 2px white;
+}
+
+.close
+{
+  border: none;
+  max-width: 100px;
+  background-color: #222;
+  color:white;
+  border-radius: 50%;
+  align-self: flex-start;
+  padding-top: 0;
+  display: none;
 }
 
 .panel
@@ -20,12 +112,10 @@ body
 .modal-dialog
 {
   overflow-y: initial !important;
-  /* display: flex;
-  flex-wrap: wrap;
-  align-items: space-between;
-  justify-content: center; */
   margin: 10 auto;
   max-width: 1200px;
+  box-shadow: 20px 20px 15px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 
 .modal-body
@@ -39,4 +129,42 @@ body
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.modal-content
+{
+  backdrop-filter: blur(.25rem) saturate(180%);
+  -webkit-backdrop-filter: blur(.25rem) saturate(180%);
+  background-color: rgba(200, 200, 200, 0.25);
+  border-radius: 12px;
+}
+
+.modal-footer
+{
+  border-top: solid 2px rgba(200, 200, 200, 0.25);
+  backdrop-filter: blur(4px) saturate(180%);
+  -webkit-backdrop-filter: blur(4px) saturate(180%);
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+.modal-footer .modal-okayBtn
+{
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background-color: hsl(var(--primary-hsl));
+  width: 128px;
+  height: 64px;
+}
+
+.modal-footer .modal-okayBtn:hover
+{
+  background-color: rgb(0, 120, 200);
+}
+
+.modal-footer .modal-okayBtn:active
+{
+  transform: scale(0.9);
 }

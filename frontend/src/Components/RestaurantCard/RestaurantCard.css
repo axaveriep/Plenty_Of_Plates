@@ -3,22 +3,30 @@
   box-sizing: border-box;
 }
 
+:root
+{
+  --primary-light-hsl: 200, 100%, 91%;
+  --primary-hsl: 200, 100%, 50%;
+  --primary-dark-hsl: 200, 100%, 6%;
+  --invalid-hsl: 0, 60%, 50%;
+}
+
 .badge.closed
 {
-    background-color: red;
-    color: white;
-    padding: 4px 8px;
-    text-align: center;
-    border-radius: 5px;
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .badge.open
 {
-    background-color: green;
-    color: white;
-    padding: 4px 8px;
-    text-align: center;
-    border-radius: 5px;
+  background-color: green;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
 }
 
 h3
@@ -31,18 +39,20 @@ h3
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: space-evenly;
   text-align: center;
-  border: solid #222 2px;
+  justify-content: space-between;
+  border: none;
   border-radius: 2rem;
   margin: 20px;
   width: 400px;
-  height: 620px;
+  height: 700px;
+  background-color: rgba(200, 200, 200, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .restaurant--name
 {
- font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 .restaurant--type
@@ -53,21 +63,22 @@ h3
   color: gray;
 }
 
+.restaurant--address a
+{
+  font-style: italic;
+  text-decoration: none;
+}
+
 a[href^="tel:"]
 {
   text-decoration: none;
+  padding: 10px;
 }
 
 a[href^="tel:"]::before 
 {
   content: "\260E";
   margin-right: 0.5em;
-}
-
-.restaurant--address a
-{
-  font-style: italic;
-  text-decoration: none;
 }
 
 .restaurant--image
@@ -100,22 +111,114 @@ a[href^="tel:"]::before
   padding: 1em;
 }
 
-.closeBtn
+.rating svg
 {
-  border: none;
-  max-width: 100px;
-  background-color: #222;
-  color:white;
-  align-self: flex-end;
-  padding: 1em;
-  margin: 5px;
+  width: 20px;
+  height: 20px;
 }
 
-.restaurant--favoriteBtn, .restaurant--addBtn, .restaurant--removeBtn
+.rating
 {
+  vertical-align: top !important;
+}
+
+.restaurant--buttons
+{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px;
+}
+
+.restaurant--favoriteBtn, .restaurant--hoursBtn, .addBtn
+{
+  width: stretch;
+  height: 64px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
   border: none;
-  max-width: 400px;
-  align-self: center;
-  padding: 1em;
-  margin: 5px;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center
+}
+   
+.restaurant--favoriteBtn, .restaurant--favoriteBtn span 
+{
+    transition: 200ms;
+}
+   
+.restaurant--favoriteBtn .favoriteBtn-text , .restaurant--hoursBtn, .addBtn
+{
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+}
+   
+.restaurant--favoriteBtn .favoriteBtn-icon, .addBtn .addBtn-icon
+{
+  display: flex;
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  opacity: 0;
+}
+   
+.restaurant--favoriteBtn svg, .addBtn svg
+{
+  width: stretch;
+  height: stretch;
+  fill: transparent;
+}
+
+.restaurant--favoriteBtn:hover 
+{
+  background: orange;
+}
+
+.restaurant--hoursBtn:hover
+{
+  background-color: hsl(var(--primary-hsl));
+}
+
+.restaurant--addBtn:hover
+{
+  background-color: hsl(var(--primary-hsl));
+}
+
+.restaurant--favoriteBtn:hover .favoriteBtn-text, .addBtn:hover .addBtn-text
+{
+  color: transparent;
+}
+   
+.restaurant--favoriteBtn:hover .favoriteBtn-icon, .addBtn:hover .addBtn-icon
+{
+  /* transform: translateY(0); */
+  animation: fadeIn ease-in-out 0.2s forwards;
+}
+
+.restaurant--favoriteBtn:hover svg, .addBtn:hover svg 
+{
+  fill: white;
+}
+
+.restaurant--favoriteBtn:focus, .addBtn:focus
+{
+  outline: none;
+}
+   
+.restaurant--favoriteBtn:active .favoriteBtn-icon svg, .addBtn:active .addBtn-icon svg 
+{
+  transform: scale(0.8);
+}
+
+@keyframes fadeIn 
+{
+  0%{opacity: 0; transform: translateY(-100%);}
+  50%{opacity: .2;}
+  100%{opacity: 1; transform: translateY(0);} 
 }

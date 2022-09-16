@@ -4,6 +4,7 @@ import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap"
 import { getRestaurantById } from "../SearchBar/SearchFunctions"
 import "./RestaurantCard.css"
 import RestaurantHours from "./RestaurantHours"
+import { Rating } from 'react-simple-star-rating'
 
 export default function RestaurantCard(props) {
     const categories = props.restaurant.categories
@@ -44,6 +45,7 @@ export default function RestaurantCard(props) {
             <div className="restaurant--container">
                 <div className='restaurant--name'>{props.restaurant.name}</div>
                 <div className='restaurant--type'>{categoryTitles}</div>
+                <Rating className="rating" initialValue={props.restaurant.rating} readonly={true}/>
                 <div className='restaurant--address'>
                     <a href={"https://www.google.com/maps/search/?api=1&query=" + String(props.restaurant.location.display_address)}target="_blank">
                     {props.restaurant.location.display_address[0]+" "}
@@ -54,7 +56,6 @@ export default function RestaurantCard(props) {
                 <a href={"tel:"+props.restaurant.display_phone}>{props.restaurant.display_phone}</a>
                 <img className='restaurant--image' src={props.restaurant.image_url} alt="restaurant visual"/>
 
-                <Button className="" onClick={toggle}>Hours</Button> {/*disabled={restaurantDetails.hours === undefined}*/}
 
                 <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true}>
                     <ModalHeader className="header">
@@ -65,16 +66,33 @@ export default function RestaurantCard(props) {
                         {hours === undefined ? <></> : <>{hours}</>}
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={toggle}>Okay</Button>
+                        <button className="modal-okayBtn" onClick={toggle}>Okay</button>
                     </ModalFooter>
                 </Modal>
-                <div className="rating">Rating: {props.restaurant.rating}{/*TODO: Add visuals*/}</div>
                 <div className="restaurant--buttons">
-                    <button className="restaurant--favoriteBtn">{/*TODO: Add functionality*/}Add to Favorites</button>
-                    {props.hideAddBtn ? <></> : <button className="restaurant--addBtn" onClick={() => props.selectRestaurant(props.restaurant)}>Add To Event</button>}
-                    {props.hideRemoveBtn ? <></> : <button className="restaurant--removeBtn" onClick={(event) => props.removeRestaurant(event, props.restaurant.id)}>X</button>}
+                    <button className="restaurant--hoursBtn" onClick={toggle}>Hours</button> {/*disabled={restaurantDetails.hours === undefined}*/}
+                    <button className="restaurant--favoriteBtn">
+                        <span class="favoriteBtn-text">Add to Favorites</span>
+                        <span class="favoriteBtn-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+                        </span>
+                    </button>
+                    {props.hideAddBtn ? <></> : 
+                    <button className="addBtn" onClick={() => props.selectRestaurant(props.restaurant)}>
+                        <span class="addBtn-text">Add to Event</span>
+                        <span class="addBtn-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </span>
+                    </button>}
                 </div>
             </div>
         </div>
     )
 }
+
+//<button className="restaurant--favoriteBtn">{/*TODO: Add functionality*/}Add to Favorites</button>
+

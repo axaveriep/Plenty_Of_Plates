@@ -189,7 +189,7 @@ export default function EventPage(props) {
             onChange={(e) => setEventTime(e.currentTarget.value)}
           />
           <br />
-          <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false} hideRemoveBtn={true} />
+          <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false}/>
           <div className="event--selectedRestuarants">{restaurantThumbnails}</div>
           <GuestForm addGuests={addGuests} />
           <div className="event--selectedRestuarants">

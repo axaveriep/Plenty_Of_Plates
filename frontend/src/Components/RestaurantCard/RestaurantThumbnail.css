@@ -24,7 +24,7 @@
 .restaurant--thumbnail-button
 {
     width: 128px;
-    height: fill;
+    height: stretch;
     cursor: pointer;
     display: flex;
     flex-direction: row;
