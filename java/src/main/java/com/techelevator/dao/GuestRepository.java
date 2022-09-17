@@ -12,6 +12,6 @@ public interface GuestRepository extends JpaRepository<Guest, GuestId> {
 
     List<Guest> findByGuestIdEventId(Long eventId);
 
-    Guest findByGuestIdGuestId(long guestId);
+    Guest findByGuestIdEventIdAndGuestIdGuestId(long eventId, long guestId);
 
 }

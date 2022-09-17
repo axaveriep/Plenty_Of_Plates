@@ -34,8 +34,11 @@ public class GuestService {
         guestRepository.saveAll(invitedGuests);
     }
 
-    public Guest findByGuestId(long guestId) {
-        return guestRepository.findByGuestIdGuestId(guestId);
+    public Guest findByGuestId(long eventId, long guestId) {
+        return guestRepository.findByGuestIdEventIdAndGuestIdGuestId(eventId, guestId);
     }
 
+    public void updateGuest(Guest guest) {
+        guestRepository.save(guest);
+    }
 }

@@ -12,4 +12,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Restaura
 
  List<Restaurant> findByRestaurantIdEventId(Long eventId);
 
+ Restaurant findByRestaurantIdEventIdAndRestaurantIdRestaurantId(long eventId, String restaurantId);
+
 }

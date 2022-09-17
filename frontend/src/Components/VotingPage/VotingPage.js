@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './VotingPage.css'
 import { useParams } from "react-router-dom"
-import { getEventByEventId, getGuestByGuestId } from '../SearchBar/SearchFunctions';
+import { getEventByEventId, getGuestByEventIdAndGuestId, getGuestByGuestId } from '../SearchBar/SearchFunctions';
 import RestaurantThumbnail from '../RestaurantCard/RestaurantThumbnail';
 import {
   Carousel,
@@ -49,7 +49,12 @@ function VotingPage() {
       })
 
       
-    Promise.resolve(getGuestByGuestId(guestId))
+    // Promise.resolve(getGuestByGuestId(guestId))
+    //   .then(value => {
+    //     setGuest(value)
+    //   })
+
+    Promise.resolve(getGuestByEventIdAndGuestId(eventId, guestId))
       .then(value => {
         setGuest(value)
       })

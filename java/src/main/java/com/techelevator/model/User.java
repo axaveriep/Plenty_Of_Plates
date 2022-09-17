@@ -48,13 +48,16 @@ public class User {
    @OneToMany(mappedBy = "userId")
    private List<Event> eventList;
 
-   public User(Long id, String username, String email, String password) {
+   @OneToMany(mappedBy = "user")
+   private List<Favorite> favorites;
+
+   public User(Long id, String username, String email, String password, List<Favorite> favorites) {
       this.id = id;
       this.username = username;
       this.email = email;
       this.password = password;
       this.activated = true;
-      // this.favorites = favorites;
+      this.favorites = favorites;
    }
 
    public Long getId() {
@@ -111,6 +114,14 @@ public class User {
 
    public void setEventList(List<Event> eventList) {
       this.eventList = eventList;
+   }
+
+   public List<Favorite> getFavorites() {
+      return favorites;
+   }
+
+   public void setFavorites(List<Favorite> favorites) {
+      this.favorites = favorites;
    }
 
    //

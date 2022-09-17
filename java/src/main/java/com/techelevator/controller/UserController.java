@@ -1,12 +1,14 @@
 package com.techelevator.controller;
 
+import com.techelevator.business.FavoriteService;
 import com.techelevator.business.UserService;
+import com.techelevator.model.Favorite;
+import com.techelevator.model.RestaurantDTO;
 import com.techelevator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -14,6 +16,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    FavoriteService favoriteService;
 
     @GetMapping("/user/email/{email}")
     public User getUserByEmail(@PathVariable String email) {
@@ -28,6 +33,18 @@ public class UserController {
     /*  mostly for Add to Favorites */
 
     //TODO: endpoint - PUT update user when favorites are added/removed
+
+    @PostMapping("/user/id/{userId}/favorite")
+    public Favorite saveFavorite(@PathVariable long userId, @RequestBody RestaurantDTO restaurantDTO) {
+        User user = userService.findUserByUserId(userId);
+        return favoriteService.saveFavorite(user, restaurantDTO);
+    }
+
+    @GetMapping("/user/id/{userId}/favorite")
+    public List<Favorite> getFavoritesByUserId(@PathVariable long userId) {
+
+        return favoriteService.getFavoritesByUserId(userId);
+    }
 
 
 }

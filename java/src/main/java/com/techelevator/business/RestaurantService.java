@@ -42,5 +42,11 @@ public class RestaurantService {
         return restaurantRepository.findByRestaurantIdEventId(eventId);
     }
 
+    public Restaurant findByRestaurantId(long eventId, String restaurantId) {
+        return restaurantRepository.findByRestaurantIdEventIdAndRestaurantIdRestaurantId(eventId, restaurantId);
+    }
 
+    public void updateRestaurantVotes(List<Restaurant> restaurants) {
+        restaurantRepository.saveAll(restaurants);
+    }
 }

@@ -5,10 +5,13 @@ import { baseUrl } from "../../Shared/baseUrl";
 export async function searchRestaurantsByLocation(input) {
 
     const uri = baseUrl+"/search/location/"+input.replaceAll(" ", "+");
+    console.log(uri)
 
     const restaurantsResults = await axios.get(decodeURIComponent(uri)).catch(err => console.log(err))
+    console.log(restaurantsResults)
     
     let restaurantsArray = restaurantsResults.data.businesses
+    console.log(restaurantsArray)
 
     return(restaurantsArray)
 }
@@ -34,8 +37,8 @@ export async function getEventByEventId(eventId) {
     return event.data
 }
 
-export async function getGuestByGuestId(guestId) {
-    const guest = await axios.get(baseUrl+"/guest/"+guestId).catch(err => console.log(err))
+export async function getGuestByEventIdAndGuestId(eventId, guestId) {
+    const guest = await axios.get(baseUrl+"/event/"+eventId+"/guests/"+guestId).catch(err => console.log(err))
 
     return guest.data
 }

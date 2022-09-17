@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS public.event_restaurants
     image_url varchar(75),
     up_votes integer,
     down_votes integer,
+    UNIQUE (event_id, restaurant_id),
     CONSTRAINT event_id FOREIGN KEY (event_id)
         REFERENCES public.event (event_id) MATCH SIMPLE
         ON UPDATE NO ACTION

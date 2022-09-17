@@ -9,14 +9,22 @@ public class RestaurantDTO {
 
     private String restaurantImage;
 
+    private boolean upVoted;
+
+    private boolean downVoted;
+
+    private boolean favorite;
 
     //<editor-fold desc="Constructors, Getters, Setters">
     public RestaurantDTO() {}
 
-    public RestaurantDTO(String restaurantId, String restaurantName, String restaurantImage) {
+    public RestaurantDTO(String restaurantId, String restaurantName, String restaurantImage, boolean upVoted, boolean downVoted, boolean favorite) {
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
         this.restaurantImage = restaurantImage;
+        this.upVoted = upVoted;
+        this.downVoted = downVoted;
+        this.favorite = favorite;
     }
 
     public String getRestaurantId() {
@@ -43,7 +51,41 @@ public class RestaurantDTO {
         this.restaurantImage = restaurantImage;
     }
 
+    public boolean isUpVoted() {
+        return upVoted;
+    }
+
+    public void setUpVoted(boolean upVoted) {
+        this.upVoted = upVoted;
+    }
+
+    public boolean isDownVoted() {
+        return downVoted;
+    }
+
+    public void setDownVoted(boolean downVoted) {
+        this.downVoted = downVoted;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     //</editor-fold>
 
-
+    @Override
+    public String toString() {
+        return "RestaurantDTO{" +
+                "restaurantId='" + restaurantId + '\'' +
+                ", restaurantName='" + restaurantName + '\'' +
+                ", restaurantImage='" + restaurantImage + '\'' +
+                ", upVoted=" + upVoted +
+                ", downVoted=" + downVoted +
+                ", favorite=" + favorite +
+                '}';
+    }
 }
