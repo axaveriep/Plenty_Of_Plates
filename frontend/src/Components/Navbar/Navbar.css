@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster&effect=emboss');
+
 *, *::before, *::after
 {
   box-sizing: border-box;
@@ -11,7 +13,9 @@
 
 .site-title
 {
+    font-family: 'Lobster', sans-serif;
     font-size: 2rem;
+    margin-right: auto;
 }
 
 body
