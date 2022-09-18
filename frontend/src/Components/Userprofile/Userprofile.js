@@ -29,17 +29,19 @@ export const UserProfile = (props) => {
   }, [eventData])
 
   return (
-    <div title="Profile">
-      <div className='profileContainer'>
-        <div><h2>{username}'s Events</h2>
-          <div md={6} className='profile--events'>
-
-            {console.log(eventData)}
-            {eventThumbnails}
+    <div className="fullscreen-container">
+      <div title="Profile">
+        <div className='profileContainer'>
+          <div>
+            <h2>{username}'s Events</h2>
+            <div md={6} className='profile--events'>
+              {console.log(eventData)}
+              {eventThumbnails}
+            </div>
           </div>
-        </div>
-        <div> {username}'s Favourites
-
+          <div>
+            {username}'s Favourites
+          </div>
         </div>
       </div>
     </div>
