@@ -3,10 +3,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './GuestForm.css'
 
 function GuestForm(props) {
+    // const [modal, setModal] = useState(false);
 
-    const [modal, setModal] = React.useState(false);
-
-    const toggle = () => setModal(!modal);
+    // const toggle = () => setModal(!modal);
 
     const [formValues, setFormValues] = useState([{ name: '', email: '' }])
 
@@ -34,7 +33,7 @@ function GuestForm(props) {
 
     let handleSubmit = (event) => {
         event.preventDefault();
-        toggle()
+        props.toggle()
         // alert(JSON.stringify(formValues));
 
         let guests = formValues.map((formValue) => {
@@ -50,12 +49,12 @@ function GuestForm(props) {
 
     return (
         <div>
-            <Button
+            {/* <Button
                 onClick={toggle}>Invite Guests
-            </Button>
+            </Button> */}
 
-            <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true}>
-                <ModalHeader toggle={toggle} className="header">
+            <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog" scrollable={true}>
+                <ModalHeader toggle={props.toggle} className="header">
                     Add Guests
                 </ModalHeader>
                 <ModalBody className="modal-body">

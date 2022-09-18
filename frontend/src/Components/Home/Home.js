@@ -1,22 +1,31 @@
-import React from 'react'
+import './Home.css'
+import {useState} from 'react'
 import { Link } from 'react-router-dom'
 import RestaurantGrid from '../RestaurantGrid/RestaurantGrid'
+import { Button } from 'reactstrap'
 
 
-export default function Home(props) {
+export default function Home(props) 
+{
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => setModal(!modal);
+
     return (
-        <div>
-            <h2>Welcome back {props.username}, Just pick a place!</h2>
-            <div>
-                <RestaurantGrid hideAddBtn={true} hideRemoveBtn={true}/>
+        <div className='home-container'>
+            <h1 className='welcome'>Welcome back {props.username}!</h1>
+            <h5 className='motto'>Just pick a place!</h5>
+            <div className='home-btnContainer'>
+                <Button onClick={toggle}>Search Restaurants</Button>
+                
+                <Link to="/EventPage"> <Button>Create Event</Button> </Link>
+                
+                <RestaurantGrid 
+                    hideAddBtn={true} 
+                    modal={modal} 
+                    toggle={toggle}
+                />
             </div>
-
-            <div className="home--create-event">
-                {/*event image*/}
-                <Link to="/EventPage" ><button className="btn">Create Event</button></Link>
-            </div>
-
-
         </div>
     )
 };

@@ -7,10 +7,19 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Button } from 'reactstrap'
 
 const Swal = window.Swal;
 
 export default function EventPage(props) {
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+  
+  const [guestModal, setGuestModal] = useState(false);
+
+  const toggleGuest = () => setGuestModal(!guestModal);
 
   const [eventTitle, setEventTitle] = useState("Event Title");
 
@@ -143,76 +152,119 @@ export default function EventPage(props) {
   }
 
   return (
-
-    <div className="container">
-      {eventCreated ?
-        <div>
-          <h1>Event Created!</h1>
-          <div className='event--title'>{eventTitle}</div>
-          <div className='event--date-time'>{eventDate} at {eventTime}</div>
-          <div className="event--confirmed-selectedGuests">
-            {selectedGuests.map((guest, i) => {
-              return (<div key={i} className="event--confirmed-guest">
-                <label>{guest.name}</label>
-                <input id="input--eventLink" type='text' readOnly={true} value={`localhost:3000/vote/${eventId}/${guest.id}`} />
-                <button onClick={()=> navigator.clipboard.writeText(`localhost:3000/vote/${eventId}/${guest.id}`)}>Copy</button>
-                {guest.email===""?<></>:<button><a href={`mailto:${guest.email}?&subject=${user.username} has invited you out!&body=Click this link localhost:3000/vote/${eventId}/${guest.id}`}>E-mail Link</a></button>}
-              </div>)
-            })}<br />
+    <div className="event--container">
+      {!eventCreated ?
+      <div>
+        <h1
+          contentEditable="true"
+          className="event--title"
+          onKeyDown={handleKeyDown}
+          onBlur={(e) => setEventTitle(e.currentTarget.textContent)}
+        >
+        {eventTitle}
+        </h1>
+        {/*Add Edit Pencil Icon*/}
+        <div className="event--time-container">
+          <h5>When:</h5>
+        <input
+          type="date"
+          name="event--date"
+          id="event--date"
+          min={minEventDate.toISOString().slice(0, 10)}
+          defaultValue={eventDate}
+          value={eventDate}
+          onChange={(e) => setEventDate(e.currentTarget.value)}
+        />
+        <h5>at:</h5>
+        <input
+          type="time"
+          name="event--time"
+          id="event--time"
+          value={eventTime}
+          onChange={(e) => setEventTime(e.currentTarget.value)}
+        />
+        <h5>Deadline:</h5>
+        <input
+          type="date"
+          name="event--deadline"
+          id="event--deadline"
+          min={minEventDeadline.toISOString().slice(0, 10)}
+          max={maxEventDeadline.toISOString().slice(0, 10)}
+          defaultValue={eventDeadline}
+          value={eventDeadline}
+          onChange={(e) => setEventDeadline(e.currentTarget.value)}
+        />
+        </div>
+          <div className="event--restaurants-container">
+            <Button onClick={toggle} className="event-searchBtn">Search Restaurants</Button>
+            <RestaurantGrid 
+              selectRestaurant={selectRestaurant}
+              hideAddBtn={false} 
+              modal={modal} 
+              toggle={toggle}
+            />
+            {restaurantThumbnails.length != 0?
+              <div className="event--selectedRestuarants">
+                {restaurantThumbnails}
+              </div>
+            :
+              <></>
+            }
           </div>
-          <div className="event--selectedRestuarantsSubmited">{restaurantThumbnails}</div>
-          <button className="btn" type="submit">GO TO EVENT</button>
+
+          <div className="event--guests-container">
+          <Button onClick={toggleGuest} className="event-guestBtn">Invite Guests</Button>
+            <GuestForm 
+              addGuests={addGuests} 
+              modal={guestModal} 
+              toggle={toggleGuest}/>
+            {selectedGuests.length >=1 ?
+              <div className="event--selectedRestuarants">
+                {
+                  selectedGuests.map((guest, i) => {
+                  return (<h5 key={i}> {guest.name} </h5>)})
+                }
+              </div>
+            :
+              <></>
+            }
         </div>
 
-        :
-        <div>
-          <h1
-            contentEditable="true"
-            className="event--title"
-            onKeyDown={handleKeyDown}
-            onBlur={(e) => setEventTitle(e.currentTarget.textContent)}
-          >
-            {eventTitle}
-          </h1>
-          <input
-            type="date"
-            min={minEventDate.toISOString().slice(0, 10)}
-            name="event--date"
-            defaultValue={eventDate}
-            value={eventDate}
-            onChange={(e) => setEventDate(e.currentTarget.value)}
-          />
-          <br />
-          <input
-            type="time"
-            name="event--time"
-            value={eventTime}
-            onChange={(e) => setEventTime(e.currentTarget.value)}
-          />
-          <br />
-          <RestaurantGrid selectRestaurant={selectRestaurant} hideAddBtn={false} />
-          <div className="event--selectedRestuarants">{restaurantThumbnails}</div>
-          <GuestForm addGuests={addGuests} />
-          <div className="event--selectedRestuarants">
-            {selectedGuests.map((guest, i) => {
-              return (<h5 key={i}>
-                {guest.name}
-              </h5>)
-            })}<br />
-          </div>
-          <input
-            type="date"
-            min={minEventDeadline.toISOString().slice(0, 10)}
-            max={maxEventDeadline.toISOString().slice(0, 10)}
-            name="event--deadline"
-            defaultValue={eventDeadline}
-            value={eventDeadline}
-            onChange={(e) => setEventDeadline(e.currentTarget.value)}
-          />
-          <button className="btn" type="submit" onClick={handleSubmit}>
+        {restaurantThumbnails.length != 0 && selectedGuests.length >=1 ?
+        <div className="event--submit-container">
+          <Button type="submit" onClick={handleSubmit} className="event-submitBtn">
             Submit event!
-          </button>
+          </Button>
         </div>
+        :
+        <></>
+        }
+      </div>
+
+    :
+
+    <div>
+      <h1>Event Created!</h1>
+      <div className='event--title'>{eventTitle}</div>
+      <div className='event--date-time'>{eventDate} at {eventTime}</div>
+      <div className="event--confirmed-selectedGuests">
+        {selectedGuests.map((guest, i) => {
+          return (
+            <div key={i} className="event--confirmed-guest">
+            <label>{guest.name}</label>
+            <input id="input--eventLink" type='text' readOnly={true} value={`localhost:3000/vote/${eventId}/${guest.id}`} />
+            <button onClick={()=> navigator.clipboard.writeText(`localhost:3000/vote/${eventId}/${guest.id}`)}>Copy</button>
+            {guest.email==="" ? <></> : <button><a href={`mailto:${guest.email}?&subject=${user.username} has invited you out!&body=Click this link localhost:3000/vote/${eventId}/${guest.id}`}>E-mail Link</a></button>}
+            </div>)
+          })
+        }
+        <br />
+        </div>
+        <div className="event--selectedRestuarantsSubmited">
+          {restaurantThumbnails}
+        </div>
+        <Button type="submit">GO TO EVENT</Button>
+      </div>
       }
     </div>
   );

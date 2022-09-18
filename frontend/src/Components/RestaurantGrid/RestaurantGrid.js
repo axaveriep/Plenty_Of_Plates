@@ -42,19 +42,19 @@ export default function RestaurantGrid(props) {
     })
 
 
-    const [modal, setModal] = React.useState(false);
+    // const [modal, setModal] = React.useState(false);
 
-    const toggle = () => setModal(!modal);
+    // const toggle = () => setModal(!modal);
 
     return (
 
         <div>
-            <Button
+            {/* <Button
                 onClick={toggle}>Search Restaurants
-            </Button>
+            </Button> */}
 
-            <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true} >
-                <ModalHeader toggle={toggle} className="header">
+            <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog" scrollable={true} >
+                <ModalHeader toggle={props.toggle} className="header">
                     <div className="restaurant--grid-title">
                         Restaurants
                     </div>
@@ -73,7 +73,7 @@ export default function RestaurantGrid(props) {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className="modal-okayBtn" onClick={toggle}>Okay</button>
+                    <button className="modal-okayBtn" onClick={props.toggle}>Okay</button>
                 </ModalFooter>
             </Modal>
         </div >
