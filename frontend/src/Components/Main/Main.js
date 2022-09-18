@@ -35,7 +35,7 @@ class Main extends Component {
 
     render() {
         return (
-            <div>
+            <div className="fullscreen-container">
                {this.props.token.token !== undefined ?
                     <div>
                         <Navbar handleLogout={this.handleLogout} username={this.props.user.username} />
