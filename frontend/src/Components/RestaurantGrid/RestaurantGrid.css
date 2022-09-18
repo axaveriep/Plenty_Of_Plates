@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster&effect=emboss');
-
 .modal-dialog ::-webkit-scrollbar 
 {
   width: 20px;
@@ -30,16 +28,6 @@
 {
   /* background: rgb(200, 175, 60);   */
   background-color: darkorange;
-}
-
-body
-{
-
-  background-image: url("../../Shared/loginbackground.jpg");
-  height: 100vh;
-  width: 100vw;
-  background-size: cover;
-  background-position: bottom;
 }
 
 .modal-header
@@ -102,13 +90,6 @@ h5.modal-title
   display: none;
 }
 
-.panel
-{
-  border-radius: 0.3rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
 .modal-dialog
 {
   overflow-y: initial !important;
@@ -167,4 +148,9 @@ h5.modal-title
 .modal-footer .modal-okayBtn:active
 {
   transform: scale(0.9);
+}
+
+.modal-open
+{
+  padding-right: 0px !important;
 }

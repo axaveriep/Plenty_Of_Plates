@@ -1,0 +1,32 @@
+*, *::before, *::after
+{
+  box-sizing: border-box;
+}
+
+.welcome
+{
+    font-family: 'Lobster', sans-serif;
+}
+
+.motto
+{
+    font-style: italic;
+}
+
+.home-btnContainer
+{
+    display: block;
+    margin-top: 20px;
+}
+
+.home-container
+{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
