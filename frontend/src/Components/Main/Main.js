@@ -74,7 +74,7 @@ class Main extends Component {
                     <Route path='/eventpage'
                         component={this.props.token.token !== undefined ?
                             () => <EventPage />
-                            : <Redirect to='/login' />}
+                            : () => <Redirect to='/login' />}
                     />
                     <Route path='/home'
                         component={this.props.token.token !== undefined ? () => <Home username={this.props.user.username} /> : () => <Redirect to='/login' />}

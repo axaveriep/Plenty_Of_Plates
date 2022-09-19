@@ -18,7 +18,7 @@ export default function Home(props)
             <div className='home-btnContainer'>
                 <Button onClick={toggle}>Search Restaurants</Button>
                 
-                <Link to="/EventPage"> <Button>Create Event</Button> </Link>
+                <Link to="/eventpage"> <Button>Create Event</Button> </Link>
                 
                 <RestaurantGrid 
                     hideAddBtn={true} 
