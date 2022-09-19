@@ -14,6 +14,7 @@ import {
 } from 'reactstrap';
 import RestaurantCard from '../RestaurantCard/RestaurantCard';
 import axios from 'axios';
+import CountdownTimer from '../CountDown/CountdownTimer';
 
 function VotingPage() {
 
@@ -127,12 +128,50 @@ function VotingPage() {
 
   }
 
+  function eventDate (time) {
+    const timeProsessed = event.time.toString();
+    let year = parseInt(time.substring(0,4));
+    let month = parseInt(time.substring(5,7));
+    let prosessedMonth = month - 1
+    let day = parseInt(time.substring(8,10));
+    let hour = parseInt(time.substring(11,13));
+    let minute = parseInt(time.substring(14, 16));
+    let finalDate = new Date(year,prosessedMonth,day,hour,minute);
+
+    return finalDate.toDateString();
+  }
+
+  function eventTime (time) {
+    console.log(time);
+    const timeProsessed = event.time.toString();
+    let hour = parseInt(time.substring(11,13));
+    console.log(hour)
+    let minute = parseInt(time.substring(14, 16));
+    console.log(minute)
+    
+    
+    let hours = ((hour + 11) % 12 + 1)
+    console.log(hours);
+    
+    
+    if(hour >11){
+      return hours.toString() + ':' + minute + 'PM' ;
+    }  else {
+      return hours.toString() + ':' + minute + 'AM'
+    }
+
+
+    
+  }
+
+
   return (
     <div>{event !== undefined && guest !== undefined && !guest.voted ?
       <div>
         <h1>Hello {guest.guestName}!</h1>
-        <h2>You've been invited to {event.title} on {event.time}.</h2>
+        <h2>You've been invited to {event.title} on {eventDate(event.time)} at {eventTime(event.time)}.</h2>
         <h3>Vote on where you'd like to go!</h3>
+        <CountdownTimer targetdate={event.deadline}/>
         <div className='voting--restaurant-thumbnail-container'>
 
           <Carousel
