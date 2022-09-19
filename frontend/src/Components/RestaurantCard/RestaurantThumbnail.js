@@ -5,8 +5,8 @@ export default function RestaurantThumbnail(props) {
 
   return (
     <div className="restaurant--thumbnail">
-      <img className="restaurant--thumbnail-image" src={props.restaurant.image_url}/>
-        {props.eventCreated ? <><span class="text">{props.restaurant.name}</span></> : <button className="restaurant--thumbnail-button" onClick={(event) => props.removeRestaurant(props.restaurant.id)}>
+      <img className="restaurant--thumbnail-image" src={props.restaurant.image_url} alt="small thumbnail of restaurant"/>
+        {props.eventCreated ? <><span class="text">{props.restaurant.name}</span></> : <button className="restaurant--thumbnail-button" onClick={() => props.removeRestaurant(props.restaurant.id)}>
           <span className="text">{props.restaurant.name}</span>
           <span className="icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

@@ -1,6 +1,5 @@
-import { element } from "prop-types"
 import { React, useState, useEffect } from "react"
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap"
+import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap"
 import { getRestaurantById } from "../SearchBar/SearchFunctions"
 import "./RestaurantCard.css"
 import RestaurantHours from "./RestaurantHours"
@@ -47,7 +46,7 @@ export default function RestaurantCard(props) {
                 <div className='restaurant--type'>{categoryTitles}</div>
                 <Rating className="rating" initialValue={props.restaurant.rating} readonly={true}/>
                 <div className='restaurant--address'>
-                    <a href={"https://www.google.com/maps/search/?api=1&query=" + String(props.restaurant.location.display_address)}target="_blank">
+                    <a href={"https://www.google.com/maps/search/?api=1&query=" + String(props.restaurant.location.display_address)}target="_blank" rel="noreferrer">
                     {props.restaurant.location.display_address[0]+" "}
                     {props.restaurant.location.display_address[1]+" "}<br/>
                     {props.restaurant.location.display_address[2]}
