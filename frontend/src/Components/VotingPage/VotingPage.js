@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import { baseUrl } from '../../Shared/baseUrl';
 import './VotingPage.css'
 import { useParams } from "react-router-dom"
-import { getEventByEventId, getGuestByEventIdAndGuestId, getGuestByGuestId, getRestaurantById } from '../SearchBar/SearchFunctions';
-import RestaurantThumbnail from '../RestaurantCard/RestaurantThumbnail';
+import { 
+  getEventByEventId, 
+  getGuestByEventIdAndGuestId, 
+  getRestaurantById 
+} from '../SearchBar/SearchFunctions';
 import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-  CarouselCaption,
-  ButtonGroup,
-  Button, Modal, ModalHeader, ModalBody,
-  UncontrolledPopover, PopoverHeader, PopoverBody, ModalFooter
+  Carousel,  CarouselItem,  CarouselControl,  CarouselCaption,
+  ButtonGroup,  Button, 
+  Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import RestaurantCard from '../RestaurantCard/RestaurantCard';
+import axios from 'axios';
 
 function VotingPage() {
-
 
   let { eventId, guestId } = useParams();
 
@@ -43,20 +42,12 @@ function VotingPage() {
     setActiveIndex(nextIndex);
   };
 
-  const goToIndex = (newIndex) => {
-    if (animating) return;
-    setActiveIndex(newIndex);
-  };
-
-
   useEffect(() => {
 
     Promise.resolve(getEventByEventId(eventId))
       .then(value => {
         setEvent(value)
       })
-
-
 
     Promise.resolve(getGuestByEventIdAndGuestId(eventId, guestId))
       .then(value => {
@@ -103,7 +94,6 @@ function VotingPage() {
   console.log(restaurantDetails)
 
   function changeVote(restaurantId, n) {
-    // setSelectedButton(n);
     setRestaurantDTOs(prevDTOs => {
       return prevDTOs.map((current) => {
         if (current.restaurantId === restaurantId) {
@@ -117,13 +107,29 @@ function VotingPage() {
     })
   }
 
+  function submitVote(e) {
+    
+    e.preventDefault();
+    console.log("clicked!")
+
+    const data = {
+      eventId: eventId,
+      guestId: guestId,
+      restaurantDTOs: restaurantDTOs
+    }
+
+    console.log(data)
+
+    axios
+    .post(baseUrl + '/vote', data)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+
+  }
 
   return (
-    <div>{event !== undefined && guest !== undefined ?
+    <div>{event !== undefined && guest !== undefined && !guest.voted ?
       <div>
-        {/* <h1>Event ID: {eventId}</h1>
-        <h2>Event Name: {event.title}</h2>
-        <h1>Guest ID: {guestId}</h1> */}
         <h1>Hello {guest.guestName}!</h1>
         <h2>You've been invited to {event.title} on {event.time}.</h2>
         <h3>Vote on where you'd like to go!</h3>
@@ -136,11 +142,6 @@ function VotingPage() {
             interval={false}
             className='voting--carousel'
           >
-            {/* <CarouselIndicators
-              items={event.restaurantList}
-              activeIndex={activeIndex}
-              onClickHandler={goToIndex}
-            /> */}
 
             {event.restaurantList.map((restaurant, i) => {
 
@@ -214,16 +215,11 @@ function VotingPage() {
                             No
                           </Button>
                         </ButtonGroup>
-                        {/* <button>yes</button>
-                        
-                        <button>no</button> */}
                       </div>}
                     className='voting--carousel-item-caption'
                   />
 
                 </CarouselItem>
-
-
               )
             })}
             <CarouselControl
@@ -237,10 +233,15 @@ function VotingPage() {
               onClickHandler={next}
             />
           </Carousel>
+          
         </div>
-
+        <form onSubmit={(e) => submitVote(e)}>
+        <button type="submit" onCLick={submitVote}>Submit Votes</button>
+        </form>
       </div>
-      :
+      : event !== undefined && guest !== undefined && guest.voted ?
+      <><h1>Thank you for voting!</h1></>
+      : 
       <></>
     }
     </div>
