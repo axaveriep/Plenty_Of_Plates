@@ -7,7 +7,7 @@ const ExpiredNotice = () => {
   return (
     <div className="expired-notice">
       <span>Expired!!!</span>
-      <p>Please select a future date and time.</p>
+      <p>Your event has expired! Eat well and prosper!</p>
     </div>
   );
 };
@@ -16,7 +16,7 @@ const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (
     <div className="show-counter">
       
-        <DateTimeDisplay value={days} type={'Days'} isDanger={days <= 3} />
+        <DateTimeDisplay value={days} type={'Days'} isDanger={false} />
         <p>:</p>
         <DateTimeDisplay value={hours} type={'Hours'} isDanger={false} />
         <p>:</p>
@@ -30,29 +30,20 @@ const ShowCounter = ({ days, hours, minutes, seconds }) => {
 
 const CountdownTimer = (targetDate) => {
 
- console.log(typeof targetDate);
- console.log(targetDate);
+  
 
   const time = targetDate.targetdate;
 
-  console.log(typeof time);
-  console.log(time);
+  
   let year = parseInt(time.substring(0,4));
   let month = parseInt(time.substring(5,7));
-  let prosessedMonth = month 
-  let day = parseInt(time.substring(8,10));
-  let hour = parseInt(time.substring(11,13));
-  let minute = parseInt(time.substring(14, 16));
-  let finalDate = new Date(year,8,day,hour,minute);
-  let currentDate = new Date();
-  let finalTime = finalDate.getTime();
-  let currentTime = currentDate.getTime();
-  console.log(finalTime)
-  console.log(currentTime)
-  let end = finalTime - currentTime;
+  let prosessedMonth = month -1;
+  let day = parseInt(time.substring(8));
+  let hour = 24;
 
-  console.log(end);
+  let finalDate = new Date(year,prosessedMonth,day,hour,);
 
+  
   const [days, hours, minutes, seconds] = useCountdown(finalDate);
 
   if (days + hours + minutes + seconds <= 0) {

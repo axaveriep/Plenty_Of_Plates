@@ -1,23 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { baseUrl } from '../../Shared/baseUrl';
-import './VotingPage.css'
-import { useParams } from "react-router-dom"
-import { 
-  getEventByEventId, 
-  getGuestByEventIdAndGuestId, 
-  getRestaurantById 
-} from '../SearchBar/SearchFunctions';
+import React, { useState, useEffect } from "react";
+import { baseUrl } from "../../Shared/baseUrl";
+import "./VotingPage.css";
+import { useParams } from "react-router-dom";
 import {
-  Carousel,  CarouselItem,  CarouselControl,  CarouselCaption,
-  ButtonGroup,  Button, 
-  Modal, ModalHeader, ModalBody, ModalFooter
-} from 'reactstrap';
-import RestaurantCard from '../RestaurantCard/RestaurantCard';
-import axios from 'axios';
-import CountdownTimer from '../CountDown/CountdownTimer';
+  getEventByEventId,
+  getGuestByEventIdAndGuestId,
+  getRestaurantById,
+} from "../SearchBar/SearchFunctions";
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselCaption,
+  ButtonGroup,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
+import RestaurantCard from "../RestaurantCard/RestaurantCard";
+import axios from "axios";
+import CountdownTimer from "../CountDown/CountdownTimer";
 
 function VotingPage() {
-
   let { eventId, guestId } = useParams();
 
   const [event, setEvent] = useState();
@@ -44,247 +50,262 @@ function VotingPage() {
   };
 
   useEffect(() => {
+    Promise.resolve(getEventByEventId(eventId)).then((value) => {
+      setEvent(value);
+    });
 
-    Promise.resolve(getEventByEventId(eventId))
-      .then(value => {
-        setEvent(value)
-      })
+    Promise.resolve(getGuestByEventIdAndGuestId(eventId, guestId)).then(
+      (value) => {
+        setGuest(value);
+      }
+    );
+  }, [eventId, guestId]);
 
-    Promise.resolve(getGuestByEventIdAndGuestId(eventId, guestId))
-      .then(value => {
-        setGuest(value)
-      })
-
-
-  }, [eventId, guestId])
-
-  console.log(event)
-  console.log(guest)
+  console.log(event);
+  console.log(guest);
 
   useEffect(() => {
     if (event !== undefined) {
-      setItems(event.restaurantList)
+      setItems(event.restaurantList);
       setRestaurantDTOs(() => {
         return event.restaurantList.map((restaurant) => {
           return {
             restaurantId: restaurant.restaurantId.restaurantId,
             upVoted: false,
-            downVoted: false
-          }
-        })
-      })
+            downVoted: false,
+          };
+        });
+      });
     }
-
-  }, [event])
-
+  }, [event]);
 
   function getRestaurantDetails(restaurantId) {
-    console.log(restaurantId)
-    let result = getRestaurantById(restaurantId)
-    console.log(result)
-    Promise.resolve(result)
-      .then(value => {
-        console.log(value)
-        setRestaurantDetails(value)
-      })
+    console.log(restaurantId);
+    let result = getRestaurantById(restaurantId);
+    console.log(result);
+    Promise.resolve(result).then((value) => {
+      console.log(value);
+      setRestaurantDetails(value);
+    });
 
-    setModal(!modal)
+    setModal(!modal);
   }
 
-  console.log(restaurantDTOs)
-  console.log(restaurantDetails)
+  console.log(restaurantDTOs);
+  console.log(restaurantDetails);
 
   function changeVote(restaurantId, n) {
-    setRestaurantDTOs(prevDTOs => {
+    setRestaurantDTOs((prevDTOs) => {
       return prevDTOs.map((current) => {
         if (current.restaurantId === restaurantId) {
           if (n === 1) {
-            return { ...current, upVoted: true, downVoted: false }
+            return { ...current, upVoted: true, downVoted: false };
           } else if (n === 2) {
-            return { ...current, upVoted: false, downVoted: true }
-          } else return current
-        } else return current
-      })
-    })
+            return { ...current, upVoted: false, downVoted: true };
+          } else return current;
+        } else return current;
+      });
+    });
   }
 
   function submitVote(e) {
-    
     e.preventDefault();
-    console.log("clicked!")
+    console.log("clicked!");
 
     const data = {
       eventId: eventId,
       guestId: guestId,
-      restaurantDTOs: restaurantDTOs
-    }
+      restaurantDTOs: restaurantDTOs,
+    };
 
-    console.log(data)
+    console.log(data);
 
     axios
-    .post(baseUrl + '/vote', data)
-    .then(response => console.log(response))
-    .catch(error => console.log(error))
-
+      .post(baseUrl + "/vote", data)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   }
 
-  function eventDate (time) {
+  function eventDate(time) {
     const timeProsessed = event.time.toString();
-    let year = parseInt(time.substring(0,4));
-    let month = parseInt(time.substring(5,7));
-    let prosessedMonth = month - 1
-    let day = parseInt(time.substring(8,10));
-    let hour = parseInt(time.substring(11,13));
+    let year = parseInt(time.substring(0, 4));
+    let month = parseInt(time.substring(5, 7));
+    let prosessedMonth = month - 1;
+    let day = parseInt(time.substring(8, 10));
+    let hour = parseInt(time.substring(11, 13));
     let minute = parseInt(time.substring(14, 16));
-    let finalDate = new Date(year,prosessedMonth,day,hour,minute);
+    let finalDate = new Date(year, prosessedMonth, day, hour, minute);
 
     return finalDate.toDateString();
   }
 
-  function eventTime (time) {
+  function eventTime(time) {
     console.log(time);
     const timeProsessed = event.time.toString();
-    let hour = parseInt(time.substring(11,13));
-    console.log(hour)
+    let hour = parseInt(time.substring(11, 13));
+    console.log(hour);
     let minute = parseInt(time.substring(14, 16));
-    console.log(minute)
-    
-    
-    let hours = ((hour + 11) % 12 + 1)
+    console.log(minute);
+
+    let hours = ((hour + 11) % 12) + 1;
     console.log(hours);
-    
-    
-    if(hour >11){
-      return hours.toString() + ':' + minute + 'PM' ;
-    }  else {
-      return hours.toString() + ':' + minute + 'AM'
+
+    if (hour > 11) {
+      return hours.toString() + ":" + minute + "PM";
+    } else {
+      return hours.toString() + ":" + minute + "AM";
     }
-
-
-    
   }
 
-
   return (
-    <div>{event !== undefined && guest !== undefined && !guest.voted ?
-      <div>
-        <h1>Hello {guest.guestName}!</h1>
-        <h2>You've been invited to {event.title} on {eventDate(event.time)} at {eventTime(event.time)}.</h2>
-        <h3>Vote on where you'd like to go!</h3>
-        <CountdownTimer targetdate={event.deadline}/>
-        <div className='voting--restaurant-thumbnail-container'>
+    <div>
+      {event !== undefined && guest !== undefined && !guest.voted ? (
+        <div>
+          <h1>Hello {guest.guestName}!</h1>
+          <h2>
+            You've been invited to {event.title} on {eventDate(event.time)} at{" "}
+            {eventTime(event.time)}.
+          </h2>
+          <h3>Vote on where you'd like to go!</h3>
+          <CountdownTimer targetdate={event.deadline} />
+          <div className="voting--restaurant-thumbnail-container">
+            <Carousel
+              activeIndex={activeIndex}
+              next={next}
+              previous={previous}
+              interval={false}
+              className="voting--carousel"
+            >
+              {event.restaurantList.map((restaurant, i) => {
+                return (
+                  <CarouselItem
+                    onExiting={() => setAnimating(true)}
+                    onExited={() => setAnimating(false)}
+                    key={i}
+                    id={restaurant.restaurantId.restaurantId}
+                    tag="div"
+                    className="voting--carousel-item"
+                  >
+                    <img
+                      src={restaurant.image_url}
+                      alt={restaurant.name}
+                      className="voting--carousel-image"
+                    />
 
-          <Carousel
-            activeIndex={activeIndex}
-            next={next}
-            previous={previous}
-            interval={false}
-            className='voting--carousel'
-          >
+                    <CarouselCaption
+                      captionHeader={restaurant.name}
+                      captionText={
+                        <div className="voting--carousel-btns">
+                          <p>
+                            <Button
+                              id="Popover1"
+                              type="button"
+                              onClick={() =>
+                                getRestaurantDetails(
+                                  restaurantDTOs[i].restaurantId
+                                )
+                              }
+                            >
+                              Restaurant Details
+                            </Button>
+                            <Modal
+                              isOpen={modal}
+                              toggle={() =>
+                                getRestaurantDetails(
+                                  restaurantDTOs[i].restaurantId
+                                )
+                              }
+                            >
+                              {restaurantDetails !== undefined && (
+                                <ModalHeader>
+                                  {restaurantDetails.name}
+                                </ModalHeader>
+                              )}
+                              {restaurantDetails !== undefined && (
+                                <ModalBody>
+                                  <RestaurantCard
+                                    restaurant={restaurantDetails}
+                                    hideAddBtn={true}
+                                  />
+                                </ModalBody>
+                              )}
+                              <ModalFooter>
+                                <button
+                                  className="modal-okayBtn"
+                                  onClick={() => setModal(false)}
+                                >
+                                  Okay
+                                </button>
+                              </ModalFooter>
+                            </Modal>
+                          </p>
 
-            {event.restaurantList.map((restaurant, i) => {
-
-              return (
-                <CarouselItem
-                  onExiting={() => setAnimating(true)}
-                  onExited={() => setAnimating(false)}
-                  key={i}
-                  id={restaurant.restaurantId.restaurantId}
-                  tag="div"
-                  className='voting--carousel-item'
-                >
-                  <img src={restaurant.image_url} alt={restaurant.name}
-                    className='voting--carousel-image' />
-
-                  <CarouselCaption
-                    captionHeader={restaurant.name}
-                    captionText={
-                      <div className='voting--carousel-btns'>
-                        <p>
-                          <Button
-                            id="Popover1"
-                            type="button"
-                            onClick={() => getRestaurantDetails(restaurantDTOs[i].restaurantId)}
-                          >
-                            Restaurant Details
-                          </Button>
-                          <Modal
-                            isOpen={modal}
-                            toggle={() => getRestaurantDetails(restaurantDTOs[i].restaurantId)}
-                          >
-                            {restaurantDetails !== undefined &&
-                              <ModalHeader>
-                                {restaurantDetails.name}
-                              </ModalHeader>}
-                            {restaurantDetails !== undefined &&
-                              <ModalBody>
-                                <RestaurantCard
-                                  restaurant={restaurantDetails}
-                                  hideAddBtn={true}
-                                />
-                              </ModalBody>}
-                            <ModalFooter>
-                              <button
-                                className="modal-okayBtn"
-                                onClick={() => setModal(false)}
-                              >
-                                Okay
-                              </button>
-                            </ModalFooter>
-                          </Modal>
-                        </p>
-
-                        <ButtonGroup>
-                          <Button
-                            color="success"
-                            active={restaurantDTOs !== undefined
-                              && restaurantDTOs[i].upVoted === true
-                            }
-                            onClick={() => changeVote(restaurant.restaurantId.restaurantId, 1)}
-                          >
-                            Yes
-                          </Button>
-                          <Button
-                            color="danger"
-                            active={restaurantDTOs !== undefined
-                              && restaurantDTOs[i].downVoted === true
-                            }
-                            onClick={() => changeVote(restaurant.restaurantId.restaurantId, 2)}
-                          >
-                            No
-                          </Button>
-                        </ButtonGroup>
-                      </div>}
-                    className='voting--carousel-item-caption'
-                  />
-
-                </CarouselItem>
-              )
-            })}
-            <CarouselControl
-              direction="prev"
-              directionText="Previous"
-              onClickHandler={previous}
-            />
-            <CarouselControl
-              direction='next'
-              directionText='Next'
-              onClickHandler={next}
-            />
-          </Carousel>
-          
+                          <ButtonGroup>
+                            <Button
+                              color="success"
+                              active={
+                                restaurantDTOs !== undefined &&
+                                restaurantDTOs[i].upVoted === true
+                              }
+                              onClick={() =>
+                                changeVote(
+                                  restaurant.restaurantId.restaurantId,
+                                  1
+                                )
+                              }
+                            >
+                              Yes
+                            </Button>
+                            <Button
+                              color="danger"
+                              active={
+                                restaurantDTOs !== undefined &&
+                                restaurantDTOs[i].downVoted === true
+                              }
+                              onClick={() =>
+                                changeVote(
+                                  restaurant.restaurantId.restaurantId,
+                                  2
+                                )
+                              }
+                            >
+                              No
+                            </Button>
+                          </ButtonGroup>
+                        </div>
+                      }
+                      className="voting--carousel-item-caption"
+                    />
+                  </CarouselItem>
+                );
+              })}
+              <CarouselControl
+                direction="prev"
+                directionText="Previous"
+                onClickHandler={previous}
+              />
+              <CarouselControl
+                direction="next"
+                directionText="Next"
+                onClickHandler={next}
+              />
+            </Carousel>
+          </div>
+          <form onSubmit={(e) => submitVote(e)}>
+            <button type="submit" onCLick={submitVote}>
+              Submit Votes
+            </button>
+          </form>
         </div>
-        <form onSubmit={(e) => submitVote(e)}>
-        <button type="submit" onCLick={submitVote}>Submit Votes</button>
-        </form>
-      </div>
-      : event !== undefined && guest !== undefined && guest.voted ?
-      <><h1>Thank you for voting!</h1></>
-      : 
-      <></>
-    }
+      ) : event !== undefined && guest !== undefined && guest.voted ? (
+        <>
+          <h1>Thank you for voting!</h1>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
-  )
+  );
 }
 
-export default VotingPage
+export default VotingPage;
