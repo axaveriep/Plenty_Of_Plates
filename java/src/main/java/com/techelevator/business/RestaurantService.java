@@ -14,7 +14,7 @@ public class RestaurantService {
     @Autowired
     RestaurantRepository restaurantRepository;
 
-    public void saveRestaurantsToEvent(Event savedEvent, EventDTO eventDTO) {
+    public List<Restaurant> saveRestaurantsToEvent(Event savedEvent, EventDTO eventDTO) {
         List<Restaurant> savedRestaurants = new ArrayList<>();
 
 //        for(String restaurantId : eventDTO.getRestaurantIds()) {
@@ -36,6 +36,7 @@ public class RestaurantService {
         }
 
         restaurantRepository.saveAll(savedRestaurants);
+        return savedRestaurants;
     }
 
     public List<Restaurant> findAllRestaurantsByEventId(long eventId) {

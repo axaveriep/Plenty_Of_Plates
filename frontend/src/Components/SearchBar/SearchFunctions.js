@@ -42,3 +42,10 @@ export async function getGuestByEventIdAndGuestId(eventId, guestId) {
 
     return guest.data
 }
+
+export async function getFavoritesByUserId(userId) {
+
+    const favorites = await axios.get(baseUrl + '/user/id/' + userId + '/favorite').catch(err => console.log(err))
+
+    return favorites.data
+}

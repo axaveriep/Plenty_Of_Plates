@@ -19,7 +19,7 @@ public class GuestService {
         return guestRepository.findByGuestIdEventId(eventId);
     }
 
-    public void saveGuestsToEvent(Event savedEvent, EventDTO eventDTO) {
+    public List<Guest> saveGuestsToEvent(Event savedEvent, EventDTO eventDTO) {
         List<Guest> invitedGuests = new ArrayList<>();
 
         for(GuestDTO guestDTO : eventDTO.getGuestDTOs()) {
@@ -32,6 +32,7 @@ public class GuestService {
         }
 
         guestRepository.saveAll(invitedGuests);
+        return invitedGuests;
     }
 
     public Guest findByGuestId(long eventId, long guestId) {

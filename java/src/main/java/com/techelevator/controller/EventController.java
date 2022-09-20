@@ -40,15 +40,18 @@ public class EventController {
     //TODO: endpoint - POST new event
 
     @PostMapping("/event")
-    public long createEvent(@RequestBody EventDTO eventDTO) {
+    public Event createEvent(@RequestBody EventDTO eventDTO) {
 
         Event savedEvent = eventService.createNewEvent(eventDTO);
 
-        restaurantService.saveRestaurantsToEvent(savedEvent, eventDTO);
+        List<Restaurant> savedRestaurants = restaurantService.saveRestaurantsToEvent(savedEvent, eventDTO);
 
-        guestService.saveGuestsToEvent(savedEvent, eventDTO);
+        List<Guest> savedGuests = guestService.saveGuestsToEvent(savedEvent, eventDTO);
 
-        return savedEvent.getEventId();
+        savedEvent.setRestaurantList(savedRestaurants);
+        savedEvent.setGuestList(savedGuests);
+
+        return savedEvent;
     }
 
 
@@ -83,9 +86,6 @@ public class EventController {
         Guest guest = guestService.findByGuestId(voteDTO.getEventId(), voteDTO.getGuestId());
         guest.setVoted(true);
 
-        System.out.println(guest.getGuestId().getGuestId());
-        System.out.println(voteDTO.getEventId());
-        System.out.println(Arrays.toString(voteDTO.getRestaurantDTOs()));
         List<Restaurant> votedRestaurants = new ArrayList<>();
 
         for(RestaurantDTO restaurantDTO : voteDTO.getRestaurantDTOs()) {

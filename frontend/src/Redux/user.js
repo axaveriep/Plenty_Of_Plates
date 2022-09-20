@@ -11,10 +11,15 @@ export const User = (state = {
                 id: action.payload.id, 
                 username: action.payload.username, 
                 authorities: action.payload.authorities, 
-                eventList: action.payload.eventList }
+                eventList: action.payload.eventList, 
+            favorites: action.payload.favorites }
         
         case ActionTypes.DELETE_USER:
             return { ...state, id: null, username: '', authorities: [] }
+
+        // case 'TOGGLE_FAVORITE':
+        //     return {...state, 
+        //     favorites: [...state.favorites, action.payload]}
 
         default:
             return state;

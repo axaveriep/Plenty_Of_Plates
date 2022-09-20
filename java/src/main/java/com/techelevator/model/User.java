@@ -42,7 +42,6 @@ public class User {
    @Transient
    private Set<Authority> authorities = new HashSet<>();
 
-   // private String favorites;
 
    /* USER = PARENT, EVENT = CHILD */
    @OneToMany(mappedBy = "userId")

@@ -141,8 +141,13 @@ function VotingPage() {
 
   function eventTime(time) {
     console.log(time);
-    const timeProsessed = event.time.toString();
-    let hour = parseInt(time.substring(11, 13));
+    // const localTime = time.toLocaleString('en-US', {timeZone: 'EDT'});
+    // console.log(localTime);
+    const localDate = new Date(time);
+    const timezoneOffset = localDate.getTimezoneOffset()/60;
+    console.log(timezoneOffset);
+    // const timeProsessed = event.time.toString();
+    let hour = parseInt(time.substring(11, 13))-timezoneOffset;
     console.log(hour);
     let minute = parseInt(time.substring(14, 16));
     console.log(minute);
@@ -167,7 +172,7 @@ function VotingPage() {
             {eventTime(event.time)}.
           </h2>
           <h3>Vote on where you'd like to go!</h3>
-          <CountdownTimer targetdate={event.deadline} />
+          <p className="countdown--container">You have <CountdownTimer targetdate={event.deadline} /> to just pick a place!</p>
           <div className="voting--restaurant-thumbnail-container">
             <Carousel
               activeIndex={activeIndex}
@@ -216,16 +221,17 @@ function VotingPage() {
                                 )
                               }
                             >
-                              {restaurantDetails !== undefined && (
+                              {/* {restaurantDetails !== undefined && (
                                 <ModalHeader>
                                   {restaurantDetails.name}
                                 </ModalHeader>
-                              )}
+                              )} */}
                               {restaurantDetails !== undefined && (
                                 <ModalBody>
                                   <RestaurantCard
                                     restaurant={restaurantDetails}
                                     hideAddBtn={true}
+                                    hideFavBtn={true}
                                   />
                                 </ModalBody>
                               )}
