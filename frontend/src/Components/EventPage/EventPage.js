@@ -64,6 +64,7 @@ export default function EventPage(props) {
    * function passed to Restaurant Grid/Card
   */
   function selectRestaurant(restaurant) {
+    /** limit restaurants - add alert more than five restaurants */
     setSelectedRestaurants((prevSelectedRestaurants) => {
       return [...prevSelectedRestaurants, restaurant];
     });
