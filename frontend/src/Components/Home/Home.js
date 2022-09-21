@@ -8,12 +8,14 @@ import { getFavoritesByUserId } from '../SearchBar/SearchFunctions'
 export default function Home(props) 
 {
     const user = props.user;
+    
     const [favorites, setFavorites] = useState(user.favorites)
     const[favCount, setFavCount] = useState(0);
 
     useEffect(() => {
+        if(user.id !== null){
         Promise.resolve(getFavoritesByUserId(user.id))
-        .then(value => setFavorites(value))
+        .then(value => setFavorites(value))}
 
     }, [favCount])
 

@@ -4,7 +4,7 @@ import './GuestForm.css'
 
 function GuestForm(props) {
 
-    const [formValues, setFormValues] = useState([{ guestName: '', email: '' }])
+    const [formValues, setFormValues] = useState([{ name: '', email: '' }])
 
     function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -15,6 +15,7 @@ function GuestForm(props) {
     let handleChange = (i, e) => {
         let newFormValues = [...formValues];
         newFormValues[i][e.target.name] = e.target.value;
+        console.log(newFormValues)
         setFormValues(newFormValues);
     }
 
@@ -33,21 +34,23 @@ function GuestForm(props) {
         props.toggle()
 
         let guests = formValues.map((formValue) => {
-
-            return ( {
+            
+                return ( {
                 ...formValue,
                 guestId: getRandomInt(30000, 99999)
             })
         })
 
-        props.addGuests(guests)
+        let filteredGuests = guests.filter(guest => guest.name !== "")
+       
+        props.addGuests(filteredGuests)
     }
 
     return (
         <div>
             <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog" scrollable={true}>
                 <ModalHeader toggle={props.toggle} className="header">
-                    Add Guests
+                    Add Guests <button className="button add" type="button" onClick={() => addFormFields()}>Add</button>
                 </ModalHeader>
                 <ModalBody className="modal-body">
                     <form onSubmit={handleSubmit}>
@@ -64,7 +67,7 @@ function GuestForm(props) {
                                 }
                             </div>
                         ))}
-                        <button className="button add" type="button" onClick={() => addFormFields()}>Add</button>
+                        
                     </form>
                 </ModalBody>
                 <ModalFooter>
