@@ -7,7 +7,7 @@ function GuestForm(props) {
 
     // const toggle = () => setModal(!modal);
 
-    const [formValues, setFormValues] = useState([{ name: '', email: '' }])
+    const [formValues, setFormValues] = useState([{ guestName: '', email: '' }])
 
     function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -40,7 +40,7 @@ function GuestForm(props) {
 
             return ( {
                 ...formValue,
-                id: getRandomInt(30000, 99999)
+                guestId: getRandomInt(30000, 99999)
             })
         })
 
@@ -65,16 +65,16 @@ function GuestForm(props) {
                                 <input type="text" name="name" value={element.name || ""} onChange={e => handleChange(index, e)} />
                                 <label>Email</label>
                                 <input type="text" name="email" value={element.email || ""} onChange={e => handleChange(index, e)} />
+                                
                                 {
                                     index ?
                                         <button type="button" className="button remove" onClick={() => removeFormFields(index)}>Remove</button>
                                         : null
                                 }
+                                
                             </div>
                         ))}
-                        <div className="button-section">
-                            <button className="button add" type="button" onClick={() => addFormFields()}>Add</button>
-                        </div>
+                        <button className="button add" type="button" onClick={() => addFormFields()}>Add</button>
                     </form>
                 </ModalBody>
                 <ModalFooter>

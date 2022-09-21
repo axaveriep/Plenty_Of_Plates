@@ -22,6 +22,7 @@ import {
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import axios from "axios";
 import CountdownTimer from "../CountDown/CountdownTimer";
+import {eventTimeFormat, eventDateFormat} from '../CountDown/TimeFormatFunctions'
 
 function VotingPage() {
   let { eventId, guestId } = useParams();
@@ -32,6 +33,8 @@ function VotingPage() {
   const [restaurantDetails, setRestaurantDetails] = useState();
 
   const [modal, setModal] = useState(false);
+
+  const [expired, setExpired] = useState(false);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -48,6 +51,11 @@ function VotingPage() {
     const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
   };
+
+  function handleExpired(ex) {
+    setExpired(ex)
+  }
+
 
   useEffect(() => {
     Promise.resolve(getEventByEventId(eventId)).then((value) => {
@@ -126,41 +134,9 @@ function VotingPage() {
       .catch((error) => console.log(error));
   }
 
-  function eventDate(time) {
-    const timeProsessed = event.time.toString();
-    let year = parseInt(time.substring(0, 4));
-    let month = parseInt(time.substring(5, 7));
-    let prosessedMonth = month - 1;
-    let day = parseInt(time.substring(8, 10));
-    let hour = parseInt(time.substring(11, 13));
-    let minute = parseInt(time.substring(14, 16));
-    let finalDate = new Date(year, prosessedMonth, day, hour, minute);
 
-    return finalDate.toDateString();
-  }
 
-  function eventTime(time) {
-    console.log(time);
-    // const localTime = time.toLocaleString('en-US', {timeZone: 'EDT'});
-    // console.log(localTime);
-    const localDate = new Date(time);
-    const timezoneOffset = localDate.getTimezoneOffset()/60;
-    console.log(timezoneOffset);
-    // const timeProsessed = event.time.toString();
-    let hour = parseInt(time.substring(11, 13))-timezoneOffset;
-    console.log(hour);
-    let minute = parseInt(time.substring(14, 16));
-    console.log(minute);
 
-    let hours = ((hour + 11) % 12) + 1;
-    console.log(hours);
-
-    if (hour > 11) {
-      return hours.toString() + ":" + minute + "PM";
-    } else {
-      return hours.toString() + ":" + minute + "AM";
-    }
-  }
 
   return (
     <div>
@@ -168,11 +144,11 @@ function VotingPage() {
         <div>
           <h1>Hello {guest.guestName}!</h1>
           <h2>
-            You've been invited to {event.title} on {eventDate(event.time)} at{" "}
-            {eventTime(event.time)}.
+            You've been invited to {event.title} on {eventDateFormat(event.time)} at{" "}
+            {eventTimeFormat(event.time)}.
           </h2>
-          <h3>Vote on where you'd like to go!</h3>
-          <p className="countdown--container">You have <CountdownTimer targetdate={event.deadline} /> to just pick a place!</p>
+          <CountdownTimer targetdate={event.deadline} handleExpired={handleExpired} isGuest={true}/>
+          { expired ? <></> : 
           <div className="voting--restaurant-thumbnail-container">
             <Carousel
               activeIndex={activeIndex}
@@ -296,12 +272,13 @@ function VotingPage() {
                 onClickHandler={next}
               />
             </Carousel>
-          </div>
-          <form onSubmit={(e) => submitVote(e)}>
+            <form onSubmit={(e) => submitVote(e)}>
             <button type="submit" onCLick={submitVote}>
               Submit Votes
             </button>
           </form>
+          </div>}
+         
         </div>
       ) : event !== undefined && guest !== undefined && guest.voted ? (
         <>

@@ -8,6 +8,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import GuestLink from "../GuestForm/GuestLink";
 
 const Swal = window.Swal;
 
@@ -51,7 +52,6 @@ export default function EventPage(props) {
 
   /** brings userId of logged in user from redux state */
   const userId = useSelector((state) => state.user.id);
-  const user = useSelector((state) => state.user);
 
   /** saves event title to state when user presses enter key on input */
   const handleKeyDown = (event) => {
@@ -65,6 +65,7 @@ export default function EventPage(props) {
   */
   function selectRestaurant(restaurant) {
     /** limit restaurants - add alert more than five restaurants */
+  
     setSelectedRestaurants((prevSelectedRestaurants) => {
       return [...prevSelectedRestaurants, restaurant];
     });
@@ -101,9 +102,6 @@ export default function EventPage(props) {
 
   /** saves all event information to database */
   function handleSubmit(event) {
-    // const selectedRestaurantsID = selectedRestaurants.map((restaurant) => {
-    //   return restaurant.id;
-    // });
 
     const selectedRestaurantDTOs = selectedRestaurants.map((restaurant) => {
       return (
@@ -118,7 +116,7 @@ export default function EventPage(props) {
     const selectedGuestDTOs = selectedGuests.map((guest) => {
       return ({
         guest_name: guest.name,
-        guest_id: guest.id
+        guest_id: guest.guestId
       });
     })
 
@@ -127,7 +125,6 @@ export default function EventPage(props) {
     event.preventDefault();
     const data = {
       userId: userId,
-      //restaurantIds: selectedRestaurantsID,
       restaurantDTOs: selectedRestaurantDTOs,
       guestDTOs: selectedGuestDTOs,
       date: eventDate,
@@ -211,6 +208,7 @@ export default function EventPage(props) {
             <Button onClick={toggle} className="event-searchBtn">Search Restaurants</Button>
             <RestaurantGrid
               selectRestaurant={selectRestaurant}
+              selectedRestaurants={selectedRestaurants}
               hideAddBtn={false}
               modal={modal}
               toggle={toggle}
@@ -261,14 +259,14 @@ export default function EventPage(props) {
           <div className='event--title'>{eventTitle}</div>
           <div className='event--date-time'>{eventDate} at {eventTime}</div>
           <div className="event--confirmed-selectedGuests">
-            {selectedGuests.map((guest, i) => {
+            {selectedGuests.map((guest) => {
               return (
-                <div key={i} className="event--confirmed-guest">
-                  <label>{guest.name}</label>
-                  <input id="input--eventLink" type='text' readOnly={true} value={`localhost:3000/vote/${eventId}/${guest.id}`} />
-                  <button onClick={() => navigator.clipboard.writeText(`localhost:3000/vote/${eventId}/${guest.id}`)}>Copy</button>
-                  {guest.email === "" ? <></> : <button><a href={`mailto:${guest.email}?&subject=${user.username} has invited you out!&body=Click this link localhost:3000/vote/${eventId}/${guest.id}`} target="_blank" rel="noreferrer">E-mail Link</a></button>}
-                </div>)
+                <GuestLink 
+                key={guest.guestId} 
+                guestName={guest.name} 
+                guestEmail={guest.email}
+                guestId={guest.guestId}
+                eventId={eventId}/>)
             })
             }
             <br />
