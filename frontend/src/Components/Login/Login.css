@@ -1,16 +1,3 @@
-*, *::before, *::after
-{
-  box-sizing: border-box;
-}
-
-:root
-{
-  --primary-light-hsl: 200, 100%, 91%;
-  --primary-hsl: 200, 100%, 50%;
-  --primary-dark-hsl: 200, 100%, 6%;
-  --invalid-hsl: 0, 60%, 50%;
-}
-
 #username::placeholder,
 #password::placeholder
 {
@@ -19,7 +6,7 @@
 
 .login-container
 {
-  --color: hsl(var(--primary-dark-hsl), .7);
+  --color: rgba(var(--primary-dark-rgb), .7);
   background-color: var(--color);
   box-shadow: 0 0 15px 0 var(--color);
   padding: 40px 30px;
@@ -36,7 +23,7 @@
   font-family: 'Lobster', sans-serif;
 }
 
-.form
+.login--form
 {
   display: flex;
   flex-direction: column;
@@ -84,7 +71,7 @@
   color:hsl(var(--invalid-hsl));
 }
 
-.btn
+.login--btn
 {
   color:white;
   background: hsl(var(--primary-hsl), .25);
@@ -96,8 +83,8 @@
   cursor: pointer;
 }
 
-.btn:focus,
-.btn:hover
+.login--btn:focus,
+.login--btn:hover
 {
   color: white;
   background-color: hsl(var(--primary-hsl), .5);

@@ -19,13 +19,12 @@ export default function RestaurantHours({object}) {
     }
 
     return (
-        <div>
-            <h4>{today}</h4>
-            <p>
+        <div className='hours--container'>
+            <h4 className='hours--header'>{today}</h4>
+            <p className='hours--data'>
                 Open: {convertTime(object.start)}<br />
                 Close: {convertTime(object.end)}<br />
             </p>
-            <hr />
         </div>
     )
 }

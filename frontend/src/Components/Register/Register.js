@@ -207,7 +207,7 @@ class Register extends Component{
             : */}
                 <div className="register-container">
                     <h1 className="register-title font-effect-emboss">Create Account</h1>
-                    <form className="form">
+                    <form className="register--form">
                         <div className={this.state.error === "User Already Exists." ? "input-group invalid" : "input-group"}>
                             <label className="sr-only">Username</label>
                             <input
@@ -277,7 +277,7 @@ class Register extends Component{
                         </div>
                         <Link to="/login" className="login-link">Have an account?</Link>
                         <button 
-                            className="btn" 
+                            className="register--btn"
                             type="submit" 
                             disabled={!this.state.validEmail || !this.state.validPassword} 
                             onClick={this.handleSubmit}>

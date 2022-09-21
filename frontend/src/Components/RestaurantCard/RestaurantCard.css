@@ -1,32 +1,16 @@
-*, *::before, *::after
+.badge.open
 {
-  box-sizing: border-box;
-}
-
-:root
-{
-  --primary-light-hsl: 200, 100%, 91%;
-  --primary-hsl: 200, 100%, 50%;
-  --primary-dark-hsl: 200, 100%, 6%;
-  --invalid-hsl: 0, 60%, 50%;
+  background-color: green;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 .badge.closed
 {
   background-color: red;
-  color: white;
-  padding: 4px 8px;
-  text-align: center;
-  border-radius: 5px;
-}
-
-.badge.open
-{
-  background-color: green;
-  color: white;
-  padding: 4px 8px;
-  text-align: center;
-  border-radius: 5px;
 }
 
 h3
@@ -40,13 +24,13 @@ h3
   flex-wrap: wrap;
   flex-direction: column;
   text-align: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   border: none;
   border-radius: 2rem;
   margin: 20px;
   width: 400px;
   height: 700px;
-  background-color: rgba(200, 200, 200, 0.75);
+  background-color: white;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
@@ -69,13 +53,13 @@ h3
   text-decoration: none;
 }
 
-a[href^="tel:"]
+.restaurant--phone[href^="tel:"]
 {
   text-decoration: none;
   padding: 10px;
 }
 
-a[href^="tel:"]::before 
+.restaurant--phone[href^="tel:"]::before 
 {
   content: "\260E";
   margin-right: 0.5em;
@@ -86,29 +70,6 @@ a[href^="tel:"]::before
   max-height: 250px;
   max-width: 100%;
   object-fit: cover;
-}
-
-.restaurant--hours
-{
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: space-around;
-  justify-content: center;
-  text-align: center;
-  padding: 10px;
-}
-
-.hours
-{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: space-between;
-  text-align: center;
-  justify-content: center;
-  padding: 1em;
 }
 
 .rating svg
@@ -175,7 +136,7 @@ a[href^="tel:"]::before
   fill: transparent;
 }
 
-.restaurant--favoriteBtn:hover 
+.restaurant--favoriteBtn:hover, .favorited
 {
   background: orange;
 }
@@ -187,22 +148,33 @@ a[href^="tel:"]::before
 
 .addBtn:hover
 {
-  /* background-color: hsl(var(--primary-hsl)); */
   background-color: rgb(0, 190, 0);
 }
 
-.restaurant--favoriteBtn:hover .favoriteBtn-text, .addBtn:hover .addBtn-text
+.addBtn:disabled, .addBtn:disabled:hover .addBtn-icon, .addBtn:disabled .addBtn-text
+{
+  background-color: grey;
+  color: black !important;
+  animation: none;
+}
+
+.restaurant--favoriteBtn:hover .favoriteBtn-text,
+.favorited .favoriteBtn-text,
+.addBtn:hover .addBtn-text
 {
   color: transparent;
 }
    
-.restaurant--favoriteBtn:hover .favoriteBtn-icon, .addBtn:hover .addBtn-icon
+.restaurant--favoriteBtn:hover .favoriteBtn-icon, 
+.favorited .favoriteBtn-icon , 
+.addBtn:hover .addBtn-icon
 {
-  /* transform: translateY(0); */
   animation: fadeIn ease-in-out 0.2s forwards;
 }
 
-.restaurant--favoriteBtn:hover svg, .addBtn:hover svg 
+.restaurant--favoriteBtn:hover svg, 
+.favorited svg, 
+.addBtn:hover svg 
 {
   fill: white;
 }
@@ -222,4 +194,70 @@ a[href^="tel:"]::before
   0%{opacity: 0; transform: translateY(-100%);}
   50%{opacity: .2;}
   100%{opacity: 1; transform: translateY(0);} 
+}
+
+.hours--modal-content
+{
+  width: 800px !important;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.hours--modal-body
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+  padding: 50px !important;
+}
+
+.hours--modal-footer
+{
+  border-top: solid rgba(200, 200, 200, 0.8) 2px!important;
+}
+
+.hours--modal-footer .hours--modal-closeBtn
+{
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background-color: hsl(var(--primary-hsl));
+  width: 128px;
+  height: 64px;
+}
+
+.hours--modal-footer .hours--modal-closeBtn:hover
+{
+  background-color: rgb(0, 120, 200);
+}
+
+.hours--modal-footer .hours--modal-closeBtn:active
+{
+  transform: scale(0.9);
+}
+
+.hours--container
+{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  border: solid white 2px;
+  width: 200px;
+}
+
+.hours--header
+{
+  padding: 10px;
+  border-bottom: solid black 2px;
 }

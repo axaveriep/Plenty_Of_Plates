@@ -23,12 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
     deleteUser: () => { dispatch(deleteUser()) }
 });
 
+
 class Main extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-
-
 
     handleLogout = () => {
         this.props.addToken("")
@@ -45,24 +41,8 @@ class Main extends Component {
                     </div>
                     :
                     <></>
-                    // <><Redirect to='/login' /></>
                 }
                 <Switch>
-                    {/* <Route path='/login'
-                        component={Login}
-                    />
-                    <Route path='/register'
-                        component={Register}
-                    />
-                    <Route path='/eventpage'
-                        component={EventPage}
-                    />
-                    <Route path='/home'
-                        component={() => <Home username={this.props.user.username} />}
-                    />
-                    <Route path='/:username'
-                        component={() => <UserProfile user={this.props.user} />}
-                    /> */}
                     <Route path='/login'
                         component={this.props.token.token === undefined ?
                             () => <Login />
@@ -93,9 +73,6 @@ class Main extends Component {
                             () => <EventResults /> :
                             () => <Redirect to='/login' />}
                     />
-
-
-
                     <Redirect to='/home' />
 
                 </Switch>

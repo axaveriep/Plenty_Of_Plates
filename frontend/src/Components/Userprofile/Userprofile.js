@@ -37,7 +37,6 @@ export const UserProfile = (props) => {
 
     if (favoriteData !== undefined) {
       let displayFavThumbnails = favoriteData.map((userFav, i) => {
-        console.log(userFav)
         const restaurant = {
           name: userFav.restaurantName,
           image_url: userFav.imageUrl
@@ -48,7 +47,7 @@ export const UserProfile = (props) => {
       })
       setFavoriteThumbnails(displayFavThumbnails)
     }
-  }, [eventData])
+  }, [eventData,favoriteData])
 
   return (
 
@@ -59,14 +58,12 @@ export const UserProfile = (props) => {
           <div>
             <h2>{username}'s Events</h2>
             <div md={6} className='profile--events'>
-              {console.log(eventData)}
               {eventThumbnails}
             </div>
           </div>
           <div>
             <h2>{username}'s Favourites</h2>
             <div md={6} className='profile--events'>
-              {console.log(favoriteData)}
               {favoriteThumbnails}
             </div>
           </div>

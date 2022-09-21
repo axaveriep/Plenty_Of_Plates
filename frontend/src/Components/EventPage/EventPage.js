@@ -210,6 +210,7 @@ export default function EventPage(props) {
               selectRestaurant={selectRestaurant}
               selectedRestaurants={selectedRestaurants}
               hideAddBtn={false}
+              hideFavBtn={true}
               modal={modal}
               toggle={toggle}
             />

@@ -21,7 +21,10 @@
 
 .home-container
 {
-    height: 100vh;
+    /* height: 100vh; */
+    background-color: rgba(var(--primary-dark-rgb), 0.7)!important;
+    box-shadow: 0 0 15px 0 var(--color);
+    color: white;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -29,4 +32,53 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    background-color: hsl(var(--primary-hsl) 0.5);
+    padding: 50px;
+    border-radius: 2rem;
+}
+
+.home--createbtn
+{
+    color:white;
+    background: hsl(var(--primary-hsl), .5);
+    padding: 15px;
+    font-size: 1.5rem;
+    border: 1px solid hsl(var(--primary-hsl));
+    border-radius: .25em;
+    outline: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.home--createbtn a
+{
+    text-decoration: none;
+    color: white;
+}
+
+.home--searchbtn
+{
+    color:white;
+    background: hsl(var(--primary-hsl), .5);
+    padding: 15px;
+    font-size: 1.5rem;
+    border: 1px solid hsl(var(--primary-hsl));
+    border-radius: .25em;
+    outline: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.home--searchbtn:focus,
+.home--searchbtn:hover,
+.home--createbtn:focus,
+.home--createbtn:hover
+{
+  color: white;
+  background-color: hsl(var(--primary-hsl), 1);
+}
+
+.home--createbtn:active,.home--searchbtn:active
+{
+    transform: scale(0.95);
 }

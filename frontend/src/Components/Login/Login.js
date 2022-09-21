@@ -64,7 +64,7 @@ class Login extends Component {
                 <div className="fullscreen-container">
                     <div className="login-container">
                         <h1 className="login-title font-effect-emboss">Please Sign In</h1>
-                        <form className="form" onSubmit={this.handleLogin}>
+                        <form className="login--form" onSubmit={this.handleLogin}>
                             <div className="input-group">
                                 <label className="sr-only">Username</label>
                                 <input
@@ -94,7 +94,7 @@ class Login extends Component {
                             </div>
 
                             <Link to="/register" className="register-link">Need an account?</Link>
-                            <button className="btn" type="submit">Sign in</button>
+                            <button className="login--btn" type="submit">Sign in</button>
                         </form>
                     </div>
                 </div>

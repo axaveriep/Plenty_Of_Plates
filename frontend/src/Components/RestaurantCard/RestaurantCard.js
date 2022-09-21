@@ -7,9 +7,9 @@ import { Rating } from 'react-simple-star-rating'
 import axios from "axios"
 import { baseUrl } from "../../Shared/baseUrl"
 import { useDispatch } from "react-redux"
-import { useCallback } from "react"
 
 export default function RestaurantCard(props) {
+
     const categories = props.restaurant.categories
     const categoryTitles = categories.map((category, i) => {
         if (i < categories.length - 1) { return category.title + " | " }
@@ -49,19 +49,9 @@ export default function RestaurantCard(props) {
         }
     }
 
-
-    // const addFavToRedux = useCallback(
-    //     (value) => dispatch({
-    //         type: 'TOGGLE_FAVORITE',
-    //         payload: value
-    //     }), [dispatch]
-    // )
-
-
     async function saveFavorite() {
-
+       
         setFavorite(prevFav => !prevFav)
-        console.log(props.restaurant.id + " " + favorite)
 
         const data = {
             restaurantId: props.restaurant.id,
@@ -69,19 +59,13 @@ export default function RestaurantCard(props) {
             restaurantImage: props.restaurant.image_url,
             favorite: !favorite,
         }
-        console.log(data)
 
         Promise.resolve(axios.post(baseUrl + '/user/id/' + props.userId + '/favorite', data))
             .then(value => {
                 console.log(value)
                 props.addFavorite()
-                // addFavToRedux(value)
             })
-        // console.log(savedFav)
-
-        // props.addFavorite(savedFav)
     }
-
 
     return (
         <div>
@@ -96,27 +80,26 @@ export default function RestaurantCard(props) {
                         {props.restaurant.location.display_address[2]}
                     </a>
                 </div>
-                <a href={"tel:" + props.restaurant.display_phone}>{props.restaurant.display_phone}</a>
+                <a className="restaurant--phone" href={"tel:" + props.restaurant.display_phone}>{props.restaurant.display_phone}</a>
                 <img className='restaurant--image' src={props.restaurant.image_url} alt="restaurant visual" />
 
 
-                <Modal isOpen={modal} toggle={toggle} className="modal-dialog" scrollable={true}>
-                    <ModalHeader className="header">
+                <Modal isOpen={modal} toggle={toggle} className="hours--modal-dialog" contentClassName="hours--modal-content" scrollable={true}>
+                    <ModalHeader className="hours--modal-header">
                         {props.restaurant.name} Hours <br />
                         {restaurantDetails.hours === undefined ? '' : restaurantDetails.hours[0].is_open_now ? <span className="badge open">Open Now</span> : <span className="badge closed">Closed</span>}
                     </ModalHeader>
-                    <ModalBody className="modal-body">
+                    <ModalBody className="hours--modal-body">
                         {hours === undefined ? <></> : <>{hours}</>}
                     </ModalBody>
-                    <ModalFooter>
-                        <button className="modal-okayBtn" onClick={toggle}>Okay</button>
+                    <ModalFooter className="hours--modal-footer">
+                        <button className="hours--modal-closeBtn" onClick={toggle}>Close</button>
                     </ModalFooter>
                 </Modal>
                 <div className="restaurant--buttons">
-                    <button className="restaurant--hoursBtn" onClick={toggle}>Hours</button> {/*disabled={restaurantDetails.hours === undefined}*/}
+                    <button className="restaurant--hoursBtn" onClick={toggle}>Hours</button>
                     {props.hideFavBtn ? <></> :
-
-                        <button className="restaurant--favoriteBtn" onClick={saveFavorite}>
+                        <button className={!favorite ? "restaurant--favoriteBtn" : "restaurant--favoriteBtn favorited" } onClick={saveFavorite}>
                             <span className="favoriteBtn-text">Add to Favorites</span>
                             <span className="favoriteBtn-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
@@ -126,20 +109,21 @@ export default function RestaurantCard(props) {
                         </button>}
                     {props.hideAddBtn ? <></> :
                         <><button
-                            className="addBtn"
+                            className= "addBtn"
                             onClick={() => props.selectRestaurant(props.restaurant)}
                             disabled={props.selectedRestaurants.length >= 5 ||
                                 props.selectedRestaurants.includes(props.restaurant)}
                             id="addBtn"
                         >
-                            <span className="addBtn-text">Add to Event</span>
+                            <span className="addBtn-text">
+                                {props.selectedRestaurants.length >= 5 ? "Limit Reached" : props.selectedRestaurants.includes(props.restaurant)? "Already Added" : "Add to Event"}</span>
                             <span className="addBtn-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                                 </svg>
                             </span>
                         </button>
-                            {props.selectedRestaurants.length >= 5 ||
+                            {/* {props.selectedRestaurants.length >= 5 ||
                                 props.selectedRestaurants.includes(props.restaurant) ?
                                 <Tooltip
                                     placement='top'
@@ -156,7 +140,7 @@ export default function RestaurantCard(props) {
                                     null}
                                 </Tooltip>
                                 :
-                                <></>}
+                                <></>} */}
                         </>}
                 </div>
             </div>
@@ -164,5 +148,4 @@ export default function RestaurantCard(props) {
     )
 }
 
-//<button className="restaurant--favoriteBtn">{/*TODO: Add functionality*/}Add to Favorites</button>
 
