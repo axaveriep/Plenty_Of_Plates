@@ -51,7 +51,7 @@
 
 .input-group input:focus
 {
-  box-shadow: 0 0 0 1px hsl(var(--primary-hsl));
+  box-shadow: 0 0 0 1px rgb(var(--primary-rgb));
 }
 
 .input-group.invalid input
@@ -74,10 +74,10 @@
 .login--btn
 {
   color:white;
-  background: hsl(var(--primary-hsl), .25);
+  background: rgba(var(--primary-rgb), .25);
   padding: 15px;
   font-size: 1.5rem;
-  border: 1px solid hsl(var(--primary-hsl));
+  border: 1px solid rgb(var(--primary-rgb));
   border-radius: .25em;
   outline: none;
   cursor: pointer;

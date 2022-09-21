@@ -254,9 +254,23 @@ export default function EventPage(props) {
         :
 
         <div>
-          <h1>Event Created!</h1>
-          <div className='event--title'>{eventTitle}</div>
-          <div className='event--date-time'>{eventDate} at {eventTime}</div>
+          <div className="event--header-container">
+            <h1 className="event--title">
+              Event Created!
+            </h1>
+          </div>
+          <h2 className='event--title'>
+            {eventTitle}
+          </h2>
+          <div className='event--time-container'>
+            <h5>
+              {eventDate}
+            </h5>
+            <h5>at</h5>
+            <h5 className="event--time">
+              {eventTime}
+            </h5>
+          </div>
           <div className="event--confirmed-selectedGuests">
             {selectedGuests.map((guest) => {
               return (
