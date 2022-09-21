@@ -14,6 +14,11 @@ export const UserProfile = (props) => {
   const [eventThumbnails, setEventThumbnails] = useState()
   const [favoriteData, setFavoriteData] = useState()
   const [favoriteThumbnails, setFavoriteThumbnails] = useState()
+  const [favCount, setFavCount] = useState(0);
+
+  function updateFavorites() {
+    setFavCount(prevFavCount => prevFavCount+1)
+  }
 
   useEffect(() => {
 
@@ -24,7 +29,7 @@ export const UserProfile = (props) => {
       .resolve(getFavoritesByUserId(userId))
       .then(value => setFavoriteData(value))
 
-  }, [userId])
+  }, [userId, favCount])
 
   useEffect(() => {
     if (eventData !== undefined) {
@@ -38,11 +43,18 @@ export const UserProfile = (props) => {
     if (favoriteData !== undefined) {
       let displayFavThumbnails = favoriteData.map((userFav, i) => {
         const restaurant = {
+          id: userFav.favoriteId.restaurantId,
           name: userFav.restaurantName,
           image_url: userFav.imageUrl
         }
         if (userFav.favorite) {
-          return <RestaurantThumbnail key={i} restaurant={restaurant} eventCreated={true} />
+          return <RestaurantThumbnail 
+          key={i} 
+          restaurant={restaurant} 
+          showFavBtn={true} 
+          userId={userId}
+          updateFavorites={updateFavorites}
+          />
         }
       })
       setFavoriteThumbnails(displayFavThumbnails)
