@@ -5,9 +5,13 @@
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
-    height: stretch;
-    width: 100vw;
+    width: fit-content;
     overflow: auto;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 20px;
+    border-radius: 2rem;
+    background-color:rgba(0, 0, 0, 0.5);
 }
 
 .event--header-container
@@ -97,10 +101,36 @@
     height: fit-content;
 }
 
-
-.event-searchBtn, .event-guestBtn, .event-submitBtn
+.event-searchBtn,.event-guestBtn, .event-submitBtn
 {
+    color:white;
+    background: rgba(var(--primary-rgb), .5);
+    padding: 15px;
+    font-size: 1.5rem;
+    border: 1px solid rgba(var(--primary-rgb));
+    border-radius: .25em;
+    outline: none;
+    cursor: pointer;
+    margin: 5px;
     width: 100%;
+}
+
+.event-searchBtn:focus,
+.event-searchBtn:hover,
+.event-guestBtn:focus,
+.event-guestBtn:hover,
+.event-submitBtn:focus,
+.event-submitBtn:hover
+{
+  color: white;
+  background-color: rgba(var(--primary-rgb), .8);
+}
+
+.event-guestBtn:active,
+.event-searchbtn:active,
+.event-submitBtn:active
+{
+    transform: scale(0.95);
 }
 
 .event--selectedRestuarantsSubmited

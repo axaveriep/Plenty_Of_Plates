@@ -97,7 +97,7 @@ h5.modal-title
   border: none;
   border-radius: 1rem;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-  background-color: hsl(var(--primary-hsl));
+  background-color: rgba(var(--primary-rgb));
   width: 128px;
   height: 64px;
 }
