@@ -120,8 +120,6 @@ export default function EventPage(props) {
       });
     })
 
-    console.log(selectedGuestDTOs);
-
     event.preventDefault();
     const data = {
       userId: userId,
@@ -205,7 +203,7 @@ export default function EventPage(props) {
           </div>
 
           <div className="event--restaurants-container">
-            <Button onClick={toggle} className="event-searchBtn">Search Restaurants</Button>
+            <button onClick={toggle} className="event-searchBtn">Search Restaurants</button>
             <RestaurantGrid
               selectRestaurant={selectRestaurant}
               selectedRestaurants={selectedRestaurants}
@@ -224,7 +222,7 @@ export default function EventPage(props) {
           </div>
 
           <div className="event--guests-container">
-            <Button onClick={toggleGuest} className="event-guestBtn">Invite Guests</Button>
+            <button onClick={toggleGuest} className="event-guestBtn">Invite Guests</button>
             <GuestForm
               addGuests={addGuests}
               modal={guestModal}
