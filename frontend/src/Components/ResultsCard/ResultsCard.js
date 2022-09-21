@@ -1,17 +1,18 @@
+import React from 'react'
+import "./ResultsCard.css"
+
 
 export default function ResultsCard(props) {
-    return(
-        <div>
-            <h1>Results</h1>
-            <div className="results--preferred">
-                <h2>Preferred</h2>
-                <div></div>
-            </div>
-            <div className="results--disqualified">
-                <h2>Disqualified</h2>
-                <div></div>
-            </div>
-            <button className="closeBtn">X</button>
+    return (
+        <div className="restaurant--thumbnail">
+                <img className="restaurant--thumbnail-image" src={props.restaurant.image_url} alt="small thumbnail of restaurant"/>
+                <><span className="text">{props.restaurant.name}</span></>
+                <div>
+                    {props.restaurant.upVotes}
+                </div>
+                <div>
+                    {props.restaurant.downVotes}
+                </div>
         </div>
-    )
+      )
 }

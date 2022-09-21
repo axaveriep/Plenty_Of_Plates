@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { baseUrl } from "../../Shared/baseUrl";
 import "./VotingPage.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   getEventByEventId,
   getGuestByEventIdAndGuestId,
@@ -306,6 +306,7 @@ function VotingPage() {
       ) : event !== undefined && guest !== undefined && guest.voted ? (
         <>
           <h1>Thank you for voting!</h1>
+          <Link to='/home'>Home </Link>
         </>
       ) : (
         <></>
