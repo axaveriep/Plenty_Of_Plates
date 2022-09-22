@@ -29,9 +29,6 @@
   
   .show-counter  .countdown-link
   {
-    /* display: flex;
-    flex-direction: row;
-    justify-content: center; */
     font-weight: 700;
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -40,7 +37,6 @@
     border-radius: 0.25rem;
     text-decoration: none;
     color: #000;
-    /* margin: auto; */
   }
   
   .countdown 
@@ -73,9 +69,4 @@
     .show-counter div {
       font-size: 20px;
     }
-    /* .show-counter-timer {
-      width: 200px;
-      text-align: left;
-      margin: auto;
-    } */
   }
