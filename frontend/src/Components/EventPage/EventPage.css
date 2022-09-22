@@ -12,8 +12,6 @@
     border-radius: 2rem;
     background-color: rgba(var(--primary-dark-rgb), .7);
     box-shadow: 0 0 15px 0 rgba(var(--primary-dark-rgb), .7);
-    z-index: 9999;
-    min-height: 700px;
 }
 
 .event--header-container
