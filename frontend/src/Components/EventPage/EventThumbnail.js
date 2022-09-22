@@ -6,15 +6,15 @@ function EventThumbnail({event}) {
 
   return (
     <div className="event-thumbnail--container">
-        <Link to={{
-            pathname: `/results/`,
-            state: {
-              savedEvent: event
-            }
+        <Link className="results--thumbnail-link" to={{
+          pathname: `/results/`,
+          state: {savedEvent: event}
           }}>
-            <div>{event.title}</div>
-            </Link><br />
-        <div>{event.date}</div>
+          <button className='results--thumbnailBtn'>
+            <h3>{event.title}</h3>
+            <h5>{event.date}</h5>
+          </button>
+        </Link>
     </div>
   )
 }

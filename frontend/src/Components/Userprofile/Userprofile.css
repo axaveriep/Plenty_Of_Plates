@@ -1,8 +1,27 @@
-.profile--events {
+.profile--events 
+{
     width: 900px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     padding: 10px;
-    border: 2px solid black;
+}
+
+.profileContainer
+{
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    background-color: rgba(200, 200, 200, 0.9);
+    border-radius: 1rem;
+    padding: 25px;
+    box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.profileContainer h2
+{
+    color: rgb(66, 66, 66);
+    font-size: 32pt;
+    font-family: 'Lobster', sans-serif;
+    text-align: center;
+    border-bottom: solid grey 2px;
+    padding: 20px;
 }

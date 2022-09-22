@@ -39,7 +39,7 @@ export default function RestaurantThumbnail(props) {
           </form>
           :
           props.eventCreated ?
-            <><span className="text">{props.restaurant.name}</span></>
+            <><span className="eventCreated-text">{props.restaurant.name}</span></>
             :
             <button className="restaurant--thumbnail-button" onClick={() => props.removeRestaurant(props.restaurant.id)}>
               <span className="text">{props.restaurant.name}</span>

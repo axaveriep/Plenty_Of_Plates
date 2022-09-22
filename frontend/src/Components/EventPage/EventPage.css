@@ -90,8 +90,7 @@
 .event--selectedRestuarants,
 .event--selectedGuests
 {
-    border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -101,15 +100,13 @@
     padding: 20px;
     justify-content: center;
     background-color: rgba(200, 200, 200, 0.8);
-    border-radius: 2rem;
     width: fit-content;
     height: fit-content;
 }
 
 .event--confirmed-selectedGuests
 {
-    border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -119,9 +116,13 @@
     padding: 20px;
     justify-content: center;
     background-color: rgba(200, 200, 200, 0.8);
-    border-radius: 2rem;
     width: 100%;
     height: fit-content;
+}
+
+.event--selectedGuests h5
+{
+    color: black;
 }
 
 .event-searchBtn,.event-guestBtn, .event-submitBtn
@@ -158,8 +159,7 @@
 
 .event--selectedRestuarantsSubmited
 {
-    border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -167,15 +167,5 @@
     overflow: auto;
     margin: 10px;
     padding: 5px;
+    background-color: rgba(200, 200, 200, 0.8);
 }
-
-/* .event--confirmed-selectedGuests 
-{
-    border: 2px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin: 10px;
-    padding: 5px;
-} */

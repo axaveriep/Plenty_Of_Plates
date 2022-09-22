@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './GuestForm.css'
 
-function GuestForm(props) {
+export default function GuestForm(props) {
 
     const [formValues, setFormValues] = useState([{ name: '', email: '' }])
 
@@ -50,32 +50,29 @@ function GuestForm(props) {
         <div>
             <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog" scrollable={true}>
                 <ModalHeader toggle={props.toggle} className="header">
-                    Add Guests <button className="button add" type="button" onClick={() => addFormFields()}>Add</button>
+                    Add Guests <button className="guest--addBtn" type="button" onClick={() => addFormFields()}>Add</button>
                 </ModalHeader>
                 <ModalBody className="modal-body">
                     <form onSubmit={handleSubmit}>
                         {formValues.map((element, index) => (
                             <div className="form-inline" key={index}>
-                                <label>Name</label>
-                                <input type="text" name="name" value={element.name || ""} onChange={e => handleChange(index, e)} />
-                                <label>Email</label>
-                                <input type="text" name="email" value={element.email || ""} onChange={e => handleChange(index, e)} />
+                                <label className='guest--name-label'>Name</label>
+                                <input className="guest--name-input" type="text" name="name" value={element.name || ""} onChange={e => handleChange(index, e)} />
+                                <label className="guest--email-label">Email</label>
+                                <input className="guest--email-input" type="text" name="email" value={element.email || ""} onChange={e => handleChange(index, e)} />
                                 {
                                     index ?
-                                        <button type="button" className="button remove" onClick={() => removeFormFields(index)}>Remove</button>
+                                    <button type="button" className="guest--removeBtn" onClick={() => removeFormFields(index)}>-</button>
                                         : null
                                 }
                             </div>
                         ))}
-                        
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <button className="button submit" type="submit" onClick={handleSubmit}>Submit</button>
+                    <button className="guest--submitBtn" type="submit" onClick={handleSubmit}>Submit</button>
                 </ModalFooter>
             </Modal>
         </div>
     )
-}
-
-export default GuestForm
+};

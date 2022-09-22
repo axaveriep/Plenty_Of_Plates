@@ -18,7 +18,7 @@ export function eventTimeFormat(time) {
 
     let hour = parseInt(time.substring(11, 13)) - timezoneOffset;
 
-    let minute = parseInt(time.substring(14, 16));
+    let minute = time.substring(14, 16);
 
     let hours = ((hour + 11) % 12) + 1;
 

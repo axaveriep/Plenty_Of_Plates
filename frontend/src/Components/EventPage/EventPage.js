@@ -6,7 +6,6 @@ import GuestForm from "../GuestForm/GuestForm"
 import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import GuestLink from "../GuestForm/GuestLink";
 
@@ -242,9 +241,9 @@ export default function EventPage(props) {
 
           {restaurantThumbnails.length !== 0 && selectedGuests.length >= 1 ?
             <div className="event--submit-container">
-              <Button type="submit" onClick={handleSubmit} className="event-submitBtn">
+              <button type="submit" onClick={handleSubmit} className="event-submitBtn">
                 Submit event!
-              </Button>
+              </button>
             </div>
             :
             <></>
@@ -293,7 +292,7 @@ export default function EventPage(props) {
               savedEvent: savedEvent
             }
           }}>
-            <Button type="submit">GO TO EVENT</Button>
+            <button className="event-submitBtn" type="submit">GO TO EVENT</button>
           </Link>
         </div>
       }

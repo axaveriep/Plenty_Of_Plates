@@ -5,10 +5,10 @@ import ResultsCard from "../ResultsCard/ResultsCard";
 import { eventTimeFormat, eventDateFormat } from '../CountDown/TimeFormatFunctions'
 import CountdownTimer from "../CountDown/CountdownTimer";
 import GuestLink from "../GuestForm/GuestLink";
+import "./EventResults.css"
 
 
-function EventResults() {
-    // let { eventId } = useParams();
+export default function EventResults() {
     const location = useLocation();
 
     const [thisEvent, setThisEvent] = useState();
@@ -44,11 +44,11 @@ function EventResults() {
     }, [thisEvent]);
 
     return (
-        <div>
-            {thisEvent === undefined ? (
-                <></>
-            ) : (
-                <div>
+        <div className="event-results-container">
+            {thisEvent === undefined ? (<></>) 
+            : 
+            (
+                <div >
                     <h1>{thisEvent.title}</h1>
                     <h2>{eventDateFormat(thisEvent.time)} at {eventTimeFormat(thisEvent.time)}</h2>
                     {console.log(thisEvent.date)}
@@ -75,19 +75,16 @@ function EventResults() {
                                 }
                             })}
                         </div>}
-                    <div>
-                        <h1>Qualified</h1>
+                    <h1>Qualified</h1>
+                    <div className="qualified--container">
                         {qualified}
-                        </div>
-                    <div>
-                        <h1>Disqualified</h1>
+                    </div>
+                    <h1>Disqualified</h1>
+                    <div className="disqualified--container">
                         {disqualified}
-                        </div>
-
+                    </div>
                 </div>
             )}
         </div>
     );
-}
-
-export default EventResults;
+};

@@ -1,0 +1,89 @@
+.guest--name-label
+{
+    padding: 15px;
+}
+
+.guest--email-label
+{
+    padding: 15px;
+}
+
+.guest--name-input, .guest--email-input
+{
+    border: none;
+    /* border-radius: 1rem; */
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    color: white;
+}
+
+.guest--addBtn
+{
+    color:white;
+    background: rgba(var(--primary-rgb), .5);
+    padding: 15px;
+    font-size: 1.5rem;
+    border: 1px solid rgba(var(--primary-rgb));
+    border-radius: .25em;
+    outline: none;
+    cursor: pointer;
+    margin: 5px;
+    width: 100%;
+}
+
+.guest--addBtn:hover,
+.guest--addBtn:focus
+{
+    color: white;
+    background-color: rgba(var(--primary-rgb), .8);
+}
+
+.guest--addBtn:active
+{
+    transform: scale(.95);
+}
+
+.copyBtn
+{
+    border: none;
+    border-left: solid black 1px;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    font-size: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    color: white;
+}
+
+.emailBtn
+{
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 1rem;
+    margin-left: 5px;
+}
+
+.copyBtn:hover, .copyBtn:focus,
+.emailBtn:hover, .emailBtn:focus
+{
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.copyBtn:active, .emailBtn:active
+{
+    transform: scale(.95);
+}
+
+.emailBtn a
+{
+    text-decoration: none;
+    color: white;
+}
