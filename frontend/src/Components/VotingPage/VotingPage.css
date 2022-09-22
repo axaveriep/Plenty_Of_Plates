@@ -1,25 +1,17 @@
-.voting--restaurant-thumbnail-container {
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 20px;
-    overflow: auto;
-    margin: 10px;
-    padding: 5px;
-}
 
 .voting--carousel {
     width: 1000px;
     height: 500px;
     margin: auto;
     border-radius: 1rem;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
 .voting--carousel-item {
     width: 1000px;
     height: 500px;
     border-radius: 1rem;
+    
 }
 
 .voting--carousel-image {
@@ -27,6 +19,7 @@
     height: 500px;
     object-fit:cover;
     border-radius: 1rem;
+    
 }
 
 .voting--carousel-item-caption {
@@ -37,9 +30,49 @@
     display: flex;
     align-content: center;
     justify-content: center;
+    margin: 10px;
 }
 
 .voting-page--btn {
     background-color: rgba(255, 255, 255, 1);
 }
 
+.voting--container {
+    background-color: rgba(200, 200, 200, 0.8);
+    padding: 20px;
+    border-radius: 1rem;
+    height: 800px;
+    min-width: 1400px;
+    overflow: hidden;
+    box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.5);
+    
+}
+
+.voting--container h1, .voting--container h2 {
+    text-align: center;
+    font-family: 'Lobster', sans-serif;
+
+}
+
+.voting--submit-btn {
+    color:white;
+    background: rgba(var(--primary-rgb), .5);
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 1px solid rgba(var(--primary-rgb));
+    border-radius: .25em;
+    outline: none;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 770px;
+    width: 30%;
+}
+
+.voting--submit-btn:focus, .voting--submit-btn:hover {
+    color: white;
+  background-color: rgba(var(--primary-rgb), .8);
+}
+
+.voting--submit-btn:active {
+    transform: scale(0.95);
+}
