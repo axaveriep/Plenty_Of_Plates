@@ -14,8 +14,8 @@ export default function GuestLink({guestName, guestId, guestEmail, eventId}) {
       <button id="copyBtn" className='copyBtn' onClick={() => navigator.clipboard.writeText(`localhost:3000/vote/${eventId}/${guestId}`)}>Copy</button>
       <UncontrolledTooltip target="copyBtn" trigger="click" autohide={true} placement='top'>Copied!</UncontrolledTooltip>
       {guestEmail === "" ? <></> : guestEmail === undefined ? <></> : 
+      <a className="emailLink" href={`mailto:${guestEmail}?&subject=${username} has invited you out!&body=Click this link localhost:3000/vote/${eventId}/${guestId}`} target="_blank" rel="noreferrer">
       <button className='emailBtn'>
-        
       <div className="svg-wrapper-1">
         <div className="svg-wrapper">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -24,8 +24,10 @@ export default function GuestLink({guestName, guestId, guestEmail, eventId}) {
           </svg>
         </div>
       </div>
-        <span><a href={`mailto:${guestEmail}?&subject=${username} has invited you out!&body=Click this link localhost:3000/vote/${eventId}/${guestId}`} target="_blank" rel="noreferrer">E-mail Link</a></span>
-        
-      </button>}
+        <span>
+          E-mail Link
+        </span>
+      </button>
+    </a>}
     </div>)
 };

@@ -61,16 +61,16 @@
     transform: scale(.95);
 }
 
-.emailBtn span a
+.emailLink
 {
     text-decoration: none;
-    color: white;
-    height: 32px;
 }
    
 .emailBtn span 
 {
     display: block;
+    color: white;
+    height: 32px;
     margin-left: 0.3em;
     transition: all 0.3s ease-in-out;
 }
