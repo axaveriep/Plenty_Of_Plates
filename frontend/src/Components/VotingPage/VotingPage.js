@@ -190,10 +190,10 @@ function VotingPage() {
                               )}
                               <ModalFooter>
                                 <button
-                                  className="modal-okayBtn"
+                                  className="modal-closeBtn"
                                   onClick={() => setModal(false)}
                                 >
-                                  Okay
+                                Close
                                 </button>
                               </ModalFooter>
                             </Modal>
@@ -264,10 +264,10 @@ function VotingPage() {
          
         </div>
       ) : event !== undefined && guest !== undefined && guest.voted ? (
-        <>
-          <h1>Thank you for voting!</h1>
-          <Link to='/home'>Home </Link>
-        </>
+        <div className="thankyou--container">
+          <h1 className="voting--thankyou">Thank you for voting!</h1>
+          <Link to='/home'><button className="voting--homeBtn">Home</button></Link>
+        </div>
       ) : (
         <></>
       )}

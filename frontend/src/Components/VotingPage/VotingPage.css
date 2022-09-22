@@ -77,7 +77,7 @@
 .voting--details-btn:focus, .voting--details-btn:hover 
 {
     color: white;
-  background-color: rgba(var(--primary-rgb), .8);
+    background-color: rgba(var(--primary-rgb), .8);
 }
 
 .voting--submit-btn:active, .voting--details-btn:active 
@@ -92,3 +92,42 @@
     border:none;
 }
 
+.thankyou--container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(var(--primary-dark-rgb), .7);
+    box-shadow: 0 0 15px 0 rgba(var(--primary-dark-rgb), .7);
+    padding: 40px 30px;
+    border-radius: 20px;
+}
+
+.voting--thankyou
+{
+    font-family: 'Lobster', sans-serif;
+    color: white;
+    padding: 1rem;
+}
+
+.modal-footer .modal-closeBtn, .voting--homeBtn
+{
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background-color: rgba(var(--primary-rgb));
+  width: 128px;
+  height: 50px;
+}
+
+.modal-footer .modal-closeBtn:hover,.modal-footer .modal-closeBtn:focus, .voting--homeBtn:hover, .voting--homeBtn:focus
+{
+  background-color: rgb(0, 120, 200);
+}
+
+.modal-footer .modal-closeBtn:active, .voting--homeBtn:active
+{
+  transform: scale(0.9);
+}
