@@ -130,7 +130,7 @@ function VotingPage() {
 
     axios
       .post(baseUrl + "/vote", data)
-      .then((response) => console.log(response))
+      .then((response) => window.location.reload())
       .catch((error) => console.log(error));
   }
 
@@ -141,7 +141,7 @@ function VotingPage() {
   return (
     <div>
       {event !== undefined && guest !== undefined && !guest.voted ? (
-        <div>
+        <div className="voting--container">
           <h1>Hello {guest.guestName}!</h1>
           <h2>
             You've been invited to {event.title} on {eventDateFormat(event.time)} at{" "}
@@ -179,6 +179,7 @@ function VotingPage() {
                         <div className="voting--carousel-btns">
                           <p>
                             <Button
+                            className="voting--details-btn"
                               id="Popover1"
                               type="button"
                               onClick={() =>
@@ -224,7 +225,9 @@ function VotingPage() {
 
                           <ButtonGroup>
                             <Button
+                            className="voting-page--btn yes-btn"
                               color="success"
+                              outline
                               active={
                                 restaurantDTOs !== undefined &&
                                 restaurantDTOs[i].upVoted === true
@@ -239,6 +242,8 @@ function VotingPage() {
                               Yes
                             </Button>
                             <Button
+                            className="voting-page--btn no-btn"
+                            outline
                               color="danger"
                               active={
                                 restaurantDTOs !== undefined &&
@@ -264,6 +269,7 @@ function VotingPage() {
               <CarouselControl
                 direction="prev"
                 directionText="Previous"
+                className="voting--carousel-control"
                 onClickHandler={previous}
               />
               <CarouselControl
@@ -272,12 +278,13 @@ function VotingPage() {
                 onClickHandler={next}
               />
             </Carousel>
-            <form onSubmit={(e) => submitVote(e)}>
-            <button type="submit" onCLick={submitVote}>
+            
+          </div>}
+          <form onSubmit={(e) => submitVote(e)}>
+            <button className="voting--submit-btn" type="submit" onCLick={submitVote}>
               Submit Votes
             </button>
           </form>
-          </div>}
          
         </div>
       ) : event !== undefined && guest !== undefined && guest.voted ? (
