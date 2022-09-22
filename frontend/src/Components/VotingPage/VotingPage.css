@@ -68,11 +68,19 @@
     width: 30%;
 }
 
-.voting--submit-btn:focus, .voting--submit-btn:hover {
+.voting--submit-btn:focus, .voting--submit-btn:hover, 
+.voting--details-btn:focus, .voting--details-btn:hover {
     color: white;
   background-color: rgba(var(--primary-rgb), .8);
 }
 
-.voting--submit-btn:active {
+.voting--submit-btn:active, .voting--details-btn:active {
     transform: scale(0.95);
 }
+
+.voting--details-btn {
+    color:white;
+    background: rgba(var(--primary-rgb), 0.6);
+    border:none;
+}
+
