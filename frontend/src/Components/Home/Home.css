@@ -2,6 +2,7 @@
 {
     font-family: 'Lobster', sans-serif;
     filter: drop-shadow(5px 5px 5px #222);
+    text-align: center;
 }
 
 .motto
@@ -11,8 +12,10 @@
 
 .home-btnContainer
 {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 20px;
+    justify-content: center;
 }
 
 .home-container
@@ -76,4 +79,10 @@
 .home--createbtn:active,.home--searchbtn:active
 {
     transform: scale(0.95);
+}
+
+@media only screen and (max-width: 600px) {
+    .home-container {
+        width: 350px;
+    }
 }

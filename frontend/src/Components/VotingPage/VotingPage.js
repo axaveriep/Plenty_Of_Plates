@@ -256,7 +256,7 @@ function VotingPage() {
             </Carousel>
             
           </div>}
-          <form onSubmit={(e) => submitVote(e)}>
+          <form onSubmit={(e) => submitVote(e)} className="voting--submit-form">
             <button className="voting--submit-btn" type="submit" onCLick={submitVote}>
               Submit Votes
             </button>

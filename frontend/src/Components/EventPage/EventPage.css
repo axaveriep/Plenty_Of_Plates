@@ -1,17 +1,27 @@
 .event--container
 {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    'header'
+    'time'
+    'restaurants'
+    'guests'
+    'submit';
+    /* align-content: center;
     justify-content: center;
-    width: fit-content;
+    width:max-content; */
     overflow: auto;
     color: white;
     padding: 20px;
     border-radius: 2rem;
     background-color: rgba(var(--primary-dark-rgb), .7);
     box-shadow: 0 0 15px 0 rgba(var(--primary-dark-rgb), .7);
+    margin-top: 84px;
+
 }
 
 .event--header-container
@@ -20,6 +30,7 @@
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: center;
+    grid-area: header;
 }
 
 .event--title
@@ -48,6 +59,7 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    grid-area: time;
 }
 
 .event--date-time
@@ -63,6 +75,10 @@
     margin-left: 5px;
     margin-right: 5px;
     color: white;
+}
+
+.event--tc-date, .event--tc-time, .event--tc-deadline {
+    margin: 10px;
 }
 
 #event--date, #event--time, #event--deadline
@@ -88,6 +104,17 @@
     margin: 10px;
 }
 
+.event--restaurants-container {
+    grid-area: restaurants;
+}
+
+.event--guests-container {
+    grid-area: guests;
+}
+.event--submit-container {
+    grid-area: submit;
+}
+
 .event--selectedRestuarants,
 .event--selectedGuests
 {
@@ -97,18 +124,29 @@
     flex-direction: row;
     gap: 20px;
     overflow: auto;
-    margin: 10px;
+    margin: 10px 0 0 0;
     padding: 20px;
     justify-content: center;
-    background-color: rgba(200, 200, 200, 0.8);
+    background-color: rgba(200, 200, 200, 1);
     width: fit-content;
     height: fit-content;
 }
 
-.event--selectedGuests h5
-{
-    color: black;
+.event--selectedGuests {
+    flex-direction: column;
+    justify-items: center;
+    width: 100%;
 }
+
+.event--selectedGuests-each {
+    /* display: flex;
+    flex-direction: row; */
+    color: black;
+    font-size: large;
+    margin: auto;
+    width: 300px;
+}
+
 
 .event-searchBtn,.event-guestBtn, .event-submitBtn
 {
@@ -199,4 +237,24 @@
 .event--container::-webkit-scrollbar-thumb:hover
 {
   background-color: darkorange;
+}
+
+@media only screen and (max-width: 540px) {
+
+    .event--container {
+        display: block;
+        margin-top: 130px;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .event--time-container {
+        flex-direction: column;
+    }
+
+    #event--date, #event--time, #event--deadline {
+        width: 150px;
+    }
+
 }

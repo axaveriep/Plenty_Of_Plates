@@ -33,57 +33,73 @@ export default function EventResults() {
             })
             setQualified(displayQualified);
 
-            let disqualifiedResults = thisEvent.restaurantList.filter(restaurant => restaurant.downVotes > 0 )
+            let disqualifiedResults = thisEvent.restaurantList.filter(restaurant => restaurant.downVotes > 0)
             let displayDisqualified = disqualifiedResults.map((restaurant, i) => {
                 return <ResultsCard key={i} restaurant={restaurant} />
             })
             setDisqualified(displayDisqualified);
 
+            let voteCount = 0;
+            thisEvent.guestList.forEach(guest => {
+                if(guest.voted) {
+                    voteCount++
+                }    
+            });
+
+            if (voteCount === thisEvent.guestList.length) {
+                setExpired(true)
+            }
+
         }
     }, [thisEvent]);
 
     return (
-        <div className="event-results-container">
-            {thisEvent === undefined ? (<></>) 
-            : 
-            (
-                <div >
-                    <h1>{thisEvent.title}</h1>
-                    <h2>{eventDateFormat(thisEvent.time)} at {eventTimeFormat(thisEvent.time)}</h2>
-                    {console.log(thisEvent.date)}
-                    <CountdownTimer
-                        targetdate={thisEvent.deadline}
-                        handleExpired={setExpired}
-                        isGuest={false}
-                    />
-                    {expired ? <>These are the final results!</> :
-                        <div>
-                            {thisEvent.guestList.map((guest) => {
-                                if (!guest.voted) 
-                                {
-                                    return (
-                                    <div>
-                                        <GuestLink
-                                        key={guest.guestId.guestId}
-                                        guestName={guest.guestName}
-                                        guestId={guest.guestId.guestId}
-                                        eventId={thisEvent.eventId}
-                                    />
-                                    </div>)
-                                }
-                                return undefined;
-                            })}
-                        </div>}
-                    <h1>Qualified</h1>
-                    <div className="qualified--container">
-                        {qualified}
+        <div >
+            {thisEvent === undefined ? (<></>)
+                :
+                (
+                    <div className="event-results-container">
+                        <div className="event-results-header-container">
+                            <h1 className="event-results-title">{thisEvent.title}</h1>
+                            <h2>{eventDateFormat(thisEvent.time)} at {eventTimeFormat(thisEvent.time)}</h2>
+                            {console.log(thisEvent.date)}
+                            <CountdownTimer
+                                targetdate={thisEvent.deadline}
+                                handleExpired={setExpired}
+                                isGuest={false}
+                            />
+                        </div>
+                        {expired ? <div className="event-results-final-text">These are the final results!</div> :
+                            <div className="event--confirmed-selectedGuests">
+                                {thisEvent.guestList.map((guest) => {
+                                    if (!guest.voted) {
+                                        return (
+                                            <div >
+                                                <GuestLink
+                                                    key={guest.guestId.guestId}
+                                                    guestName={guest.guestName}
+                                                    guestId={guest.guestId.guestId}
+                                                    eventId={thisEvent.eventId}
+                                                />
+                                            </div>)
+                                    }
+                                    return undefined;
+                                })}
+                            </div>}
+                        <div className="event-results-qualified">
+                            <h1>Qualified</h1>
+                            <div className="qualified--container">
+                                {qualified}
+                            </div>
+                        </div>
+                        <div className="event-results-disqualified">
+                            <h1>Disqualified</h1>
+                            <div className="disqualified--container">
+                                {disqualified}
+                            </div>
+                        </div>
                     </div>
-                    <h1>Disqualified</h1>
-                    <div className="disqualified--container">
-                        {disqualified}
-                    </div>
-                </div>
-            )}
+                )}
         </div>
     );
 };

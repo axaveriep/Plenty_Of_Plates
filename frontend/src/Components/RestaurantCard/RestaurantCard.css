@@ -261,3 +261,9 @@ h3
   padding: 10px;
   border-bottom: solid black 2px;
 }
+
+@media only screen and (max-width: 400px) {
+  .restaurant--container {
+    width: 350px;
+  }
+}

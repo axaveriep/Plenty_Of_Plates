@@ -166,6 +166,7 @@ export default function EventPage() {
           </div>
 
           <div className="event--time-container">
+           <div className="event--tc-date"> 
             <h5>When:</h5>
             <input
               type="date"
@@ -175,8 +176,10 @@ export default function EventPage() {
               value={eventDate}
               onChange={(e) => setEventDate(e.currentTarget.value)}
             />
+            </div>
 
-            <h5>at:</h5>
+            <div className="event--tc-time">
+              <h5>at:</h5>
             <input
               type="time"
               name="event--time"
@@ -184,8 +187,10 @@ export default function EventPage() {
               value={eventTime}
               onChange={(e) => setEventTime(e.currentTarget.value)}
             />
+            </div>
 
-            <h5>Deadline:</h5>
+            <div className="event--tc-deadline">
+              <h5>Deadline:</h5>
             <input
               type="date"
               name="event--deadline"
@@ -195,6 +200,7 @@ export default function EventPage() {
               value={eventDeadline}
               onChange={(e) => setEventDeadline(e.currentTarget.value)}
             />
+            </div>
           </div>
 
           <div className="event--restaurants-container">
@@ -226,7 +232,7 @@ export default function EventPage() {
               <div className="event--selectedGuests">
                 {
                   selectedGuests.map((guest, i) => {
-                    return (<h5 key={i}> {guest.name} </h5>)
+                    return (<div className="event--selectedGuests-each"><h5 key={i}>✉ {guest.name}</h5> <p>{guest.email}</p> </div>)
                   })
                 }
               </div>

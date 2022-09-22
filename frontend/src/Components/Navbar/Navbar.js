@@ -4,8 +4,8 @@ import './Navbar.css'
 export default function Navbar(props) {
     return (
         <nav className="nav">
-            <img className='logo' src='plates_favicon.ico' alt='stacked plates'/>
-            <Link to='/home' className="site-title">Plenty of Plates</Link>
+            
+            <Link to='/home' className="site-title"><img className='logo' src='plates_favicon.ico' alt='stacked plates'/> Plenty of Plates</Link>
             <ul>
                 <li>
                     <Link to='/home'>Home</Link>

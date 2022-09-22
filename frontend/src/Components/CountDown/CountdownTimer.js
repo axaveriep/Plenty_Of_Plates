@@ -18,8 +18,7 @@ const ExpiredNotice = ({isGuest}) => {
 const ShowCounter = ({ days, hours, minutes, seconds, isGuest }) => {
   return (
     <div className="show-counter">
-       You have <DateTimeDisplay value={days} type={'Days'} isDanger={false} />  :  <DateTimeDisplay value={hours} type={'Hours'} isDanger={false} /> : <DateTimeDisplay value={minutes} type={'Mins'} isDanger={false} /> : <DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} /> to just pick a place! <br />
-       {isGuest ? <h3>Vote on where you'd like to go!</h3> : <></>}
+       <div>You have</div>        <div className='show-counter-timer'><DateTimeDisplay value={days} type={'Days'} isDanger={false} />  :  </div>       <div className='show-counter-timer'><DateTimeDisplay value={hours} type={'Hours'} isDanger={false} /> : </div>       <div className='show-counter-timer'><DateTimeDisplay value={minutes} type={'Mins'} isDanger={false} /> : </div>       <div className='show-counter-timer'><DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} /></div>        <div>to just pick a place!</div> <br />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 .upvotes,.downvotes
 {
-    width: stretch;
+    width: 256px;
     height: 64px;
     cursor: pointer;
     display: flex;
@@ -39,7 +39,7 @@
 
 .result-eventCreated-text
 {
-    width: stretch;
+    width: 256px;
     height: 64px;
     cursor: pointer;
     display: flex;

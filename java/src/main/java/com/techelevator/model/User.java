@@ -47,6 +47,7 @@ public class User {
    @OneToMany(mappedBy = "userId")
    private List<Event> eventList;
 
+   /* USER = PARENT, FAV = CHILD */
    @OneToMany(mappedBy = "user")
    private List<Favorite> favorites;
 

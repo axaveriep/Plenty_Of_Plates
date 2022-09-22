@@ -93,9 +93,34 @@
     font-size: 1rem;
     outline: none;
     color: white;
+    margin: 10px;
 }
 
 .guest--form--email-input
 {
     margin-right: 20px;
+}
+
+.form-inline {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+@media only screen and (max-width: 540px) {
+    .form-inline {
+        flex-direction: column;
+        background-color: #222;
+        margin: 10px;
+    }
+
+    .guest--form--name-input, .guest--form--email-input {
+        margin: 10px;
+    }
+
+    .guest--removeBtn {
+        margin: auto;
+        margin-bottom: 10px;
+    }
+    
 }

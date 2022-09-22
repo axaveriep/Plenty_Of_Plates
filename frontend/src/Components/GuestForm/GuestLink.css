@@ -13,11 +13,12 @@
     border: none;
     border-bottom-left-radius: 1rem;
     border-top-left-radius: 1rem;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     padding: 0.5rem;
     font-size: 1rem;
     outline: none;
     color: white;
+    box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.5) inset;
 }
 
 .copyBtn
@@ -113,5 +114,20 @@
     {
         transform: translateY(-0.1em);
     }
+}
+
+@media only screen and (max-width: 540px) {
+    .guest--name-input {
+        border-radius:  0;
+        margin: 5px;
+    }
+
+    .copyBtn {
+        border-radius: 0;
+        margin: 5px;
+        border: none;
+        padding: 0.5rem;
+    }
+    
 }
    

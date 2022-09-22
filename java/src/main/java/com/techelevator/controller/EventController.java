@@ -24,20 +24,19 @@ public class EventController {
     @Autowired
     GuestService guestService;
 
-    //TODO: endpoint - GET all events by userId
+
     @GetMapping("/event/user/{userId}")
     public List<Event> getAllEventsByUserId(@PathVariable long userId) {
         return eventService.findAllEventsByUserId(userId);
     }
 
-    //TODO: endpoint - GET event by eventId
 
     @GetMapping("/event/{eventId}")
     public Event getEventByEventId(@PathVariable long eventId) {
         return eventService.findByEventId(eventId);
     }
 
-    //TODO: endpoint - POST new event
+
 
     @PostMapping("/event")
     public Event createEvent(@RequestBody EventDTO eventDTO) {
@@ -55,31 +54,24 @@ public class EventController {
     }
 
 
-    //TODO: endpoint - PUT? update event name/date/time?
-
-    //TODO: endpoint - GET all guests by eventId
     @GetMapping("/event/{eventId}/guests")
     public List<Guest> getGuestsByEventId(@PathVariable long eventId) {
         return guestService.findAllGuestsByEventId(eventId);
     }
 
-    //TODO: endpoint - GET all restaurants by eventId
+
     @GetMapping("/event/{eventId}/restaurants")
     public List<Restaurant> getRestaurantsByEventId(@PathVariable long eventId) {
         return restaurantService.findAllRestaurantsByEventId(eventId);
     }
 
-    /* Might make Guest and Restaurant Controllers */
 
-    //TODO: endpoint - PUT update guest when voted = true
 
     @GetMapping("/event/{eventId}/guests/{guestId}")
     public Guest getGuestByGuestId(@PathVariable long eventId, @PathVariable long guestId) {
         return guestService.findByGuestId(eventId, guestId);
     }
-
-
-    //TODO: endpoint - PUT update restaurant when votes change
+    
 
     @PostMapping("/vote")
     public void saveGuestVote(@RequestBody VoteDTO voteDTO) {

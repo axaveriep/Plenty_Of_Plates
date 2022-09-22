@@ -48,18 +48,18 @@ export default function GuestForm(props) {
 
     return (
         <div>
-            <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog" scrollable={true}>
+            <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog guest-form-modal" scrollable={true}>
                 <ModalHeader toggle={props.toggle} className="header">
                     Add Guests <button className="guest--addBtn" type="button" onClick={() => addFormFields()}>Add</button>
                 </ModalHeader>
-                <ModalBody className="modal-body">
+                <ModalBody className="modal-body guest-form-modal--body">
                     <form onSubmit={handleSubmit}>
                         {formValues.map((element, index) => (
                             <div className="form-inline" key={index}>
-                                <label className='guest--name-label'>Name</label>
-                                <input className="guest--form--name-input" type="text" name="name" value={element.name || ""} onChange={e => handleChange(index, e)} />
-                                <label className="guest--email-label">Email</label>
-                                <input className="guest--form--email-input" type="text" name="email" value={element.email || ""} onChange={e => handleChange(index, e)} />
+                                {/* <label className='guest--name-label'>Name</label> */}
+                                <input className="guest--form--name-input" type="text" name="name" placeholder="Name" value={element.name || ""} onChange={e => handleChange(index, e)} />
+                                {/* <label className="guest--email-label">Email</label> */}
+                                <input className="guest--form--email-input" placeholder="E-mail" type="text" name="email" value={element.email || ""} onChange={e => handleChange(index, e)} />
                                 {
                                     index ?
                                     <button type="button" className="guest--removeBtn" onClick={() => removeFormFields(index)}>-</button>

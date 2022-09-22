@@ -6,12 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -56,9 +53,11 @@ public class Event {
     @JoinColumn(name="user_id", insertable = false, updatable = false)
     private User user;
 
+    /* EVENT = PARENT, GUEST = CHILD */
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Guest> guestList;
 
+    /* EVENT = PARENT, RESTAURANT = CHILD */
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Restaurant> restaurantList;
 }

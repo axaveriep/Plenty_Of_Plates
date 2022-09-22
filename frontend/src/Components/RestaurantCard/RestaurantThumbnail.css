@@ -101,7 +101,7 @@
 
 .eventCreated-text
 {
-    width: stretch;
+    width: 256px;
     height: 64px;
     cursor: pointer;
     display: flex;

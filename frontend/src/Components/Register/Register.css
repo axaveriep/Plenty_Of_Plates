@@ -45,6 +45,7 @@
 .input-group
 {
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
   gap: 7px;
 }
@@ -58,6 +59,7 @@
   border: none;
   outline: none;
   border-radius: .25em !important;
+  object-fit: contain;
 }
 
 .input-group input:focus
@@ -180,3 +182,4 @@
   opacity: 1;
   transform: scaleX(1);
 }
+

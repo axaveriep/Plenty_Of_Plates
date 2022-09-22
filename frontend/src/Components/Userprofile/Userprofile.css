@@ -59,3 +59,20 @@
 {
   background-color: darkorange;
 }
+
+@media only screen and (max-width: 800px) {
+  .profile--events {
+    width: 540px;
+    justify-content: space-evenly;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .profile--events {
+    width: 350px;
+  }
+
+  .profileContainer {
+    margin-top: 130px;
+  }
+}
