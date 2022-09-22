@@ -103,7 +103,7 @@
 {
     width: 256px;
     height: 64px;
-    cursor: pointer;
+    cursor: default;
     display: flex;
     flex-direction: row;
     border: none;
