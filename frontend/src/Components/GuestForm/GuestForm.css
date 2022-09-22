@@ -1,3 +1,8 @@
+.guestform--header h5
+{
+    filter: drop-shadow(5px 5px 5px #222);
+}
+
 .guest--addBtn
 {
     color:white;

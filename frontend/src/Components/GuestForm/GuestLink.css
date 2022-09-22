@@ -35,6 +35,8 @@
 
 .emailBtn
 {
+    display: flex;
+    align-items: center;
     border: none;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1rem;
@@ -42,6 +44,9 @@
     outline: none;
     border-radius: 1rem;
     margin-left: 5px;
+    padding: 0.7em 1em;
+    overflow: hidden;
+    transition: all 0.2s;
 }
 
 .copyBtn:hover, .copyBtn:focus,
@@ -55,8 +60,58 @@
     transform: scale(.95);
 }
 
-.emailBtn a
+.emailBtn span a
 {
     text-decoration: none;
     color: white;
+    height: 32px;
 }
+   
+.emailBtn span 
+{
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+}
+   
+.emailBtn svg 
+{
+    display: block;
+    color: white;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+}
+   
+.emailBtn:hover .svg-wrapper 
+{
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+   
+.emailBtn:hover svg 
+{
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+   
+.emailBtn:hover span 
+{
+    transform: translateX(6em);
+}
+   
+.emailBtn:active 
+{
+    transform: scale(0.95);
+}
+   
+@keyframes fly-1 
+{
+    from 
+    {
+        transform: translateY(0.1em);
+    }
+   
+    to
+    {
+        transform: translateY(-0.1em);
+    }
+}
+   

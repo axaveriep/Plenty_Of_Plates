@@ -9,6 +9,7 @@
     font-family: 'Lobster', sans-serif;
     font-size: 2rem;
     margin-right: auto;
+    filter: drop-shadow(5px 5px 5px #222);
 }
 
 .nav

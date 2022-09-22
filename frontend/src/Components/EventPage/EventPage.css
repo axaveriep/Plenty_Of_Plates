@@ -7,11 +7,13 @@
     justify-content: center;
     width: fit-content;
     overflow: auto;
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
     color: white;
     padding: 20px;
     border-radius: 2rem;
-    background-color:rgba(0, 0, 0, 0.5);
+    background-color: rgba(var(--primary-dark-rgb), .7);
+    box-shadow: 0 0 15px 0 rgba(var(--primary-dark-rgb), .7);
+    z-index: 9999;
+    min-height: 700px;
 }
 
 .event--header-container
@@ -29,6 +31,7 @@
     border-radius: 1rem;
     padding: 0.5rem;
     outline-color: white;
+    filter: drop-shadow(5px 5px 5px #222);
 }
 
 .event--title-icon
@@ -104,22 +107,6 @@
     height: fit-content;
 }
 
-.event--confirmed-selectedGuests
-{
-    border-radius: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 20px;
-    overflow: auto;
-    margin: 10px;
-    padding: 20px;
-    justify-content: center;
-    background-color: rgba(200, 200, 200, 0.8);
-    width: 100%;
-    height: fit-content;
-}
-
 .event--selectedGuests h5
 {
     color: black;
@@ -157,15 +144,61 @@
     transform: scale(0.95);
 }
 
+.event--confirmed-selectedGuests
+{
+    border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    overflow: auto;
+    margin: 10px;
+    padding: 10px;
+    justify-content: center;
+    background-color: rgba(200, 200, 200, 0.8);
+    /* width: 100%; */
+    height: fit-content;
+}
+
 .event--selectedRestuarantsSubmited
 {
     border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 20px;
+    justify-content: space-evenly;
     overflow: auto;
     margin: 10px;
     padding: 5px;
     background-color: rgba(200, 200, 200, 0.8);
+}
+
+/* Scrollbar */
+.event--container::-webkit-scrollbar 
+{
+  width: 20px;
+}
+
+/* Track */
+.event--container::-webkit-scrollbar-track 
+{
+  border-radius: 10px;
+  backdrop-filter: blur(.25rem) saturate(180%);
+  -webkit-backdrop-filter: blur(.25rem) saturate(180%);
+  background-color: rgba(200, 200, 200, 0.25);
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+ 
+/* Handle */
+.event--container::-webkit-scrollbar-thumb 
+{
+  background-color: orange;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.event--container::-webkit-scrollbar-thumb:hover
+{
+  background-color: darkorange;
 }

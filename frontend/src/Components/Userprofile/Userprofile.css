@@ -18,6 +18,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     height: 700px;
+    z-index: 9999;
 }
 
 .profileContainer h2
@@ -43,8 +44,8 @@
   backdrop-filter: blur(.25rem) saturate(180%);
   -webkit-backdrop-filter: blur(.25rem) saturate(180%);
   background-color: rgba(200, 200, 200, 0.25);
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
  
 /* Handle */

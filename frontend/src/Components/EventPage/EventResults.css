@@ -15,6 +15,7 @@
     min-width: 1400px;
     overflow: auto;
     box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
 }
 
 .event--confirmed-guest
@@ -52,8 +53,8 @@
   backdrop-filter: blur(.25rem) saturate(180%);
   -webkit-backdrop-filter: blur(.25rem) saturate(180%);
   background-color: rgba(200, 200, 200, 0.25);
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
  
 /* Handle */

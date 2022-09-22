@@ -4,6 +4,15 @@
   color: white;
 }
 
+.login--title-banner
+{
+  font-size: 64pt;
+  font-family: 'Lobster', sans-serif;
+  color: white;
+  filter: drop-shadow(5px 5px 5px #222);
+  margin-bottom:50px;
+}
+
 .login-container
 {
   --color: rgba(var(--primary-dark-rgb), .7);
@@ -21,6 +30,7 @@
   text-align: center;
   margin-bottom: 30px;
   font-family: 'Lobster', sans-serif;
+  filter: drop-shadow(5px 5px 5px #222);
 }
 
 .login--form

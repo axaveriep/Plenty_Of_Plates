@@ -59,6 +59,7 @@ class Login extends Component {
     render(){
         return(
             <div className="fullscreen-container">
+                <h1 className='login--title-banner'>Plenty of Plates</h1>
                 <div className="login-container">
                     <h1 className="login-title font-effect-emboss">Please Sign In</h1>
                     <form className="login--form" onSubmit={this.handleLogin}>

@@ -1,6 +1,7 @@
 .welcome
 {
     font-family: 'Lobster', sans-serif;
+    filter: drop-shadow(5px 5px 5px #222);
 }
 
 .motto
