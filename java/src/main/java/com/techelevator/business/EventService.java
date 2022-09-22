@@ -24,10 +24,14 @@ public class EventService {
         return eventRepository.findAllByUserId(userId);
     }
 
+    /** uses information sent from front end to create a new event and save to database
+     * converted date and time strings into Date and Timestamp objects */
+
     public Event createNewEvent(EventDTO eventDTO) {
         Event newEvent = new Event();
         newEvent.setUserId(eventDTO.getUserId());
         newEvent.setTitle(eventDTO.getTitle());
+
         newEvent.setDate(LocalDate.parse(eventDTO.getDate()));
         newEvent.setTime(Timestamp.valueOf(eventDTO.getDate() + " " + eventDTO.getTime() + ":00"));
         newEvent.setDeadline(LocalDate.parse(eventDTO.getDeadline()));

@@ -18,6 +18,9 @@ public class UserService {
     UserRepository userRepository;
 
 
+    /** similar to the initial JDBC set up,
+     * users are activated and authorities are set when retrieved from the database*/
+
     public List<User> findAllUsers() {
         List<User> allUsers = userRepository.findAll();
         for (User user : allUsers) {
@@ -39,12 +42,15 @@ public class UserService {
 
     public User findByUsername(String username) throws UsernameNotFoundException {
         for (User user : this.findAllUsers()) {
-            if( user.getUsername().toLowerCase().equals(username.toLowerCase())) {
+            if( user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
         }
         throw new UsernameNotFoundException("User " + username + " was not found.");
     }
+
+    /** create method uses JPA's save instead of writing an insert SQL statement
+     * to save users in the database table */
 
     public boolean create(String username, String email, String password, String role) throws EmailAlreadyExistsException {
         boolean userCreated = false;

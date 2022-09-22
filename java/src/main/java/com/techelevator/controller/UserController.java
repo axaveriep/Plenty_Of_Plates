@@ -30,9 +30,6 @@ public class UserController {
         return userService.findUserByUserId(userId);
     }
 
-    /*  mostly for Add to Favorites */
-
-    //TODO: endpoint - PUT update user when favorites are added/removed
 
     @PostMapping("/user/id/{userId}/favorite")
     public Favorite saveFavorite(@PathVariable long userId, @RequestBody RestaurantDTO restaurantDTO) {
