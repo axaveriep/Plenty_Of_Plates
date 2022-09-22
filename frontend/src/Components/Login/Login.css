@@ -56,7 +56,7 @@
 
 .input-group.invalid input
 {
-  box-shadow: 0 0 0 1px hsl(var(--invalid-hsl));
+  box-shadow: 0 0 0 1px rgb(var(--invalid-rgb));
 }
 
 .input-group .msg
@@ -68,7 +68,7 @@
 .input-group.invalid .msg
 {
   display: block;
-  color:hsl(var(--invalid-hsl));
+  color: rgb(var(--invalid-rgb));
 }
 
 .login--btn
@@ -87,7 +87,7 @@
 .login--btn:hover
 {
   color: white;
-  background-color: hsl(var(--primary-hsl), .5);
+  background-color: rgba(var(--primary-rgb), .5);
 }
 
 .register-link

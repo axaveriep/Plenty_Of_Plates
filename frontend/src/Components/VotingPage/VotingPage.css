@@ -1,5 +1,5 @@
-
-.voting--carousel {
+.voting--carousel 
+{
     width: 1000px;
     height: 500px;
     margin: auto;
@@ -7,37 +7,41 @@
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
-.voting--carousel-item {
+.voting--carousel-item 
+{
     width: 1000px;
     height: 500px;
     border-radius: 1rem;
-    
 }
 
-.voting--carousel-image {
+.voting--carousel-image 
+{
     width: 1000px;
     height: 500px;
     object-fit:cover;
     border-radius: 1rem;
-    
 }
 
-.voting--carousel-item-caption {
+.voting--carousel-item-caption 
+{
     text-shadow: 2px 2px 2px black;
 }
 
-.countdown--container {
+.countdown--container 
+{
     display: flex;
     align-content: center;
     justify-content: center;
     margin: 10px;
 }
 
-.voting-page--btn {
+.voting-page--btn 
+{
     background-color: rgba(255, 255, 255, 1);
 }
 
-.voting--container {
+.voting--container 
+{
     background-color: rgba(200, 200, 200, 0.8);
     padding: 20px;
     border-radius: 1rem;
@@ -45,16 +49,17 @@
     min-width: 1400px;
     overflow: hidden;
     box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.5);
-    
 }
 
-.voting--container h1, .voting--container h2 {
+.voting--container h1, .voting--container h2 
+{
     text-align: center;
     font-family: 'Lobster', sans-serif;
 
 }
 
-.voting--submit-btn {
+.voting--submit-btn 
+{
     color:white;
     background: rgba(var(--primary-rgb), .5);
     padding: 10px;
@@ -69,16 +74,19 @@
 }
 
 .voting--submit-btn:focus, .voting--submit-btn:hover, 
-.voting--details-btn:focus, .voting--details-btn:hover {
+.voting--details-btn:focus, .voting--details-btn:hover 
+{
     color: white;
   background-color: rgba(var(--primary-rgb), .8);
 }
 
-.voting--submit-btn:active, .voting--details-btn:active {
+.voting--submit-btn:active, .voting--details-btn:active 
+{
     transform: scale(0.95);
 }
 
-.voting--details-btn {
+.voting--details-btn 
+{
     color:white;
     background: rgba(var(--primary-rgb), 0.6);
     border:none;

@@ -1,8 +1,8 @@
-import "./Register.css"
 import axios from 'axios'
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {baseUrl} from '../../Shared/baseUrl'
+import "./Register.css"
 
 const Swal = window.Swal
 
@@ -162,8 +162,6 @@ class Register extends Component{
                             window.location = '/login';
                         }
                     })
-
-                //this.setState({...this.state, created: true})
                }
             })
             .catch(err => {
@@ -199,12 +197,6 @@ class Register extends Component{
     render(){
         return(
             <div className="fullscreen-container">
-            {/* {this.state.created ? 
-                <div className="register-container success-screen">
-                    <h1 className="register-title font-effect-emboss">Account Created!</h1>
-                    <Link to="/login" ><button className="btn">Go to Sign In</button></Link>
-                </div>
-            : */}
                 <div className="register-container">
                     <h1 className="register-title font-effect-emboss">Create Account</h1>
                     <form className="register--form">
@@ -285,7 +277,6 @@ class Register extends Component{
                         </button>
                     </form>
                 </div>
-            {/* } */}
             </div>
         )
     }

@@ -2,7 +2,6 @@ import React from 'react';
 import DateTimeDisplay from './DateTimeDisplay';
 import useCountdown from './useCountdown';
 import "./CountDown.css";
-import { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import { Button } from 'reactstrap'
 
@@ -25,16 +24,10 @@ const ShowCounter = ({ days, hours, minutes, seconds, isGuest }) => {
   );
 };
 
-
-
 const CountdownTimer = (props) => {
-
-
-  console.log(props)
 
   const time = props.targetdate;
 
-  
   let year = parseInt(time.substring(0,4));
   let month = parseInt(time.substring(5,7));
   let prosessedMonth = month -1;
@@ -43,10 +36,8 @@ const CountdownTimer = (props) => {
 
   let finalDate = new Date(year,prosessedMonth,day,hour,);
 
-  
   const [days, hours, minutes, seconds] = useCountdown(finalDate);
   
-
   if (days + hours + minutes + seconds <= 0) {
 
     props.handleExpired(true);

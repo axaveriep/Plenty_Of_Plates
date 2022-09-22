@@ -57,9 +57,9 @@ export default function GuestForm(props) {
                         {formValues.map((element, index) => (
                             <div className="form-inline" key={index}>
                                 <label className='guest--name-label'>Name</label>
-                                <input className="guest--name-input" type="text" name="name" value={element.name || ""} onChange={e => handleChange(index, e)} />
+                                <input className="guest--form--name-input" type="text" name="name" value={element.name || ""} onChange={e => handleChange(index, e)} />
                                 <label className="guest--email-label">Email</label>
-                                <input className="guest--email-input" type="text" name="email" value={element.email || ""} onChange={e => handleChange(index, e)} />
+                                <input className="guest--form--email-input" type="text" name="email" value={element.email || ""} onChange={e => handleChange(index, e)} />
                                 {
                                     index ?
                                     <button type="button" className="guest--removeBtn" onClick={() => removeFormFields(index)}>-</button>

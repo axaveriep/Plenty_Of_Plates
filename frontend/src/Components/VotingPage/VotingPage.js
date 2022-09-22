@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { baseUrl } from "../../Shared/baseUrl";
-import "./VotingPage.css";
 import { Link, useParams } from "react-router-dom";
 import {
   getEventByEventId,
@@ -15,7 +14,6 @@ import {
   ButtonGroup,
   Button,
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter,
 } from "reactstrap";
@@ -23,6 +21,7 @@ import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import axios from "axios";
 import CountdownTimer from "../CountDown/CountdownTimer";
 import {eventTimeFormat, eventDateFormat} from '../CountDown/TimeFormatFunctions'
+import "./VotingPage.css";
 
 function VotingPage() {
   let { eventId, guestId } = useParams();
@@ -56,7 +55,6 @@ function VotingPage() {
     setExpired(ex)
   }
 
-
   useEffect(() => {
     Promise.resolve(getEventByEventId(eventId)).then((value) => {
       setEvent(value);
@@ -68,9 +66,6 @@ function VotingPage() {
       }
     );
   }, [eventId, guestId]);
-
-  console.log(event);
-  console.log(guest);
 
   useEffect(() => {
     if (event !== undefined) {
@@ -88,19 +83,13 @@ function VotingPage() {
   }, [event]);
 
   function getRestaurantDetails(restaurantId) {
-    console.log(restaurantId);
     let result = getRestaurantById(restaurantId);
-    console.log(result);
     Promise.resolve(result).then((value) => {
-      console.log(value);
       setRestaurantDetails(value);
     });
 
     setModal(!modal);
   }
-
-  console.log(restaurantDTOs);
-  console.log(restaurantDetails);
 
   function changeVote(restaurantId, n) {
     setRestaurantDTOs((prevDTOs) => {
@@ -118,25 +107,17 @@ function VotingPage() {
 
   function submitVote(e) {
     e.preventDefault();
-    console.log("clicked!");
-
     const data = {
       eventId: eventId,
       guestId: guestId,
       restaurantDTOs: restaurantDTOs,
     };
 
-    console.log(data);
-
     axios
       .post(baseUrl + "/vote", data)
-      .then((response) => window.location.reload())
+      .then(() => window.location.reload())
       .catch((error) => console.log(error));
   }
-
-
-
-
 
   return (
     <div>
@@ -198,11 +179,6 @@ function VotingPage() {
                                 )
                               }
                             >
-                              {/* {restaurantDetails !== undefined && (
-                                <ModalHeader>
-                                  {restaurantDetails.name}
-                                </ModalHeader>
-                              )} */}
                               {restaurantDetails !== undefined && (
                                 <ModalBody>
                                   <RestaurantCard

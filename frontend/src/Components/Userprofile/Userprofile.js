@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import "./UserProfile.css"
 import { getEventsByUserId, getFavoritesByUserId } from '../SearchBar/SearchFunctions'
 import EventThumbnail from '../EventPage/EventThumbnail'
 import RestaurantThumbnail from '../RestaurantCard/RestaurantThumbnail'
+import "./UserProfile.css"
 
 export const UserProfile = (props) => {
 
@@ -47,7 +46,8 @@ export const UserProfile = (props) => {
           name: userFav.restaurantName,
           image_url: userFav.imageUrl
         }
-        if (userFav.favorite) {
+        if (userFav.favorite) 
+        {
           return <RestaurantThumbnail 
           key={i} 
           restaurant={restaurant} 
@@ -56,17 +56,15 @@ export const UserProfile = (props) => {
           updateFavorites={updateFavorites}
           />
         }
+        return undefined;//react was whining about needing return at the end
       })
       setFavoriteThumbnails(displayFavThumbnails)
     }
-  }, [eventData,favoriteData])
+  }, [eventData,favoriteData,userId])//react was whining about needing userId
 
   return (
-
-    <div className="fullscreen-container">
-
+    <div className='profileContainer'>
       <div title="Profile">
-        <div className='profileContainer'>
           <div>
             <h2>{username}'s Events</h2>
             <div md={6} className='profile--events'>
@@ -81,7 +79,6 @@ export const UserProfile = (props) => {
           </div>
         </div>
       </div>
-    </div>
   )
 }
 

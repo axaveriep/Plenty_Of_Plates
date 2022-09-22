@@ -1,7 +1,6 @@
 import React from 'react'
 import "./ResultsCard.css"
 
-
 export default function ResultsCard(props) {
     return (
         <div className="restaurant--thumbnail">

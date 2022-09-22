@@ -1,12 +1,11 @@
 import { React, useState, useEffect } from "react"
-import { Modal, ModalBody, ModalHeader, ModalFooter, Tooltip } from "reactstrap"
+import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap"
 import { getRestaurantById } from "../SearchBar/SearchFunctions"
-import "./RestaurantCard.css"
 import RestaurantHours from "./RestaurantHours"
 import { Rating } from 'react-simple-star-rating'
 import axios from "axios"
 import { baseUrl } from "../../Shared/baseUrl"
-import { useDispatch } from "react-redux"
+import "./RestaurantCard.css"
 
 export default function RestaurantCard(props) {
 
@@ -18,16 +17,11 @@ export default function RestaurantCard(props) {
 
     const [modal, setModal] = useState(false);
 
-    const [tooltipOpen, setTooltipOpen] = useState(false);
-    const toggleTooltip = () => setTooltipOpen(!tooltipOpen)
-
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
     const [hours, setHours] = useState()
 
     const [favorite, setFavorite] = useState(props.isFavorite)
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         Promise
@@ -61,8 +55,7 @@ export default function RestaurantCard(props) {
         }
 
         Promise.resolve(axios.post(baseUrl + '/user/id/' + props.userId + '/favorite', data))
-            .then(value => {
-                console.log(value)
+            .then(() => {
                 props.addFavorite()
             })
     }
@@ -116,31 +109,14 @@ export default function RestaurantCard(props) {
                             id="addBtn"
                         >
                             <span className="addBtn-text">
-                                {props.selectedRestaurants.length >= 5 ? "Limit Reached" : props.selectedRestaurants.includes(props.restaurant)? "Already Added" : "Add to Event"}</span>
+                                {props.selectedRestaurants.length >= 5 ? "Limit Reached" : props.selectedRestaurants.includes(props.restaurant)? "Already Added" : "Add to Event"}
+                            </span>
                             <span className="addBtn-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                                 </svg>
                             </span>
                         </button>
-                            {/* {props.selectedRestaurants.length >= 5 ||
-                                props.selectedRestaurants.includes(props.restaurant) ?
-                                <Tooltip
-                                    placement='top'
-                                    target='addBtn'
-                                    isOpen={tooltipOpen}
-                                    toggle={toggleTooltip}
-                                >
-                                    {props.selectedRestaurants.length >= 5 ? 
-                                    "Max number of Restaurants reached!" 
-                                    : 
-                                    props.selectedRestaurants.includes(props.restaurant) ? 
-                                    "Already added!" 
-                                    : 
-                                    null}
-                                </Tooltip>
-                                :
-                                <></>} */}
                         </>}
                 </div>
             </div>

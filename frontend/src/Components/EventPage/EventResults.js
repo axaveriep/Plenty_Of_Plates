@@ -12,7 +12,6 @@ export default function EventResults() {
     const location = useLocation();
 
     const [thisEvent, setThisEvent] = useState();
-    const [results, setResults] = useState();
     const [qualified, setQualified] = useState();
     const [disqualified, setDisqualified] = useState();
 
@@ -24,7 +23,7 @@ export default function EventResults() {
             const { savedEvent } = location.state;
             setThisEvent(savedEvent);
         }
-    }, []);
+    }, [location.state]);//react was whining about needing location.state
 
     useEffect(() => {
         if (thisEvent !== undefined) {
@@ -59,10 +58,9 @@ export default function EventResults() {
                     />
                     {expired ? <>These are the final results!</> :
                         <div>
-                            {console.log(thisEvent)}
                             {thisEvent.guestList.map((guest) => {
-                                if (!guest.voted) {
-                                    console.log(guest)
+                                if (!guest.voted) 
+                                {
                                     return (
                                     <div>
                                         <GuestLink
@@ -73,6 +71,7 @@ export default function EventResults() {
                                     />
                                     </div>)
                                 }
+                                return undefined;
                             })}
                         </div>}
                     <h1>Qualified</h1>

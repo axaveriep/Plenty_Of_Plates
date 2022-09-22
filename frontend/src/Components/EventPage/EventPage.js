@@ -1,4 +1,3 @@
-import "./EventPage.css";
 import { useState } from "react";
 import RestaurantGrid from "../RestaurantGrid/RestaurantGrid";
 import RestaurantThumbnail from "../RestaurantCard/RestaurantThumbnail";
@@ -8,10 +7,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 import GuestLink from "../GuestForm/GuestLink";
+import "./EventPage.css";
 
-const Swal = window.Swal;
-
-export default function EventPage(props) {
+export default function EventPage() {
 
   const [modal, setModal] = useState(false);
 
@@ -63,8 +61,6 @@ export default function EventPage(props) {
    * function passed to Restaurant Grid/Card
   */
   function selectRestaurant(restaurant) {
-    /** limit restaurants - add alert more than five restaurants */
-  
     setSelectedRestaurants((prevSelectedRestaurants) => {
       return [...prevSelectedRestaurants, restaurant];
     });
@@ -278,7 +274,8 @@ export default function EventPage(props) {
                 guestName={guest.name} 
                 guestEmail={guest.email}
                 guestId={guest.guestId}
-                eventId={eventId}/>)
+                eventId={eventId}/>
+              )
             })
             }
             <br />

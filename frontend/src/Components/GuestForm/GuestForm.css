@@ -1,3 +1,29 @@
+.guest--addBtn
+{
+    color:white;
+    background: rgba(var(--primary-rgb), .5);
+    padding: 15px;
+    font-size: 1.5rem;
+    border: 1px solid rgba(var(--primary-rgb));
+    border-radius: .25em;
+    outline: none;
+    cursor: pointer;
+    margin: 5px;
+    width: 100%;
+}
+
+.guest--addBtn:hover,
+.guest--addBtn:focus
+{
+    color: white;
+    background-color: rgba(var(--primary-rgb), .8);
+}
+
+.guest--addBtn:active
+{
+    transform: scale(.95);
+}
+
 .guest--removeBtn
 {
     border-radius: 50%;
@@ -11,6 +37,7 @@
     text-align: center;
     margin: 5px;
     box-shadow: 2.5px 2.5px 2.5px 0px rgba(0, 0, 0, 0.5);
+    margin-right: 15px;
 }
 
 .guest--removeBtn:hover,
@@ -49,4 +76,21 @@
 .guest--submitBtn:active
 {
     transform: scale(.95);
+}
+
+
+.guest--form--name-input, .guest--form--email-input
+{
+    border: none;
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    color: white;
+}
+
+.guest--form--email-input
+{
+    margin-right: 20px;
 }

@@ -8,11 +8,10 @@
 :root
 {
   --primary-light-hsl: 200, 100%, 91%;
-  /* --primary-hsl: 200, 100%, 50%; */
   --primary-rgb: 0, 170, 255;
-  /* --primary-dark-hsl: 200, 100%, 6%; */
   --primary-dark-rgb: 0, 20, 30;
-  --invalid-hsl: 0, 60%, 50%;
+  --invalid-rgb: 204, 51, 51;
+  --valid-rgb: 0, 200, 0;
 }
 
 body 
@@ -42,7 +41,6 @@ code
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* overflow: hidden; */
   overflow: hidden;
   margin: 0;
 }

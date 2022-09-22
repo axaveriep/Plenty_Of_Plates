@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import './RestaurantThumbnail.css'
+import React from 'react'
 import axios from "axios"
 import { baseUrl } from "../../Shared/baseUrl"
+import './RestaurantThumbnail.css'
 
 export default function RestaurantThumbnail(props) {
 
@@ -14,10 +14,9 @@ export default function RestaurantThumbnail(props) {
       restaurantImage: props.restaurant.image_url,
       favorite: false,
     }
-    console.log(data)
 
     Promise.resolve(axios.post(baseUrl + '/user/id/' + props.userId + '/favorite', data))
-      .then(value => {
+      .then(() => {
         props.updateFavorites()
       })
   }

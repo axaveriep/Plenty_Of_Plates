@@ -1,8 +1,8 @@
-import './Home.css'
 import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import RestaurantGrid from '../RestaurantGrid/RestaurantGrid'
 import { getFavoritesByUserId } from '../SearchBar/SearchFunctions'
+import './Home.css'
 
 
 export default function Home(props) 
@@ -17,7 +17,7 @@ export default function Home(props)
         Promise.resolve(getFavoritesByUserId(user.id))
         .then(value => setFavorites(value))}
 
-    }, [favCount])
+    }, [favCount,user.id])//react was whining about needing user.id
 
     function addFavorite() {
         setFavCount(prevFavCount => prevFavCount+1)

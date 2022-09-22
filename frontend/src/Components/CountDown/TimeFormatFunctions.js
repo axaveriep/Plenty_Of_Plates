@@ -22,7 +22,6 @@ export function eventTimeFormat(time) {
 
     let hours = ((hour + 11) % 12) + 1;
 
-
     if (hour > 11) {
         return hours.toString() + ":" + minute + "PM";
     } else {

@@ -1,6 +1,6 @@
-import './SearchBar.css'
 import React, { useState } from 'react'
 import { searchRestaurantsByLocation } from './SearchFunctions'
+import './SearchBar.css'
 
 export default function SearchBar(props)
 {
