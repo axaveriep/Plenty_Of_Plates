@@ -36,7 +36,8 @@ public class EventController {
         return eventService.findByEventId(eventId);
     }
 
-
+    /** because our data tables are mapped together, we can save our list of restaurants
+     * and guest list directly to each event, and send back that information as one object */
 
     @PostMapping("/event")
     public Event createEvent(@RequestBody EventDTO eventDTO) {
@@ -46,6 +47,7 @@ public class EventController {
         List<Restaurant> savedRestaurants = restaurantService.saveRestaurantsToEvent(savedEvent, eventDTO);
 
         List<Guest> savedGuests = guestService.saveGuestsToEvent(savedEvent, eventDTO);
+
 
         savedEvent.setRestaurantList(savedRestaurants);
         savedEvent.setGuestList(savedGuests);
@@ -71,7 +73,7 @@ public class EventController {
     public Guest getGuestByGuestId(@PathVariable long eventId, @PathVariable long guestId) {
         return guestService.findByGuestId(eventId, guestId);
     }
-    
+
 
     @PostMapping("/vote")
     public void saveGuestVote(@RequestBody VoteDTO voteDTO) {

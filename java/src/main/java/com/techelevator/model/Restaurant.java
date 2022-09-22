@@ -16,9 +16,6 @@ import java.util.Objects;
 @Table(name = "event_restaurants")
 public class Restaurant {
 
-//    private long event_id;
-//    private String restaurant_id;
-
     /* RestaurantID object refers to both event_id and restaurant_id */
 
     @EmbeddedId

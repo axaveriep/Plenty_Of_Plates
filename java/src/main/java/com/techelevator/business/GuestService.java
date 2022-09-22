@@ -19,6 +19,9 @@ public class GuestService {
         return guestRepository.findByGuestIdEventId(eventId);
     }
 
+    /** saves guests to the database with a guest ID and the event they've been invited to
+     * and keeps track of whether they voted or not */
+
     public List<Guest> saveGuestsToEvent(Event savedEvent, EventDTO eventDTO) {
         List<Guest> invitedGuests = new ArrayList<>();
 

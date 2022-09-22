@@ -22,12 +22,6 @@ public class Guest {
     @EmbeddedId
     private GuestId guestId;
 
-//    @Column(name="event_id")
-//    private long eventId;
-//
-//    @Column(name="guest_id")
-//    private long guestId;
-
     @Column(name="guest_name")
     private String guestName;
 

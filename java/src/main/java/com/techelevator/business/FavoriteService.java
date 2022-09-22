@@ -25,11 +25,14 @@ public class FavoriteService {
         return favoriteRepository.findByFavoriteIdUserIdAndFavoriteIdRestaurantId(userId, restaurantId);
     }
 
+    /** used to remember which restaurants users have added to or removed from their favorites
+     * saving the most pertinent info - ID, name, and picture to our own database allows
+     * fast and easy recall */
+
     public Favorite saveFavorite(User user, RestaurantDTO restaurantDTO) {
 
         Favorite favorite = favoriteRepository.findByFavoriteIdUserIdAndFavoriteIdRestaurantId(user.getId(), restaurantDTO.getRestaurantId());
-        System.out.println(restaurantDTO.isFavorite());
-        System.out.println(user.getId());
+
         if (favorite == null) {
             favorite = new Favorite();
             favorite.setUser(user);

@@ -14,14 +14,14 @@ public class RestaurantService {
     @Autowired
     RestaurantRepository restaurantRepository;
 
+    private final int INITIAL_VOTES = 0;
+
+    /** remembers which restaurants were selected for an event by storing their
+     * ID, name, and picture, and keeps track of how many votes they have received */
+
     public List<Restaurant> saveRestaurantsToEvent(Event savedEvent, EventDTO eventDTO) {
         List<Restaurant> savedRestaurants = new ArrayList<>();
 
-//        for(String restaurantId : eventDTO.getRestaurantIds()) {
-//            Restaurant restaurant = new Restaurant(new RestaurantId(savedEvent.getEventId(), restaurantId), 0, 0);
-//            // note: the 0s right now represent initial upVotes and downVotes - remove magic numbers later
-//            savedRestaurants.add(restaurant);
-//        }
 
         for(RestaurantDTO restaurantDTO : eventDTO.getRestaurantDTOs()) {
             Restaurant restaurant = new Restaurant();
@@ -29,9 +29,8 @@ public class RestaurantService {
             restaurant.setRestaurantId(new RestaurantId(savedEvent.getEventId(), restaurantDTO.getRestaurantId()));
             restaurant.setName(restaurantDTO.getRestaurantName());
             restaurant.setImage_url(restaurantDTO.getRestaurantImage());
-            restaurant.setUpVotes(0);
-            restaurant.setDownVotes(0);
-            // note: the 0s right now represent initial upVotes and downVotes - remove magic numbers later
+            restaurant.setUpVotes(INITIAL_VOTES);
+            restaurant.setDownVotes(INITIAL_VOTES);
             savedRestaurants.add(restaurant);
         }
 
