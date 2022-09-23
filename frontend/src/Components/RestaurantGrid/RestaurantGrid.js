@@ -7,6 +7,7 @@ import "./RestaurantGrid.css"
 
 export default function RestaurantGrid(props) {
 
+    /** pulls user from redux state */
     const user = useSelector((state) => state.user)
 
     const [restaurants, setRestaurants] = useState([])
@@ -54,6 +55,7 @@ export default function RestaurantGrid(props) {
                     <div className="restaurant--grid-subtitle">
                         in
                     </div>
+                    {/** search results returned from Search Bar */}
                     <SearchBar
                         searchType={'RESTAURANTS_LOCATION'}
                         addRestaurants={addRestaurants}

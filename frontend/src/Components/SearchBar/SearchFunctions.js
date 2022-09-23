@@ -1,6 +1,7 @@
 import axios from "axios"
 import { baseUrl } from "../../Shared/baseUrl";
 
+/** holds functions for all backend calls */
 
 export async function searchRestaurantsByLocation(input) {
 

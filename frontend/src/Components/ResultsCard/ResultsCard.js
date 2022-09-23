@@ -2,6 +2,9 @@ import React from 'react'
 import "./ResultsCard.css"
 
 export default function ResultsCard(props) {
+
+    /** thumbnail version to show votes on restaurants selected for events */
+    
     return (
         <div className="restaurant--thumbnail">
             <img className="restaurant--thumbnail-image" src={props.restaurant.image_url} alt="small thumbnail of restaurant"/>

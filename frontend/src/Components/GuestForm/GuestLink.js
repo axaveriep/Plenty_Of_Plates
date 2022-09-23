@@ -5,16 +5,20 @@ import './GuestLink.css'
 
 export default function GuestLink({guestName, guestId, guestEmail, eventId}) {
 
+  /** brings username from redux state */
   const username = useSelector((state) => state.user.username)
 
   return (
     <div className="event--confirmed-guest">
       <label className='guest--name-label'>{guestName}</label>
+      {/** text box and button to copy unique guest link */}
       <input className="guest--name-input" id="input--eventLink" type='text' readOnly={true} value={`localhost:3000/vote/${eventId}/${guestId}`} />
       <button id="copyBtn" className='copyBtn' onClick={() => navigator.clipboard.writeText(`localhost:3000/vote/${eventId}/${guestId}`)}>
         <i className='fa fa-clone'/>
       </button>
+      {/** tooltip displays when copy button is clicked */}
       <UncontrolledTooltip target="copyBtn" trigger="click" autohide={true} placement='top'>Copied!</UncontrolledTooltip>
+      {/** if e-mail exists, button opens e-mail client with guest e-mail address and template e-mail */}
       {guestEmail === "" ? <></> : guestEmail === undefined ? <></> : 
       <a className="emailLink" href={`mailto:${guestEmail}?&subject=${username} has invited you out!&body=Click this link localhost:3000/vote/${eventId}/${guestId}`} target="_blank" rel="noreferrer">
       <button className='emailBtn'>

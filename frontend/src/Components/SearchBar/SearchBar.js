@@ -17,6 +17,7 @@ export default function SearchBar(props)
         }
     }
 
+    
     const handleSearch = (searchTerm) => {
         props.addRestaurants(searchRestaurantsByLocation(searchTerm))
     }

@@ -5,6 +5,7 @@ import "./CountDown.css";
 import {Link} from 'react-router-dom'
 import { Button } from 'reactstrap'
 
+/** show when deadline has passed */
 const ExpiredNotice = ({isGuest}) => {
   return (
     <div className="expired-notice">
@@ -15,7 +16,8 @@ const ExpiredNotice = ({isGuest}) => {
   );
 };
 
-const ShowCounter = ({ days, hours, minutes, seconds, isGuest }) => {
+/** counts down until deadline */
+const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (
     <div className="show-counter">
        <div>You have</div>        <div className='show-counter-timer'><DateTimeDisplay value={days} type={'Days'} isDanger={false} />  :  </div>       <div className='show-counter-timer'><DateTimeDisplay value={hours} type={'Hours'} isDanger={false} /> : </div>       <div className='show-counter-timer'><DateTimeDisplay value={minutes} type={'Mins'} isDanger={false} /> : </div>       <div className='show-counter-timer'><DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} /></div>        <div>to just pick a place!</div> <br />
@@ -25,16 +27,18 @@ const ShowCounter = ({ days, hours, minutes, seconds, isGuest }) => {
 
 const CountdownTimer = (props) => {
 
+  /** takes deadline as a parameter, separates parts */
   const time = props.targetdate;
 
   let year = parseInt(time.substring(0,4));
   let month = parseInt(time.substring(5,7));
-  let prosessedMonth = month -1;
+  let processedMonth = month -1;
   let day = parseInt(time.substring(8));
   let hour = 24;
 
-  let finalDate = new Date(year,prosessedMonth,day,hour,);
+  let finalDate = new Date(year,processedMonth,day,hour,);
 
+  /** send parts to do math */
   const [days, hours, minutes, seconds] = useCountdown(finalDate);
   
   if (days + hours + minutes + seconds <= 0) {

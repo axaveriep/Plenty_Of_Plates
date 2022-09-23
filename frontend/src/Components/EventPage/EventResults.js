@@ -17,6 +17,7 @@ export default function EventResults() {
 
     const [expired, setExpired] = useState(false);
 
+    /** the event data is pulled directly from a paramater when linked to this page, showing event details */
     useEffect(() => {
         if (location.state !== undefined) {
             console.log(location.state);
@@ -25,20 +26,26 @@ export default function EventResults() {
         }
     }, [location.state]);//react was whining about needing location.state
 
+
+    /** the event data also has the guest and restaurant information which we use to display the content
+     * of the page as soon as the data is retrived      */
     useEffect(() => {
         if (thisEvent !== undefined) {
+
             let qualifiedResults = thisEvent.restaurantList.filter(restaurant => restaurant.downVotes === 0)
             let displayQualified = qualifiedResults.map((restaurant, i) => {
                 return <ResultsCard key={i} restaurant={restaurant} />
             })
             setQualified(displayQualified);
 
+            /** restaurants that receive 'No' votes are disqualified */
             let disqualifiedResults = thisEvent.restaurantList.filter(restaurant => restaurant.downVotes > 0)
             let displayDisqualified = disqualifiedResults.map((restaurant, i) => {
                 return <ResultsCard key={i} restaurant={restaurant} />
             })
             setDisqualified(displayDisqualified);
 
+            /** check if all guests have voted */
             let voteCount = 0;
             thisEvent.guestList.forEach(guest => {
                 if(guest.voted) {
@@ -69,6 +76,9 @@ export default function EventResults() {
                                 isGuest={false}
                             />
                         </div>
+                        {/** if the deadline has not passed and there are guests who still have not voted
+                         * custom links are redisplayed
+                         */}
                         {expired ? <div className="event-results-final-text">These are the final results!</div> :
                             <div className="event--confirmed-selectedGuests">
                                 {thisEvent.guestList.map((guest) => {

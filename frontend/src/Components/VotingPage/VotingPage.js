@@ -26,11 +26,14 @@ import "./VotingPage.css";
 function VotingPage() {
   let { eventId, guestId } = useParams();
 
+  /** parameters from page URL */
+
   const [event, setEvent] = useState();
   const [guest, setGuest] = useState();
   const [restaurantDTOs, setRestaurantDTOs] = useState();
   const [restaurantDetails, setRestaurantDetails] = useState();
 
+  /** controls restaurant details */
   const [modal, setModal] = useState(false);
 
   const [expired, setExpired] = useState(false);
@@ -39,6 +42,7 @@ function VotingPage() {
   const [animating, setAnimating] = useState(false);
   const [items, setItems] = useState();
 
+  /** carousel controls */
   const next = () => {
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
@@ -51,11 +55,13 @@ function VotingPage() {
     setActiveIndex(nextIndex);
   };
 
+  /** expiration state from countdown timer */
   function handleExpired(ex) {
     setExpired(ex)
   }
 
   useEffect(() => {
+    /** IDs in URL used to get data */
     Promise.resolve(getEventByEventId(eventId)).then((value) => {
       setEvent(value);
     });
@@ -70,6 +76,7 @@ function VotingPage() {
   useEffect(() => {
     if (event !== undefined) {
       setItems(event.restaurantList);
+      /** info we need to keep track of votes */
       setRestaurantDTOs(() => {
         return event.restaurantList.map((restaurant) => {
           return {
@@ -83,6 +90,7 @@ function VotingPage() {
   }, [event]);
 
   function getRestaurantDetails(restaurantId) {
+    /** pull restaurant details from API */
     let result = getRestaurantById(restaurantId);
     Promise.resolve(result).then((value) => {
       setRestaurantDetails(value);
@@ -91,6 +99,7 @@ function VotingPage() {
     setModal(!modal);
   }
 
+  /** update votes, 1 for yes, 2 for no */
   function changeVote(restaurantId, n) {
     setRestaurantDTOs((prevDTOs) => {
       return prevDTOs.map((current) => {
@@ -105,6 +114,9 @@ function VotingPage() {
     });
   }
 
+  /** save vote to database and refreshes page
+   * guests cannot vote twice
+   */
   function submitVote(e) {
     e.preventDefault();
     const data = {
@@ -121,6 +133,7 @@ function VotingPage() {
 
   return (
     <div>
+      {/** check if guest has voted */}
       {event !== undefined && guest !== undefined && !guest.voted ? (
         <div className="voting--container">
           <h1>Hello {guest.guestName}!</h1>
@@ -129,6 +142,7 @@ function VotingPage() {
             {eventTimeFormat(event.time)}.
           </h2>
           <CountdownTimer targetdate={event.deadline} handleExpired={handleExpired} isGuest={true}/>
+          {/** voting disabled if deadline is passed */}
           { expired ? <></> : 
           <div className="voting--restaurant-thumbnail-container">
             <Carousel
@@ -263,7 +277,9 @@ function VotingPage() {
           </form>
          
         </div>
-      ) : event !== undefined && guest !== undefined && guest.voted ? (
+      ) : event !== undefined && guest !== undefined && guest.voted ?
+      {/** show if guest has already voted */}
+      (
         <div className="thankyou--container">
           <h1 className="voting--thankyou">Thank you for voting!</h1>
           <Link to='/home'><button className="voting--homeBtn">Home</button></Link>

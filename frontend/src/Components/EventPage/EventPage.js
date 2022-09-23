@@ -11,23 +11,24 @@ import "./EventPage.css";
 
 export default function EventPage() {
 
+  /** controls 'Search Restaurants' popup */
   const [modal, setModal] = useState(false);
-
   const toggle = () => setModal(!modal);
 
+  /** controls 'Add Guests' popup */
   const [guestModal, setGuestModal] = useState(false);
-
   const toggleGuest = () => setGuestModal(!guestModal);
 
   const [eventTitle, setEventTitle] = useState("Event Title");
 
+  /** checks event date is at least five days away */
   const currentDate = new Date().toISOString().slice(0, 10)
   let minEventDate = new Date(currentDate)
   minEventDate.setDate(minEventDate.getDate() + 5)
 
-  const [eventDate, setEventDate] = useState(minEventDate.toISOString().slice(0, 10)
-  );
+  const [eventDate, setEventDate] = useState(minEventDate.toISOString().slice(0, 10));
 
+  /** checks deadline is at least two days from today, at least two days before event date */
   let maxEventDeadline = new Date(eventDate)
   maxEventDeadline.setDate(maxEventDeadline.getDate() - 2)
 
@@ -42,8 +43,10 @@ export default function EventPage() {
 
   const [selectedGuests, setSelectedGuests] = useState([]);
 
+  /** updates when event is successfully created */
   const [eventCreated, setEventCreated] = useState(false);
 
+  /** returns all event information from database */
   const [eventId, setEventId] = useState();
   const [savedEvent, setSavedEvent] = useState();
 
@@ -90,7 +93,7 @@ export default function EventPage() {
   });
 
 
-
+  /** adds guests to state from user input */
   function addGuests(guests) {
     setSelectedGuests(guests)
   }
@@ -98,6 +101,7 @@ export default function EventPage() {
   /** saves all event information to database */
   function handleSubmit(event) {
 
+    /** create array of restaurant data to transfer */
     const selectedRestaurantDTOs = selectedRestaurants.map((restaurant) => {
       return (
         {
@@ -108,6 +112,7 @@ export default function EventPage() {
       )
     })
 
+    /** create an array of guest info to transfer data */
     const selectedGuestDTOs = selectedGuests.map((guest) => {
       return ({
         guest_name: guest.name,
@@ -116,6 +121,8 @@ export default function EventPage() {
     })
 
     event.preventDefault();
+
+    /** info to send to back end */
     const data = {
       userId: userId,
       restaurantDTOs: selectedRestaurantDTOs,
@@ -133,7 +140,7 @@ export default function EventPage() {
       .then(function (response) {
         console.log(response);
         if (response.status === 200) {
-
+          
           setEventId(response.data.eventId)
           setSavedEvent(response.data)
           setEventCreated(true)
