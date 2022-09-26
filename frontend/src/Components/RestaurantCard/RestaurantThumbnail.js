@@ -5,9 +5,15 @@ import './RestaurantThumbnail.css'
 
 export default function RestaurantThumbnail(props) {
 
+  /** thumnail used for three purposes 
+   * - displaying favorites
+   * - event's restaurant selections
+   * - event confirmation
+   */
+
   async function removeFavorite(e) {
     e.preventDefault();
-
+    /** removes user favorites from database */
     const data = {
       restaurantId: props.restaurant.id,
       restaurantName: props.restaurant.name,

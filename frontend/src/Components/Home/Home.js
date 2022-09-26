@@ -19,6 +19,8 @@ export default function Home(props)
 
     }, [favCount,user.id])//react was whining about needing user.id
 
+    /** this function is to update the useEffect, 
+     * so we can keep the favorites with what is current in the database */
     function addFavorite() {
         setFavCount(prevFavCount => prevFavCount+1)
     }
