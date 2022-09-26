@@ -1,8 +1,6 @@
 package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 
@@ -124,22 +122,9 @@ public class User {
       this.favorites = favorites;
    }
 
-   //
-//   //   public String getFavorites() {
-////      return favorites;
-////   }
-////
-////   public void setFavorites(String favorites) {
-////      this.favorites = favorites;
-////   }
-//
    public Set<Authority> getAuthorities() {
       return authorities;
    }
-//
-//   public void setAuthorities(Set<Authority> authorities) {
-//      this.authorities = authorities;
-//   }
 
    public void setAuthorities(String authorities) {
       String[] roles = authorities.split(",");
