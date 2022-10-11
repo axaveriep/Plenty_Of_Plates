@@ -20,7 +20,10 @@ export const UserProfile = (props) => {
   }
 
   useEffect(() => {
-
+    /** retrieves current information from database 
+     * resets when database information is changed like user
+     * deleting a favorite
+    */
     Promise
       .resolve(getEventsByUserId(userId))
       .then(value => setEventData(value))
@@ -32,7 +35,7 @@ export const UserProfile = (props) => {
 
   useEffect(() => {
     if (eventData !== undefined) {
-
+      /** displays clickable thumbnails - goes to detailed event page */
       let displayEventThumbnails = eventData.map((userEvent) => {
         return <EventThumbnail key={userEvent.eventId} event={userEvent} />
       })
@@ -40,6 +43,7 @@ export const UserProfile = (props) => {
     }
 
     if (favoriteData !== undefined) {
+      /** displays user favorites, can be deleted */
       let displayFavThumbnails = favoriteData.map((userFav, i) => {
         const restaurant = {
           id: userFav.favoriteId.restaurantId,
