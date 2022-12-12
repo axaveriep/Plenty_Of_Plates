@@ -59,7 +59,8 @@ export default function RestaurantGrid(props) {
                     <SearchBar
                         searchType={'RESTAURANTS_LOCATION'}
                         addRestaurants={addRestaurants}
-                        placeholder="Enter a Location or Zip Code"
+                        location_placeholder="Location or Zip Code"
+                        term_placeholder='Restaurant Type'
                     />
                 </ModalHeader>
                 <ModalBody className="modal-body">

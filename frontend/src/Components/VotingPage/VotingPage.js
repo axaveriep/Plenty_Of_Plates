@@ -20,7 +20,7 @@ import {
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import axios from "axios";
 import CountdownTimer from "../CountDown/CountdownTimer";
-import {eventTimeFormat, eventDateFormat} from '../CountDown/TimeFormatFunctions'
+import { eventTimeFormat, eventDateFormat } from '../CountDown/TimeFormatFunctions'
 import "./VotingPage.css";
 
 function VotingPage() {
@@ -141,152 +141,151 @@ function VotingPage() {
             You've been invited to {event.title} on {eventDateFormat(event.time)} at{" "}
             {eventTimeFormat(event.time)}.
           </h2>
-          <CountdownTimer targetdate={event.deadline} handleExpired={handleExpired} isGuest={true}/>
+          <CountdownTimer targetdate={event.deadline} handleExpired={handleExpired} isGuest={true} />
           {/** voting disabled if deadline is passed */}
-          { expired ? <></> : 
-          <div className="voting--restaurant-thumbnail-container">
-            <Carousel
-              activeIndex={activeIndex}
-              next={next}
-              previous={previous}
-              interval={false}
-              className="voting--carousel"
-            >
-              {event.restaurantList.map((restaurant, i) => {
-                return (
-                  <CarouselItem
-                    onExiting={() => setAnimating(true)}
-                    onExited={() => setAnimating(false)}
-                    key={i}
-                    id={restaurant.restaurantId.restaurantId}
-                    tag="div"
-                    className="voting--carousel-item"
-                  >
-                    <img
-                      src={restaurant.image_url}
-                      alt={restaurant.name}
-                      className="voting--carousel-image"
-                    />
+          {expired ? <></> :
+            <div className="voting--restaurant-thumbnail-container">
+              <Carousel
+                activeIndex={activeIndex}
+                next={next}
+                previous={previous}
+                interval={false}
+                className="voting--carousel"
+              >
+                {event.restaurantList.map((restaurant, i) => {
+                  return (
+                    <CarouselItem
+                      onExiting={() => setAnimating(true)}
+                      onExited={() => setAnimating(false)}
+                      key={i}
+                      id={restaurant.restaurantId.restaurantId}
+                      tag="div"
+                      className="voting--carousel-item"
+                    >
+                      <img
+                        src={restaurant.image_url}
+                        alt={restaurant.name}
+                        className="voting--carousel-image"
+                      />
 
-                    <CarouselCaption
-                      captionHeader={restaurant.name}
-                      captionText={
-                        <div className="voting--carousel-btns">
-                          <p>
-                            <Button
-                            className="voting--details-btn"
-                              id="Popover1"
-                              type="button"
-                              onClick={() =>
-                                getRestaurantDetails(
-                                  restaurantDTOs[i].restaurantId
-                                )
-                              }
-                            >
-                              Restaurant Details
-                            </Button>
-                            <Modal
-                              isOpen={modal}
-                              toggle={() =>
-                                getRestaurantDetails(
-                                  restaurantDTOs[i].restaurantId
-                                )
-                              }
-                            >
-                              {restaurantDetails !== undefined && (
-                                <ModalBody>
-                                  <RestaurantCard
-                                    restaurant={restaurantDetails}
-                                    hideAddBtn={true}
-                                    hideFavBtn={true}
-                                  />
-                                </ModalBody>
-                              )}
-                              <ModalFooter>
-                                <button
-                                  className="modal-closeBtn"
-                                  onClick={() => setModal(false)}
-                                >
-                                Close
-                                </button>
-                              </ModalFooter>
-                            </Modal>
-                          </p>
+                      <CarouselCaption
+                        captionHeader={restaurant.name}
+                        captionText={
+                          <div className="voting--carousel-btns">
+                            <p>
+                              <Button
+                                className="voting--details-btn"
+                                id="Popover1"
+                                type="button"
+                                onClick={() =>
+                                  getRestaurantDetails(
+                                    restaurantDTOs[i].restaurantId
+                                  )
+                                }
+                              >
+                                Restaurant Details
+                              </Button>
+                              <Modal
+                                isOpen={modal}
+                                toggle={() =>
+                                  getRestaurantDetails(
+                                    restaurantDTOs[i].restaurantId
+                                  )
+                                }
+                              >
+                                {restaurantDetails !== undefined && (
+                                  <ModalBody>
+                                    <RestaurantCard
+                                      restaurant={restaurantDetails}
+                                      hideAddBtn={true}
+                                      hideFavBtn={true}
+                                    />
+                                  </ModalBody>
+                                )}
+                                <ModalFooter>
+                                  <button
+                                    className="modal-closeBtn"
+                                    onClick={() => setModal(false)}
+                                  >
+                                    Close
+                                  </button>
+                                </ModalFooter>
+                              </Modal>
+                            </p>
 
-                          <ButtonGroup>
-                            <Button
-                            className="voting-page--btn yes-btn"
-                              color="success"
-                              outline
-                              active={
-                                restaurantDTOs !== undefined &&
-                                restaurantDTOs[i].upVoted === true
-                              }
-                              onClick={() =>
-                                changeVote(
-                                  restaurant.restaurantId.restaurantId,
-                                  1
-                                )
-                              }
-                            >
-                              Yes
-                            </Button>
-                            <Button
-                            className="voting-page--btn no-btn"
-                            outline
-                              color="danger"
-                              active={
-                                restaurantDTOs !== undefined &&
-                                restaurantDTOs[i].downVoted === true
-                              }
-                              onClick={() =>
-                                changeVote(
-                                  restaurant.restaurantId.restaurantId,
-                                  2
-                                )
-                              }
-                            >
-                              No
-                            </Button>
-                          </ButtonGroup>
-                        </div>
-                      }
-                      className="voting--carousel-item-caption"
-                    />
-                  </CarouselItem>
-                );
-              })}
-              <CarouselControl
-                direction="prev"
-                directionText="Previous"
-                className="voting--carousel-control"
-                onClickHandler={previous}
-              />
-              <CarouselControl
-                direction="next"
-                directionText="Next"
-                onClickHandler={next}
-              />
-            </Carousel>
-            
-          </div>}
-          <form onSubmit={(e) => submitVote(e)} className="voting--submit-form">
-            <button className="voting--submit-btn" type="submit" onCLick={submitVote}>
+                            <ButtonGroup>
+                              <Button
+                                className="voting-page--btn yes-btn"
+                                color="success"
+                                outline
+                                active={
+                                  restaurantDTOs !== undefined &&
+                                  restaurantDTOs[i].upVoted === true
+                                }
+                                onClick={() =>
+                                  changeVote(
+                                    restaurant.restaurantId.restaurantId,
+                                    1
+                                  )
+                                }
+                              >
+                                Yes
+                              </Button>
+                              <Button
+                                className="voting-page--btn no-btn"
+                                outline
+                                color="danger"
+                                active={
+                                  restaurantDTOs !== undefined &&
+                                  restaurantDTOs[i].downVoted === true
+                                }
+                                onClick={() =>
+                                  changeVote(
+                                    restaurant.restaurantId.restaurantId,
+                                    2
+                                  )
+                                }
+                              >
+                                No
+                              </Button>
+                            </ButtonGroup>
+                          </div>
+                        }
+                        className="voting--carousel-item-caption"
+                      />
+                    </CarouselItem>
+                  );
+                })}
+                <CarouselControl
+                  direction="prev"
+                  directionText="Previous"
+                  className="voting--carousel-control"
+                  onClickHandler={previous}
+                />
+                <CarouselControl
+                  direction="next"
+                  directionText="Next"
+                  onClickHandler={next}
+                />
+              </Carousel>
+
+            </div>}
+          { !expired? (<form onSubmit={(e) => submitVote(e)} className="voting--submit-form">
+            <button className="voting--submit-btn" type="submit" onClick={submitVote} disabled={expired}>
               Submit Votes
             </button>
-          </form>
-         
+          </form>) : (<></>) }
+
         </div>
       ) : event !== undefined && guest !== undefined && guest.voted ?
-      {/** show if guest has already voted */}
-      (
-        <div className="thankyou--container">
-          <h1 className="voting--thankyou">Thank you for voting!</h1>
-          <Link to='/home'><button className="voting--homeBtn">Home</button></Link>
-        </div>
-      ) : (
-        <></>
-      )}
+        (
+          <div className="thankyou--container">
+            <h1 className="voting--thankyou">Thank you for voting!</h1>
+            <Link to='/home'><button className="voting--homeBtn">Home</button></Link>
+          </div>
+        ) : (
+          <></>
+        )}
     </div>
   );
 }

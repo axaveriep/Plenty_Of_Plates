@@ -1,22 +1,22 @@
 import axios from 'axios'
-import {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {baseUrl} from '../../Shared/baseUrl'
+import { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { baseUrl } from '../../Shared/baseUrl'
 import "./Register.css"
 
 const Swal = window.Swal
 
-class Register extends Component{
+class Register extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             username: '',
             email: '',
             password: '',
             confirmPassword: '',
-            error: null, 
-            created: false, 
+            error: null,
+            created: false,
             validEmail: false,
             validPassword: false
         }
@@ -30,155 +30,133 @@ class Register extends Component{
     }
 
     handleInputBlur = (event) => {
-        if(event.target.name === "email")
-        {
+        if (event.target.name === "email") {
             this.toggleValidationStyle(event, "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$")
         }
-        else if(event.target.name === "password")
-        {
+        else if (event.target.name === "password") {
             this.toggleValidationStyle(event, "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
             document.getElementsByClassName("msg")[0].style.display = "none";
         }
     }
 
-    handleInputFocus = ()=>
-    {
+    handleInputFocus = () => {
         document.getElementsByClassName("msg")[0].style.display = "block";
     }
 
-    handleKeyUp = (event)=>
-    {
+    handleKeyUp = (event) => {
         const letter = document.getElementById("pwd-letter");
         const capital = document.getElementById("pwd-capital");
         const number = document.getElementById("pwd-number");
         const length = document.getElementById("pwd-length");
-        
+
         // Validate lowercase letters
         const lowerCaseLetters = /[a-z]/g;
-        if(event.target.value.match(lowerCaseLetters))
-        {
+        if (event.target.value.match(lowerCaseLetters)) {
             letter.classList.remove("invalid");
             letter.classList.add("valid");
-        } 
-        else
-        {
+        }
+        else {
             letter.classList.remove("valid");
             letter.classList.add("invalid");
         }
 
         // Validate capital letters
         const upperCaseLetters = /[A-Z]/g;
-        if(event.target.value.match(upperCaseLetters))
-        {
+        if (event.target.value.match(upperCaseLetters)) {
             capital.classList.remove("invalid");
             capital.classList.add("valid");
         }
-        else
-        {
+        else {
             capital.classList.remove("valid");
             capital.classList.add("invalid");
         }
 
         // Validate numbers
         const numbers = /[0-9]/g;
-        if(event.target.value.match(numbers))
-        {
+        if (event.target.value.match(numbers)) {
             number.classList.remove("invalid");
             number.classList.add("valid");
         }
-        else
-        {
+        else {
             number.classList.remove("valid");
             number.classList.add("invalid");
         }
 
         // Validate length
-        if(event.target.value.length >= 8)
-        {
+        if (event.target.value.length >= 8) {
             length.classList.remove("invalid");
             length.classList.add("valid");
         }
-        else
-        {
+        else {
             length.classList.remove("valid");
             length.classList.add("invalid");
         }
     }
 
-    toggleValidationStyle = (event, format) => 
-    {
-        if (!event.target.value.match(format) && event.target.value !== null)
-        {
+    toggleValidationStyle = (event, format) => {
+        if (!event.target.value.match(format) && event.target.value !== null) {
             event.target.parentElement.classList.add('invalid');
-            if(event.target.parentElement.classList.contains('valid'))  // sanity check
+            if (event.target.parentElement.classList.contains('valid'))  // sanity check
             {
                 event.target.parentElement.classList.remove('valid');
             }
-            if(event.target.name === 'email') {
-                this.setState({...this.state, validEmail: false})
-            } else if(event.target.name === 'password') {
-                this.setState({...this.state, validPassword: false})
+            if (event.target.name === 'email') {
+                this.setState({ ...this.state, validEmail: false })
+            } else if (event.target.name === 'password') {
+                this.setState({ ...this.state, validPassword: false })
             }
         }
-        else
-        {
+        else {
             event.target.parentElement.classList.remove('invalid');
             event.target.parentElement.classList.add('valid');
-            if(event.target.name === 'email')
-            {
-                this.setState({...this.state, validEmail: true})
+            if (event.target.name === 'email') {
+                this.setState({ ...this.state, validEmail: true })
             }
-            else if(event.target.name === 'password') 
-            {
-                this.setState({...this.state, validPassword: true})
+            else if (event.target.name === 'password') {
+                this.setState({ ...this.state, validPassword: true })
             }
         }
     }
 
     handleSubmit = (event) => {
         event.preventDefault()
-        const data = {username: this.state.username, email: this.state.email, password: this.state.password, confirmPassword: this.state.confirmPassword, role: 'USER'}
+        const data = { username: this.state.username, email: this.state.email, password: this.state.password, confirmPassword: this.state.confirmPassword, role: 'USER' }
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
-              confirmButton: 'btn btn-success'
+                confirmButton: 'btn btn-success'
             }
-          })
-        if(this.state.password === this.state.confirmPassword)
-        {
+        })
+        if (this.state.password === this.state.confirmPassword) {
             axios.post(baseUrl + "/register", data)
-            .then(response => {
-               if (response.status <= 202) 
-               {
-                swalWithBootstrapButtons.fire({
-                    title: 'Successfully Registered!',
-                    icon: 'success',
-                    showCancelButton: false,
-                    confirmButtonText: 'Go to Login ->',
-                    reverseButtons: false
-                  })
-                  .then((result) => {
-                        if (result.isConfirmed) 
-                        {
-                            window.location = '/login';
-                        }
-                    })
-               }
-            })
-            .catch(err => {
-                if (err.response !== undefined) 
-                {
-                    this.setState({...this.state, error: err.response.data.message})
-                    Swal.fire({
-                        icon: 'error',
-                        title: this.state.error,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
+                .then(response => {
+                    if (response.status <= 202) {
+                        swalWithBootstrapButtons.fire({
+                            title: 'Successfully Registered!',
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonText: 'Go to Login ->',
+                            reverseButtons: false
+                        })
+                            .then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location = '/login';
+                                }
+                            })
+                    }
+                })
+                .catch(err => {
+                    if (err.response !== undefined) {
+                        this.setState({ ...this.state, error: err.response.data.message })
+                        Swal.fire({
+                            icon: 'error',
+                            title: this.state.error,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
         }
-        else
-        {
+        else {
             Swal.fire({
                 icon: 'error',
                 title: 'Password and Confirm Password must match!!!',
@@ -190,12 +168,12 @@ class Register extends Component{
 
     clearFields = () => {
         var inputs = document.getElementsByTagName("input");
-        for(var i=0;i<inputs.length;i++)
+        for (var i = 0; i < inputs.length; i++)
             inputs[i].value = '';
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="fullscreen-container">
                 <div className="register-container">
                     <h1 className="register-title font-effect-emboss">Create Account</h1>
@@ -215,7 +193,7 @@ class Register extends Component{
                         </div>
 
                         <div className="input-group">
-                            <input 
+                            <input
                                 type="email"
                                 id="register--email"
                                 name="email"
@@ -226,7 +204,7 @@ class Register extends Component{
                                 onBlur={this.handleInputBlur}
                             />
                         </div>
-                        
+
                         <div className="input-group">
                             <label className="sr-only">Password</label>
                             <input
@@ -235,7 +213,7 @@ class Register extends Component{
                                 name="password"
                                 placeholder="Password"
                                 v-model="user.password"
-                                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
+                                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                 onChange={this.handleInputChange}
                                 onBlur={this.handleInputBlur}
                                 onFocus={this.handleInputFocus}
@@ -252,8 +230,8 @@ class Register extends Component{
                         </div>
 
                         <div className={this.state.password === '' ?
-                         "input-group" : this.state.password === this.state.confirmPassword ?
-                          "input-group valid" : "input-group  invalid"}>
+                            "input-group" : this.state.password === this.state.confirmPassword ?
+                                "input-group valid" : "input-group  invalid"}>
                             <input
                                 type="password"
                                 id="register--password-confirm"
@@ -265,15 +243,15 @@ class Register extends Component{
                                 required
                             />
                             {this.state.password === this.state.confirmPassword ?
-                             <div className="msg"></div> : <div className="msg">Password and Confirm Password must match!!!</div>}
+                                <div className="msg"></div> : <div className="msg">Password and Confirm Password must match!!!</div>}
                         </div>
                         <Link to="/login" className="login-link">Have an account?</Link>
-                        <button 
+                        <button
                             className="register--btn"
-                            type="submit" 
-                            disabled={!this.state.validEmail || !this.state.validPassword} 
+                            type="submit"
+                            disabled={!this.state.validEmail || !this.state.validPassword}
                             onClick={this.handleSubmit}>
-                        Register
+                            Register
                         </button>
                     </form>
                 </div>

@@ -19,9 +19,9 @@ public class YelpAPIController {
         this.yelpAPIService = yelpAPIService;
     }
 
-    @GetMapping("/search/location/{location}")
-    public String searchRestaurantsByLocation(@PathVariable String location) {
-        return yelpAPIService.searchRestaurantsByLocation(location);
+    @GetMapping("/search/location/{location}/{term}")
+    public String searchRestaurantsByLocation(@PathVariable String location, @PathVariable String term) {
+        return yelpAPIService.searchRestaurantsByLocation(location, term);
     }
 
     @GetMapping("/search/restaurant/{restaurantId}")

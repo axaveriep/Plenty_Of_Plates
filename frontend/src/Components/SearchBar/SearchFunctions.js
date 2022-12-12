@@ -5,7 +5,7 @@ import { baseUrl } from "../../Shared/baseUrl";
 
 export async function searchRestaurantsByLocation(input) {
 
-    const uri = baseUrl+"/search/location/"+input.replaceAll(" ", "+");
+    const uri = baseUrl+"/search/location/"+input.location+"/"+input.term;
 
     const restaurantsResults = await axios.get(decodeURIComponent(uri)).catch(err => console.log(err))
     

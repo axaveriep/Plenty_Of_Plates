@@ -9,3 +9,5 @@ frontend/.VSCodeCounter/2022-09-22_15-24-39/results.json
 frontend/.VSCodeCounter/2022-09-22_15-24-39/results.md
 frontend/.VSCodeCounter/2022-09-22_15-24-39/results.txt
 .gitignore
+frontend/src/Components/Userprofile/Userprofile.js
+frontend/src/Components/Userprofile/Userprofile.css

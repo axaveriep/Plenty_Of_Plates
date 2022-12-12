@@ -4,6 +4,8 @@ import EventThumbnail from '../EventPage/EventThumbnail'
 import RestaurantThumbnail from '../RestaurantCard/RestaurantThumbnail'
 import "./UserProfile.css"
 
+
+
 export const UserProfile = (props) => {
 
   const username = props.user.username
@@ -15,8 +17,14 @@ export const UserProfile = (props) => {
   const [favoriteThumbnails, setFavoriteThumbnails] = useState()
   const [favCount, setFavCount] = useState(0);
 
+  const [page, setPage] = useState('events')
+
   function updateFavorites() {
-    setFavCount(prevFavCount => prevFavCount+1)
+    setFavCount(prevFavCount => prevFavCount + 1)
+  }
+
+  function sidebarClick(pageName) {
+    setPage(pageName)
   }
 
   useEffect(() => {
@@ -50,39 +58,58 @@ export const UserProfile = (props) => {
           name: userFav.restaurantName,
           image_url: userFav.imageUrl
         }
-        if (userFav.favorite) 
-        {
-          return <RestaurantThumbnail 
-          key={i} 
-          restaurant={restaurant} 
-          showFavBtn={true} 
-          userId={userId}
-          updateFavorites={updateFavorites}
+        if (userFav.favorite) {
+          return <RestaurantThumbnail
+            key={i}
+            restaurant={restaurant}
+            showFavBtn={true}
+            userId={userId}
+            updateFavorites={updateFavorites}
           />
         }
         return undefined;//react was whining about needing return at the end
       })
       setFavoriteThumbnails(displayFavThumbnails)
     }
-  }, [eventData,favoriteData,userId])//react was whining about needing userId
+
+
+  }, [eventData, favoriteData, userId, page])//react was whining about needing userId
 
   return (
+
     <div className='profileContainer'>
-      <div title="Profile">
-          <div>
-            <h2>{username}'s Events</h2>
+      <div className='profile--sidebar'>
+        <h1 className='profile--sidebar-username'>{username}</h1>
+        <button 
+        className='profile--sidebar-btn'
+        onClick={(e) => sidebarClick('events')}>
+          Events
+        </button>
+        <button 
+        className='profile--sidebar-btn'
+        onClick={(e) => sidebarClick('favorites')}>
+          Favorites
+        </button>
+      </div>
+      <div title="Profile" className='profile'>
+        {page === 'events' ?
+          <div className='profile--array-container'>
+            <h2>Events</h2>
             <div md={6} className='profile--events'>
               {eventThumbnails}
             </div>
           </div>
-          <div>
-            <h2>{username}'s Favourites</h2>
+          :
+          <div className='profile--array-container'>
+            <h2>Favourites</h2>
             <div md={6} className='profile--events'>
               {favoriteThumbnails}
             </div>
           </div>
-        </div>
+        }
       </div>
+    </div>
+
   )
 }
 

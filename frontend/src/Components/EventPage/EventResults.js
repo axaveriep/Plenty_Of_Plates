@@ -61,11 +61,11 @@ export default function EventResults() {
     }, [thisEvent]);
 
     return (
-        <div >
+        <div className="event-results-container">
             {thisEvent === undefined ? (<></>)
                 :
                 (
-                    <div className="event-results-container">
+                    <div>
                         <div className="event-results-header-container">
                             <h1 className="event-results-title">{thisEvent.title}</h1>
                             <h2>{eventDateFormat(thisEvent.time)} at {eventTimeFormat(thisEvent.time)}</h2>

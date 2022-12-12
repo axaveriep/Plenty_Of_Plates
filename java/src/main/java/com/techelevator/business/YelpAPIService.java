@@ -19,34 +19,30 @@ public class YelpAPIService {
      * because YELP does not allow calls to their API from javascript/front end applications */
 
     private final String yelpBaseUrl = "https://api.yelp.com/v3/businesses/";
-    String bearerToken = "Bearer ";
+    String bearerToken = "Bearer 7w0VfA6HD2GXdQe2o4LNVcW5Iq1KuAJn6_gLLIzBunEceC7_4aqXaCmk-kJqbKBfRCyENM1PMQBj2HIfX38CjudMNT1mJrYE5NAb6ck7m-L_x2H0Mu4srV7LkWYSY3Yx";
 
-    public void getbearerToken() throws FileNotFoundException
-    {
-        try
-        {
-            Scanner txtIn = new Scanner(new File(System.getProperty("user.dir")+"\\YELP_API_TOKEN.txt"));
-            while (txtIn.hasNext())
-            {
-                this.bearerToken += txtIn.next();
-            }
-            txtIn.close();
-        }
-        catch (FileNotFoundException e) 
-        {
-            throw new FileNotFoundException();
-        }
-    }
+//    public void getbearerToken() throws FileNotFoundException {
+//        try {
+//            Scanner txtIn = new Scanner(new File(System.getProperty("user.dir")+"\\YELP_API_TOKEN.txt"));
+//            while (txtIn.hasNext()) {
+//                this.bearerToken += txtIn.next();
+//            }
+//            txtIn.close();
+//        }
+//        catch (FileNotFoundException e) {
+//            System.out.println(e.getMessage());
+//            throw new FileNotFoundException();
+//        }
+//    }
 
-    public String searchRestaurantsByLocation(String location) throws SearchFailedException{
+    public String searchRestaurantsByLocation(String location, String term) throws SearchFailedException{
 
         try {
-            getbearerToken();
-
+            // getbearerToken();
             HttpClient httpClient = HttpClient.newHttpClient();
 
             HttpRequest searchRequest = HttpRequest.newBuilder()
-                    .uri(new URI(yelpBaseUrl + "search?location=" + location))
+                    .uri(new URI(yelpBaseUrl + "search?location=" + location + "&term=" + term))
                     .header("Authorization", bearerToken)
                     .build();
 
@@ -54,13 +50,14 @@ public class YelpAPIService {
 
             return searchResponse.body();
         } catch (URISyntaxException | InterruptedException | IOException e) {
+            System.out.println(e.getMessage());
             throw new SearchFailedException();
         }
     }
 
     public String getRestaurantById(String restaurantId) throws SearchFailedException {
         try {
-            getbearerToken();
+            // getbearerToken();
 
             HttpClient httpClient = HttpClient.newHttpClient();
 
