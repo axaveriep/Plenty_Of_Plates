@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import RestaurantGrid from '../RestaurantGrid/RestaurantGrid'
 import { getFavoritesByUserId } from '../SearchBar/SearchFunctions'
+import Footer from '../Footer/Footer'
 import './Home.css'
 
 
@@ -46,6 +47,7 @@ export default function Home(props)
                     favorites={favorites}
                 />
             </div>
+            <Footer />
         </div>
     )
 };

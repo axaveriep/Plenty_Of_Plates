@@ -71,7 +71,7 @@ export default function RestaurantCard(props) {
     }
 
     return (
-        <div>
+        
             <div className="restaurant--container">
                 <div className='restaurant--name'>{props.restaurant.name}</div>
                 <div className='restaurant--type'>{categoryTitles}</div>
@@ -133,7 +133,7 @@ export default function RestaurantCard(props) {
                         </>}
                 </div>
             </div>
-        </div>
+        
     )
 }
 

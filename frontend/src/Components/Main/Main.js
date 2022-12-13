@@ -9,7 +9,8 @@ import Home from '../Home/Home'
 import Navbar from '../Navbar/Navbar'
 import { addToken, deleteUser } from '../../Redux/actionCreators'
 import { connect } from 'react-redux'
-import UserProfile from "../UserProfile/UserProfile"
+import ProfileEvents from '../UserProfile/ProfileEvents'
+import ProfileFavorites from '../UserProfile/ProfileFavorites'
 
 const mapStateToProps = state => {
     return {
@@ -61,16 +62,21 @@ class Main extends Component {
                     <Route path='/home'
                         component={this.props.token.token !== undefined ? () => <Home user={this.props.user} /> : () => <Redirect to='/login' />}
                     />
-                    <Route path='/user/:username'
-                        component={this.props.token.token !== undefined ? () => <UserProfile user={this.props.user} /> : () => <Redirect to='/login' />}
-                    />
+                   
 
                     <Route path='/vote/:eventId/:guestId'
                         component={this.props.token.token === undefined ? () => <VotingPage /> : () => <Redirect to='/home' />}
                     />
+                    <Route path='/user/:username/events'
+                    component={this.props.token.token !== undefined ? () =>
+                    <ProfileEvents user={this.props.user} /> : () => <Redirect to='home'/>}
+                    />
+                    <Route path='/user/:username/favorites'
+                    component={this.props.token.token !== undefined ? () => <ProfileFavorites user={this.props.user} /> : () => <Redirect to='home'/>}
+                    />
                     <Route path='/results/'
                         component={this.props.token.token !== undefined ?
-                            () => <EventResults /> :
+                            () => <EventResults user={this.props.user}/> :
                             () => <Redirect to='/login' />}
                     />
                     <Redirect to='/home' />

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {useSelector} from 'react-redux'
-import { UncontrolledTooltip } from 'reactstrap';
+import { Tooltip } from 'reactstrap';
 import './GuestLink.css'
 
 export default function GuestLink({guestName, guestId, guestEmail, eventId}) {
@@ -8,16 +8,30 @@ export default function GuestLink({guestName, guestId, guestEmail, eventId}) {
   /** brings username from redux state */
   const username = useSelector((state) => state.user.username)
 
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+
+  function handleClick() {
+    setTooltipOpen(true)
+    navigator.clipboard.writeText(`localhost:3000/vote/${eventId}/${guestId}`)
+  }
+
   return (
     <div className="event--confirmed-guest">
       <label className='guest--name-label'>{guestName}</label>
       {/** text box and button to copy unique guest link */}
+      <div className='guest--invite-link'>
       <input className="guest--name-input" id="input--eventLink" type='text' readOnly={true} value={`localhost:3000/vote/${eventId}/${guestId}`} />
-      <button id="copyBtn" className='copyBtn' onClick={() => navigator.clipboard.writeText(`localhost:3000/vote/${eventId}/${guestId}`)}>
+      <button id="copyBtn" className='copyBtn' onClick={handleClick} onBlur={() => setTooltipOpen(false)}>
         <i className='fa fa-clone'/>
       </button>
+      </div>
       {/** tooltip displays when copy button is clicked */}
-      <UncontrolledTooltip target="copyBtn" trigger="click" autohide={true} placement='top'>Copied!</UncontrolledTooltip>
+      <Tooltip 
+      target="copyBtn" 
+      isOpen={tooltipOpen} 
+      placement='top'>
+        Copied!
+        </Tooltip>
       {/** if e-mail exists, button opens e-mail client with guest e-mail address and template e-mail */}
       {guestEmail === "" ? <></> : guestEmail === undefined ? <></> : 
       <a className="emailLink" href={`mailto:${guestEmail}?&subject=${username} has invited you out!&body=Click this link localhost:3000/vote/${eventId}/${guestId}`} target="_blank" rel="noreferrer">

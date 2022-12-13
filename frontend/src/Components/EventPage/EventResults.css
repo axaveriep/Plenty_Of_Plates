@@ -1,19 +1,35 @@
 .event-results-container {
+
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  border-radius: 1rem;
-  width: 80%;
-  height: 800px;
-  padding: 100px 100px 80px 100px;
-  overflow-y: scroll;
-  box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.5);
   color: white;
+  padding: 25px;
+  box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  margin-top: 3rem;
+
+}
+
+.event-results-content {
+
+  margin-left: 200px;
+ 
+  
 }
 
 .event-results-header-container {
   grid-area: header;
+  border-right: 1px solid #444;
+  width: 500px;
+  height: 100vh;
+  position: fixed;
 }
 
+.event-results-restaurants {
+ margin-left: 500px;
+}
 .event-results-qualified {
   grid-area: qualified;
 }
@@ -34,6 +50,10 @@
   grid-area: guests;
 }
 
+.side {
+  grid-area: side;
+}
+
 .event--confirmed-guest {
   background-color: rgba(200, 200, 200, 1);
   border-radius: 1rem;
@@ -41,7 +61,14 @@
   color: black;
   padding: 10px;
   display: flex;
+  justify-content: space-between;
   margin: 10px;
+  width: 90%;
+}
+
+.event--confirmed-selectedGuests-header {
+  color: black;
+  font-size: 1.2rem;
 }
 
 .event-results-container h1 {
@@ -58,20 +85,21 @@
   font-size: 4rem;
 }
 
-.show-counter {
+/* .show-counter {
   text-align: center;
   font-size: 1.5rem;
-}
+} */
 
 .event-results-final-text {
   font-family: 'Atkinson Hyperlegible', sans-serif;
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
   background-color: darkorange;
-  line-height: 5rem;
+  /* line-height: 5rem; */
   border-radius: 1rem;
   margin: 10px;
   padding: 5px;
+  height: fit-content;
 }
 
 /* Scrollbar */
@@ -106,8 +134,43 @@
     width: 100%;
   }
 
+  .guest--invite-link {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+  }
+
+  .guest--name-label {
+    padding: 5px;
+  }
+  .guest--name-input, .copyBtn {
+    padding: 0.25rem;
+    margin: 5px 0 5px 0;
+  }
+
   .event-results-container {
     margin-top: 130px;
-    padding: 100px;
+    
+  }
+
+  .event-results-content {
+    margin-top: 3rem;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .event-results-header-container {
+   border-right: 0px;
+    border-bottom: 1px solid #444;
+    width: 100%;
+    height:fit-content;
+    position:unset;
+ 
+  }
+  
+  .event-results-restaurants {
+   margin-left: 0;
   }
 }

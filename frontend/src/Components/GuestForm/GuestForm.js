@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import * as IoIcons from 'react-icons/io5'
 import './GuestForm.css'
 
 export default function GuestForm(props) {
@@ -50,9 +51,14 @@ export default function GuestForm(props) {
 
     return (
         <div>
-            <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog guest-form-modal" scrollable={true}>
-                <ModalHeader toggle={props.toggle} className="header">
-                    Add Guests <button className="guest--addBtn" type="button" onClick={() => addFormFields()}>Add</button>
+            <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog guest--form-modal" scrollable={true}>
+                <ModalHeader toggle={props.toggle} className="guest--form-header">
+                    Add Guests 
+                    <div className='guest--form-btns'>
+                        <button className="guest--addBtn" type="button" onClick={() => addFormFields()}>
+                        <IoIcons.IoPersonAdd />
+                    </button>
+                    </div>
                 </ModalHeader>
                 <ModalBody className="modal-body guest-form-modal--body">
                     <form onSubmit={handleSubmit}>
@@ -68,11 +74,16 @@ export default function GuestForm(props) {
                                 value={element.email || ""} 
                                 onChange={e => handleChange(index, e)} 
                                 />
+                                <div className='guest--form-btns'>
+                                
                                 { /** remove guests from list */
-                                    index ?
-                                    <button type="button" className="guest--removeBtn" onClick={() => removeFormFields(index)}>-</button>
-                                        : null
+                                    // index ?
+                                    <button type="button" className="guest--removeBtn" onClick={() => removeFormFields(index)}><IoIcons.IoPersonRemove /></button>
+                                        // : null
                                 }
+                                
+                                </div>
+                                
                             </div>
                         ))}
                     </form>

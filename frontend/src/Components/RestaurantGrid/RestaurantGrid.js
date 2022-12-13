@@ -47,7 +47,7 @@ export default function RestaurantGrid(props) {
     return (
 
         <div>
-            <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog" scrollable={true} >
+            <Modal isOpen={props.modal} toggle={props.toggle} className="modal-dialog restaurant--grid-modal" scrollable={true} >
                 <ModalHeader toggle={props.toggle} className="header">
                     <div className="restaurant--grid-title">
                         Restaurants

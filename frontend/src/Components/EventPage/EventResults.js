@@ -6,9 +6,10 @@ import { eventTimeFormat, eventDateFormat } from '../CountDown/TimeFormatFunctio
 import CountdownTimer from "../CountDown/CountdownTimer";
 import GuestLink from "../GuestForm/GuestLink";
 import "./EventResults.css"
+import ProfileSidebar from "../UserProfile/ProfileSidebar";
 
 
-export default function EventResults() {
+export default function EventResults(props) {
     const location = useLocation();
 
     const [thisEvent, setThisEvent] = useState();
@@ -62,10 +63,13 @@ export default function EventResults() {
 
     return (
         <div className="event-results-container">
+            <ProfileSidebar 
+            username={props.user.username}
+            />
             {thisEvent === undefined ? (<></>)
                 :
                 (
-                    <div>
+                    <div className='event-results-content'>
                         <div className="event-results-header-container">
                             <h1 className="event-results-title">{thisEvent.title}</h1>
                             <h2>{eventDateFormat(thisEvent.time)} at {eventTimeFormat(thisEvent.time)}</h2>
@@ -75,27 +79,29 @@ export default function EventResults() {
                                 handleExpired={setExpired}
                                 isGuest={false}
                             />
-                        </div>
-                        {/** if the deadline has not passed and there are guests who still have not voted
+                             {/** if the deadline has not passed and there are guests who still have not voted
                          * custom links are redisplayed
                          */}
-                        {expired ? <div className="event-results-final-text">These are the final results!</div> :
-                            <div className="event--confirmed-selectedGuests">
+                        {expired ? <div className="event-results-final-text side">These are the final results!</div> :
+                            <div className="event--confirmed-selectedGuests side">
+                                <div className='event--confirmed-selectedGuests-header'>Resend Invitations</div>
                                 {thisEvent.guestList.map((guest) => {
                                     if (!guest.voted) {
                                         return (
-                                            <div >
+                                            
                                                 <GuestLink
                                                     key={guest.guestId.guestId}
                                                     guestName={guest.guestName}
                                                     guestId={guest.guestId.guestId}
                                                     eventId={thisEvent.eventId}
                                                 />
-                                            </div>)
+                                            )
                                     }
                                     return undefined;
                                 })}
                             </div>}
+                        </div>
+                       <div className='event-results-restaurants'>
                         <div className="event-results-qualified">
                             <h1>Qualified</h1>
                             <div className="qualified--container">
@@ -107,6 +113,7 @@ export default function EventResults() {
                             <div className="disqualified--container">
                                 {disqualified}
                             </div>
+                        </div>
                         </div>
                     </div>
                 )}

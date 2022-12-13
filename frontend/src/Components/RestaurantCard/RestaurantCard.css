@@ -61,6 +61,7 @@ h3 {
   grid-area: restaurant-address;
   align-self: center;
   justify-self: center;
+  text-align: center;
 }
 
 .restaurant--address a {
@@ -115,6 +116,9 @@ h3 {
 .addBtn {
   width: 380px;
   height: 64px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -131,7 +135,7 @@ h3 {
   transition: 200ms;
 }
 
-.restaurant--favoriteBtn .favoriteBtn-text,
+/* .restaurant--favoriteBtn .favoriteBtn-text,
 .restaurant--hoursBtn,
 .addBtn {
   color: white;
@@ -139,7 +143,7 @@ h3 {
   font-size: 1rem;
   text-align: center;
   width: 100%;
-}
+} */
 
 .restaurant--favoriteBtn .favoriteBtn-icon,
 .addBtn .addBtn-icon {
@@ -224,7 +228,9 @@ h3 {
 
 .hours--modal-content {
   width: 800px !important;
+  max-height: 800px !important;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  background-color: rgba(200, 200, 200, 0.8);
 }
 
 .hours--modal-body {
@@ -239,6 +245,7 @@ h3 {
 
 .hours--modal-footer {
   border-top: solid rgba(200, 200, 200, 0.8) 2px !important;
+  background-color: white;
 }
 
 .hours--modal-footer .hours--modal-closeBtn {
@@ -280,32 +287,46 @@ h3 {
   border-bottom: solid black 2px;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 800px) {
+
+  .hours--modal-content {
+    width: 80% !important;
+    height: 60%;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  }
+
+
   .restaurant--container {
-    width: 350px;
+    
     overflow-x: hidden;
     margin-left: 0;
     margin-right: 0;
   }
 
-  .restaurant--favoriteBtn,
-  .restaurant--hoursBtn,
-  .addBtn, .restaurant--image {
-    width: 320px;
-  }
 }
 
-@media only screen and (max-width: 290px) {
+@media only screen and (max-width: 400px) {
+
+  .hours--modal-content {
+    width: 100% !important;
+    height: 60%;
+    box-shadow: none;
+  }
+
   .restaurant--container {
-    width: 260px;
+    width: 100% !important;
     overflow-x: hidden;
     margin-left: 0;
     margin-right: 0;
   }
 
+  .restaurant--buttons {
+    width: 90%;
+  }
+
   .restaurant--favoriteBtn,
   .restaurant--hoursBtn,
   .addBtn, .restaurant--image {
-    width: 240px;
+    width: 100%;
   }
 }

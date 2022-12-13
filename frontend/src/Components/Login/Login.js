@@ -6,6 +6,7 @@ import {addToken, addUser} from '../../Redux/actionCreators'
 import {baseUrl} from '../../Shared/baseUrl'
 import axios from 'axios'
 import "./Login.css"
+import Footer from '../Footer/Footer'
 
 const Swal = window.Swal
 
@@ -95,6 +96,7 @@ class Login extends Component {
                         <button className="login--btn" type="submit">Sign in</button>
                     </form>
                 </div>
+                <Footer />
             </div>
         )
     }

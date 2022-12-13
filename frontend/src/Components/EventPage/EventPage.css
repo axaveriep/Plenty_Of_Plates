@@ -1,24 +1,23 @@
-.event--container
-{
+.event--container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas: 
-    'header'
-    'time'
-    'restaurants'
-    'guests'
-    'submit';
+    grid-template-areas:
+        'header'
+        'time'
+        'restaurants'
+        'guests'
+        'submit';
     overflow: auto;
     color: white;
     padding: 20px;
     border-radius: 2rem;
     background-color: rgba(var(--primary-dark-rgb), .7);
     box-shadow: 0 0 15px 0 rgba(var(--primary-dark-rgb), .7);
-    margin-top: 84px;
+    margin-top: 100px;
+    width: 80%;
 }
 
-.event--header-container
-{
+.event--header-container {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -26,8 +25,7 @@
     grid-area: header;
 }
 
-.event--title
-{
+.event--title {
     text-align: center;
     color: white;
     border-radius: 1rem;
@@ -36,16 +34,14 @@
     filter: drop-shadow(5px 5px 5px #222);
 }
 
-.event--title-icon
-{
+.event--title-icon {
     width: 24px;
     height: 24px;
     fill: white;
     margin-left: 1rem;
 }
 
-.event--time-container
-{
+.event--time-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -55,14 +51,12 @@
     grid-area: time;
 }
 
-.event--date-time
-{
+.event--date-time {
     display: flex;
     flex-direction: row;
 }
 
-.event--time-container h5
-{
+.event--time-container h5 {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 5px;
@@ -70,13 +64,15 @@
     color: white;
 }
 
-.event--tc-date, .event--tc-time, .event--tc-deadline 
-{
+.event--tc-date,
+.event--tc-time,
+.event--tc-deadline {
     margin: 10px;
 }
 
-#event--date, #event--time, #event--deadline
-{
+#event--date,
+#event--time,
+#event--deadline {
     color-scheme: dark;
     -webkit-text-fill-color: white;
     border: none;
@@ -88,8 +84,8 @@
 }
 
 .event--restaurants-container,
-.event--guests-container,.event--submit-container
-{
+.event--guests-container,
+.event--submit-container {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -98,24 +94,20 @@
     margin: 10px;
 }
 
-.event--restaurants-container 
-{
+.event--restaurants-container {
     grid-area: restaurants;
 }
 
-.event--guests-container 
-{
+.event--guests-container {
     grid-area: guests;
 }
 
-.event--submit-container 
-{
+.event--submit-container {
     grid-area: submit;
 }
 
 .event--selectedRestuarants,
-.event--selectedGuests
-{
+.event--selectedGuests {
     border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -130,15 +122,13 @@
     height: fit-content;
 }
 
-.event--selectedGuests 
-{
+.event--selectedGuests {
     flex-direction: column;
     justify-items: center;
     width: 100%;
 }
 
-.event--selectedGuests-each 
-{
+.event--selectedGuests-each {
     color: black;
     font-size: large;
     margin: auto;
@@ -146,9 +136,10 @@
 }
 
 
-.event-searchBtn,.event-guestBtn, .event-submitBtn
-{
-    color:white;
+.event-searchBtn,
+.event-guestBtn,
+.event-submitBtn {
+    color: white;
     background: rgba(var(--primary-rgb), .5);
     padding: 15px;
     font-size: 1.5rem;
@@ -157,7 +148,7 @@
     outline: none;
     cursor: pointer;
     margin: 5px;
-    width: 100%;
+    width: 300px;
 }
 
 .event-searchBtn:focus,
@@ -165,21 +156,18 @@
 .event-guestBtn:focus,
 .event-guestBtn:hover,
 .event-submitBtn:focus,
-.event-submitBtn:hover
-{
-  color: white;
-  background-color: rgba(var(--primary-rgb), .8);
+.event-submitBtn:hover {
+    color: white;
+    background-color: rgba(var(--primary-rgb), .8);
 }
 
 .event-guestBtn:active,
 .event-searchbtn:active,
-.event-submitBtn:active
-{
+.event-submitBtn:active {
     transform: scale(0.95);
 }
 
-.event--confirmed-selectedGuests
-{
+.event--confirmed-selectedGuests {
     border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -193,8 +181,7 @@
     height: fit-content;
 }
 
-.event--selectedRestuarantsSubmited
-{
+.event--selectedRestuarantsSubmited {
     border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -207,40 +194,35 @@
 }
 
 /* Scrollbar */
-.event--container::-webkit-scrollbar 
-{
-  width: 20px;
+.event--container::-webkit-scrollbar {
+    width: 20px;
 }
 
 /* Track */
-.event--container::-webkit-scrollbar-track 
-{
-  border-radius: 10px;
-  backdrop-filter: blur(.25rem) saturate(180%);
-  -webkit-backdrop-filter: blur(.25rem) saturate(180%);
-  background-color: rgba(200, 200, 200, 0.25);
-  margin-top: 5px;
-  margin-bottom: 20px;
+.event--container::-webkit-scrollbar-track {
+    border-radius: 10px;
+    backdrop-filter: blur(.25rem) saturate(180%);
+    -webkit-backdrop-filter: blur(.25rem) saturate(180%);
+    background-color: rgba(200, 200, 200, 0.25);
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
- 
+
 /* Handle */
-.event--container::-webkit-scrollbar-thumb 
-{
-  background-color: orange;
-  border-radius: 10px;
+.event--container::-webkit-scrollbar-thumb {
+    background-color: orange;
+    border-radius: 10px;
 }
 
 /* Handle on hover */
-.event--container::-webkit-scrollbar-thumb:hover
-{
-  background-color: darkorange;
+.event--container::-webkit-scrollbar-thumb:hover {
+    background-color: darkorange;
 }
 
-@media only screen and (max-width: 540px) 
-{
+@media only screen and (max-width: 540px) {
     .event--container {
         display: block;
-        margin-top: 130px;
+        margin-top: 6rem;
         width: 100vw;
         height: 100vh;
         border-radius: 0;
@@ -250,7 +232,9 @@
         flex-direction: column;
     }
 
-    #event--date, #event--time, #event--deadline {
+    #event--date,
+    #event--time,
+    #event--deadline {
         width: 150px;
     }
 }

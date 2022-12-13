@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { baseUrl } from '../../Shared/baseUrl'
+import Footer from '../Footer/Footer'
 import "./Register.css"
 
 const Swal = window.Swal
@@ -175,6 +176,7 @@ class Register extends Component {
     render() {
         return (
             <div className="fullscreen-container">
+                <h1 className='login--title-banner'>Plenty of Plates</h1>
                 <div className="register-container">
                     <h1 className="register-title font-effect-emboss">Create Account</h1>
                     <form className="register--form">
@@ -255,6 +257,7 @@ class Register extends Component {
                         </button>
                     </form>
                 </div>
+                <Footer />
             </div>
         )
     }

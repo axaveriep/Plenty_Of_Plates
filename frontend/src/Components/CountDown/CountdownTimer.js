@@ -10,7 +10,7 @@ const ExpiredNotice = ({isGuest}) => {
   return (
     <div className="expired-notice">
       {isGuest ? <span>Oh no, it's too late!</span> : <></>}
-      <p>The voting deadline has passed! Eat well and prosper!</p>
+      <p>The voting deadline has passed!<br/> Eat well and prosper!</p>
       {isGuest ? <Link to='/home'><Button>Home</Button></Link> : <></>}
     </div>
   );
@@ -20,7 +20,12 @@ const ExpiredNotice = ({isGuest}) => {
 const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (
     <div className="show-counter">
-       <div>You have</div>        <div className='show-counter-timer'><DateTimeDisplay value={days} type={'Days'} isDanger={false} />  :  </div>       <div className='show-counter-timer'><DateTimeDisplay value={hours} type={'Hours'} isDanger={false} /> : </div>       <div className='show-counter-timer'><DateTimeDisplay value={minutes} type={'Mins'} isDanger={false} /> : </div>       <div className='show-counter-timer'><DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} /></div>        <div>to just pick a place!</div> <br />
+       <div>You have</div>   
+       <DateTimeDisplay value={days} type={'Days'} isDanger={false} />  :       
+       <DateTimeDisplay value={hours} type={'Hours'} isDanger={false} /> :      
+       <DateTimeDisplay value={minutes} type={'Mins'} isDanger={false} /> :     
+       <DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} /> 
+       <div>to just pick a place!</div> <br />
     </div>
   );
 };

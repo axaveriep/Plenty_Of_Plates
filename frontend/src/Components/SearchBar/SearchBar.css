@@ -25,7 +25,7 @@
 }
 
 .search input:focus+.search--button svg {
-    fill: white;
+    fill: black;
 }
 
 .search input ::placeholder {
